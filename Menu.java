@@ -15,15 +15,13 @@ public class Menu {
 		StdDraw.setYscale(0.0, 110);
 
 		StdDraw.clear(StdDraw.BLACK);/* AFFICHAGE INITIAL DU JEU */
+		StdDraw.picture(60.0, 55.0, "fond_intro.JPG");
 		StdDraw.setPenColor(StdDraw.WHITE);
 
 		Font currentFont = StdDraw.getFont();
 		float size = 25;
 		currentFont = currentFont.deriveFont(size);
 		StdDraw.setFont(currentFont);
-
-		StdDraw.text(55, 60, "RISK");
-		StdDraw.text(55, 45, "Cliquez pour jouer");/* on invite le joueur à cliquer pour jouer */
 
 		/* INITIALISATION DES CHOIX */
 		int choix1 = 0;// cliquer pour atteindre le menu
@@ -55,7 +53,8 @@ public class Menu {
 						double y = StdDraw.mouseY();
 						StdDraw.clear(StdDraw.WHITE);
 						if (55 < y && y < 65) {
-							StdDraw.text(55, 60, "Vous jouez à 2");
+							//StdDraw.text(55, 60, "Vous jouez à 2");
+							StdDraw.picture(60.0, 55.0, "parchemin.PNG");
 							choix3 = 2;
 							StdDraw.pause(500);
 
