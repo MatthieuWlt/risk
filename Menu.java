@@ -1,4 +1,5 @@
 import edu.princeton.cs.introcs.StdDraw;
+import java.io.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,6 +32,8 @@ public class Menu {
 		int choix4 = 0;
 		int choix5 = 0;
 		int choix6 = 0;
+		String choixJ1="";
+		String choixJ2="";
 		Random rand = new Random();
 
 		while (choix1 != 1) {
@@ -55,6 +58,7 @@ public class Menu {
 							StdDraw.text(55, 60, "Vous jouez à 2");
 							choix3 = 2;
 							StdDraw.pause(500);
+
 							break;
 						} else if (45 < y && y < 55) {
 							StdDraw.text(55, 60, "Vous jouez à 3");
@@ -88,15 +92,16 @@ public class Menu {
 		}
 
 		// 2 JOUEURS
-		/*
+		
 		while (choix3 == 2) {
 			if (StdDraw.isMousePressed()) {
-				StdDraw.clear(StdDraw.WHITE);/* AFFICHAGE DE LA PAGE 
+				StdDraw.clear(StdDraw.WHITE); // AFFICHAGE DE LA PAGE 
 				StdDraw.setPenColor(StdDraw.BLACK);
 				StdDraw.text(60, 90, "Joueur 1, choisissez votre personnage");
-				StdDraw.picture(25.0, 50.0, "J1.JPG");
-				StdDraw.text(25.0, 30, "Joueur 1");
-				// StdDraw.picture(75.0, 10.0, "J1.JPG");
+				StdDraw.picture(35.0, 55.0, "Napo1.JPG");
+				StdDraw.text(35.0, 20, "Napoléon");
+				StdDraw.picture(85.0, 55.0, "Macron.png");
+				StdDraw.text(85.0, 20, "Jupiter");
 				StdDraw.pause(500);
 			}
 
@@ -104,31 +109,45 @@ public class Menu {
 				if (StdDraw.mousePressed()) {
 					double x = StdDraw.mouseX();
 					double y = StdDraw.mouseY();
-					if (15 < x && x < 35) {
+					if (15 < x && x < 55) {
 						choix5 = 2;
-						StdDraw.text(60, 90, "Choix fait");
+						choixJ1="Napoléon";
+						choixJ2="Macron";
+						StdDraw.pause(500);
+						StdDraw.clear(StdDraw.WHITE); // AFFICHAGE DE LA PAGE 
+						StdDraw.setPenColor(StdDraw.BLACK);
+						StdDraw.text(60, 90, "Joueur 2, choisissez votre personnage");
+						StdDraw.picture(60.0, 55.0, "Macron.png");
+						StdDraw.text(60.0, 20, "Jupiter");
 						StdDraw.pause(500);
 					}
 
-					else if (65 < y && y < 85) {
+					else if (55 < y && y < 105) {
 						choix5 = 2;
-						StdDraw.text(60, 90, "Choix fait");
+						choixJ2="Napoléon";
+						choixJ1="Macron";
+						StdDraw.pause(500);
+						StdDraw.clear(StdDraw.WHITE); // AFFICHAGE DE LA PAGE 
+						StdDraw.setPenColor(StdDraw.BLACK);
+						StdDraw.text(60, 90, "Joueur 2, choisissez votre personnage");
+						StdDraw.picture(60.0, 55.0, "Napo1.JPG");
+						StdDraw.text(60.0, 20, "Napoléon");
 						StdDraw.pause(500);
 					} else {
 
 					}
 				}
 				break;
-			}*/
+			}
 
-			while (choix3 == 2) {
+			while (choix5 == 2) {
 				if (StdDraw.mousePressed()) {
 					int armee = 40;
 					Partie p = new Partie(42, choix3); // création de la carte
 					p.afficher_map(); // affichage de la carte
 					// création joueurs
-					Joueur j1 = new Joueur(1, StdDraw.BLUE, "bleu");
-					Joueur j2 = new Joueur(2, StdDraw.GREEN, "vert");
+					Joueur j1 = new Joueur(choixJ1, 1, StdDraw.BLUE, "bleu");
+					Joueur j2 = new Joueur(choixJ2, 2, StdDraw.GREEN, "vert");
 					// liste aléatoire des territoires
 					ArrayList l = new ArrayList<territoire>();
 					l = p.randomAvecExclusion(1, 43);
@@ -171,9 +190,9 @@ public class Menu {
 					Partie p = new Partie(42, choix3); // création de la carte
 					p.afficher_map(); // affichage de la carte
 					// création joueurs
-					Joueur j1 = new Joueur(1, StdDraw.BLUE, "bleu");
-					Joueur j2 = new Joueur(2, StdDraw.GREEN, "vert");
-					Joueur j3 = new Joueur(3, StdDraw.RED, "rouge");
+					Joueur j1 = new Joueur(null, 1, StdDraw.BLUE, "bleu");
+					Joueur j2 = new Joueur(null, 2, StdDraw.GREEN, "vert");
+					Joueur j3 = new Joueur(null, 3, StdDraw.RED, "rouge");
 					// liste aléatoire des territoires
 					ArrayList l = new ArrayList<territoire>();
 					l = p.randomAvecExclusion(1, 43);
@@ -207,10 +226,10 @@ public class Menu {
 					Partie p = new Partie(42, choix3); // création de la carte
 					p.afficher_map(); // affichage de la carte
 					// création joueurs
-					Joueur j1 = new Joueur(1, StdDraw.BLUE, "bleu");
-					Joueur j2 = new Joueur(2, StdDraw.GREEN, "vert");
-					Joueur j3 = new Joueur(3, StdDraw.RED, "rouge");
-					Joueur j4 = new Joueur(4, StdDraw.ORANGE, "orange");
+					Joueur j1 = new Joueur(null, 1, StdDraw.BLUE, "bleu");
+					Joueur j2 = new Joueur(null, 2, StdDraw.GREEN, "vert");
+					Joueur j3 = new Joueur(null, 3, StdDraw.RED, "rouge");
+					Joueur j4 = new Joueur(null, 4, StdDraw.ORANGE, "orange");
 					// liste aléatoire des territoires
 					ArrayList l = new ArrayList<Integer>();
 					l = p.randomAvecExclusion(1, 43);
@@ -243,4 +262,5 @@ public class Menu {
 			}
 		}
 	
+}
 }
