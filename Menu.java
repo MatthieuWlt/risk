@@ -148,6 +148,33 @@ public class Menu {
 					// création joueurs
 					Joueur j1 = new Joueur(choixJ1, 1, StdDraw.BLUE, "bleu");
 					Joueur j2 = new Joueur(choixJ2, 2, StdDraw.GREEN, "vert");
+					/* -----------------------PARTIE MISSION----------------------- */
+				
+				int choix4 = 0;
+				while (choix4 == 0) {
+					if (StdDraw.mousePressed()) {
+						double x4 = StdDraw.mouseX();// on recupere les coordonnées de x et y cliqués
+						double y4 = StdDraw.mouseY();
+						if (x4 < 116 && x4 > 104 && y4 < 104 && y4 > 96) {// si elles sont sur le bouton
+							JOptionPane jop1;// on definit notre objet pour le pop up
+							jop1 = new JOptionPane();// on le cree
+							jop1.showMessageDialog(null, "Découvrez votre mission", "Nom de la mission",
+									JOptionPane.INFORMATION_MESSAGE);// on le remplit
+							choix4 = 1;
+						} else {
+							choix4 = 0;// on redemande au joueur de choisir sa mission
+							StdDraw.text(50, 105, "Découvrez votre mission");
+						}
+					} else {
+						choix4 = 0;// on demande au joueur de choisir sa mission
+						StdDraw.text(50, 105, "Découvrez votre mission");
+					}
+				}
+
+				StdDraw.clear();// on supprime le message de mission
+				p.afficher_map(); // on ré-affiche la carte
+
+				/* -----------------FIN DE LA PARTIE MISSION--------------------- */
 					// liste aléatoire des territoires
 					ArrayList l = new ArrayList<territoire>();
 					l = p.randomAvecExclusion(1, 43);
