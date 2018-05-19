@@ -288,30 +288,36 @@ public class Joueur {
 					return t;
 				} 
 				else {
+					return null;
 				}
 			//break;
 			//} else {
 			//}
 		//}
-			return null;
 		
 	}
-	public void initialisation(int choix4, Joueur j) {
-		int i =0;
+	public void initialisation(int choix4, Joueur j, int c) {
+		int i =1;
+		StdDraw.pause(500);
 		while (choix4!=0) {
 			if (StdDraw.mousePressed()) {
-			System.out.println("Il vous reste "+(19-i)+" armées à placer");
+			
 			territoire t=choix_pays(1,j);
+			if (t==null) {
+				initialisation(choix4, j, c-i+1);
+				break;
+			}
+			System.out.println("Il vous reste "+(c-i)+" armées à placer");
 			add_armee(t, 1);
 			i++;
 			t.position(t,couleur);
 			StdDraw.pause(500);
-			if(i==19) {
+			if(c-i==-1) {
 				break;
 			}
 			}
 			else {
-				
+				//StdDraw.pause(500);
 			}
 		}
 	}
@@ -322,41 +328,48 @@ public class Joueur {
 	}
 	
 	
-	public void phase_attaque(int c, Joueur j1, Joueur j2 ) {
-		while (c!=0) {
+	public void phase_attaque(int a, Joueur j1, Joueur j2 ) {
+		while (a!=0) {
 			if (StdDraw.mousePressed()) { //clique sur un des boutons à droite
 				double x = StdDraw.mouseX();
 				double y = StdDraw.mouseY();
 					if (105 < x && x < 115 && 77<y && y<83) { //lorsqu'on clique sur "attaque"
 						System.out.println("choisir un pays");
 						StdDraw.pause(500);
-						while(c!=0) {
+						while(a!=0) {
 							if (StdDraw.mousePressed()) { //clique sur un territoire
 							territoire t1=choix_pays(1,j1); //selection du pays qui attaque
 							t1.position(t1,StdDraw.YELLOW); //affichage du pays qui attaque
+							System.out.println("choisir un pays à attaquer");
 							StdDraw.pause(500);
-							while(c!=0) {
-								System.out.println("choisir un pays à attaquer");
+							while(a!=0) {
+								//System.out.println("choisir un pays à attaquer");
 								if (StdDraw.mousePressed()) {//clique sur le territoire à attaquer
 								territoire t2=choix_pays(1,j2); //selection du pays à attaquer
-								int att= de(j1); //résultat du dé joueur attaquant
-								int def= de(j2); //résultat du dé joueur defenseur
-								if (att>def) {
-									System.out.println("le Joueur"+j1.getNumero()+" gagne");
-									add_armee(t2,(t1.getA()-2)); //déplacement armée joueur attaquant
-									sup_armee(t1,(t1.getA()-1)); 
-									j1.list_ter.add(t2); //ajout du territoire au joueur attaquant
-									j2.list_ter.remove(t2); //suppression du territoire au joueur defenseur
-									t2.position(t2, j1.getCouleur()); //affichage territoire conquis
-									t1.position(t1, j1.getCouleur()); //affichage territoire attaquant
-									StdDraw.pause(500);
+								if (verif(t1,t2)==true) {
+									int att= de(j1); //résultat du dé joueur attaquant
+									int def= de(j2); //résultat du dé joueur defenseur
+									if (att>def) {
+										System.out.println("le Joueur"+j1.getNumero()+" gagne");
+										add_armee(t2,(t1.getA()-2)); //déplacement armée joueur attaquant
+										sup_armee(t1,(t1.getA()-1)); 
+										j1.list_ter.add(t2); //ajout du territoire au joueur attaquant
+										j2.list_ter.remove(t2); //suppression du territoire au joueur defenseur
+										t2.position(t2, j1.getCouleur()); //affichage territoire conquis
+										t1.position(t1, j1.getCouleur()); //affichage territoire attaquant
+										StdDraw.pause(500);
+									}
+									else if (att<=def) {
+										System.out.println("le Joueur"+j1.getNumero()+" perd");
+										sup_armee(t1,1); //le joueur attaquant perd un soldat
+										t1.position(t1, j1.getCouleur()); //affichage du territoire
+										StdDraw.pause(500);
+									}
 								}
-								else if (att<=def) {
-									System.out.println("le Joueur"+j1.getNumero()+" perd");
-									sup_armee(t1,1); //le joueur attaquant perd un soldat
-									t1.position(t1, j1.getCouleur()); //affichage du territoire
-									StdDraw.pause(500);
+								else {
+									t1.position(t1,j1.getCouleur());
 								}
+								
 								StdDraw.pause(500);
 								break;
 								}
@@ -367,12 +380,203 @@ public class Joueur {
 						}
 					}else if (105 < x && x < 115 && 87<y && y<93) { //lorsqu'on clique sur "finir"
 						StdDraw.pause(500);
-						break;
+						break; //arrêt de la phase attaque
 					}
 					
 			}else {
 				
 			}
 		}
+	}
+	
+	public void deplacement(int d, Joueur j) {
+		while (d!=0) {
+			if (StdDraw.mousePressed()) { //clique sur un des boutons à droite
+				double x = StdDraw.mouseX();
+				double y = StdDraw.mouseY();
+					if (105 < x && x < 115 && 67<y && y<73) { //lorsqu'on clique sur "mouvement"
+						System.out.println("choisir un pays");
+						StdDraw.pause(500);
+						while(d!=0) {
+							if (StdDraw.mousePressed()) { //clique sur un territoire
+								territoire t1=choix_pays(1,j); //selection armée à déplacer
+								t1.position(t1,StdDraw.YELLOW); //affichage du pays qui attaque
+								StdDraw.pause(500);
+								while(d!=0) {
+									System.out.println("choisir le territoire");
+									if (StdDraw.mousePressed()) {//clique sur le territoire de destination
+										territoire t2=choix_pays(1,j); //selection du territoire de destination
+										add_armee(t2,(t1.getA()-1)); //ajout armee sur territoire de destination
+										sup_armee(t1,(t1.getA()-1)); //suppression armee sur territoire source
+										t2.position(t2, j.getCouleur()); //affichage territoire destination
+										t1.position(t1, j.getCouleur()); //affichage territoire source
+										StdDraw.pause(500);
+										break;
+									}
+								}
+							}
+						}
+					}else if (105 < x && x < 115 && 87<y && y<93) { //lorsqu'on clique sur "finir"
+						StdDraw.pause(500);
+						break; //arrêt de la phase déplacement
+					}
+					
+			}
+		}
+	}
+	
+	public boolean verif(territoire t1,territoire t2) {
+		//Amérique du nord
+		if(t1.getNumero()==1) {
+			if (t2.getNumero()==2) {
+				return true;
+			}
+			else if (t2.getNumero()==6) {
+				return true;
+			}
+			else if (t2.getNumero()==36) {
+				return true;
+			}
+			else {
+				return false;
+			}
+		}
+		if (t1.getNumero()==2) {
+			if (t2.getNumero()==1) {
+				return true;
+			}
+			else if (t2.getNumero()==6) {
+				return true;
+			}
+			else if (t2.getNumero()==7) {
+				return true;
+			}
+			else if (t2.getNumero()==9) {
+				return true;
+			}
+			else {
+				return false;
+			}
+		}
+		if (t1.getNumero()==3) {
+			if (t2.getNumero()==4) {
+				return true;
+			}
+			else if (t2.getNumero()==9) {
+				return true;
+			}
+			else if (t2.getNumero()==13) {
+				return true;
+			}
+			else {
+				return false;
+			}
+		}
+		if (t1.getNumero()==4) {
+			if (t2.getNumero()==3) {
+				return true;
+			}
+			else if (t2.getNumero()==7) {
+				return true;
+			}
+			else if (t2.getNumero()==8) {
+				return true;
+			}
+			else if (t2.getNumero()==9) {
+				return true;
+			}
+			else {
+				return false;
+			}
+		}
+		if (t1.getNumero()==5) {
+			if (t2.getNumero()==6) {
+				return true;
+			}
+			else if (t2.getNumero()==7) {
+				return true;
+			}
+			else if (t2.getNumero()==8) {
+				return true;
+			}
+			else if (t2.getNumero()==21) {
+				return true;
+			}
+			else {
+				return false;
+			}
+		}
+		if (t1.getNumero()==6) {
+			if (t2.getNumero()==1) {
+				return true;
+			}
+			else if (t2.getNumero()==2) {
+				return true;
+			}
+			else if (t2.getNumero()==5) {
+				return true;
+			}
+			else if (t2.getNumero()==7) {
+				return true;
+			}
+			else {
+				return false;
+			}
+		}
+		if (t1.getNumero()==7) {
+			if (t2.getNumero()==2) {
+				return true;
+			}
+			else if (t2.getNumero()==4) {
+				return true;
+			}
+			else if (t2.getNumero()==5) {
+				return true;
+			}
+			else if (t2.getNumero()==6) {
+				return true;
+			}
+			else if (t2.getNumero()==8) {
+				return true;
+			}
+			else if (t2.getNumero()==9) {
+				return true;
+			}
+			else {
+				return false;
+			}
+		}
+		if (t1.getNumero()==8) {
+			if (t2.getNumero()==4) {
+				return true;
+			}
+			else if (t2.getNumero()==5) {
+				return true;
+			}
+			else if (t2.getNumero()==7) {
+				return true;
+			}
+			else {
+				return false;
+			}
+		}
+		if (t1.getNumero()==9) {
+			if (t2.getNumero()==2) {
+				return true;
+			}
+			else if (t2.getNumero()==3) {
+				return true;
+			}
+			else if (t2.getNumero()==4) {
+				return true;
+			}
+			else if (t2.getNumero()==7) {
+				return true;
+			}
+			else {
+				return false;
+			}
+		}
+		return false;
 	}
 }
