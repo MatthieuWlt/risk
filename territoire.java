@@ -28,12 +28,12 @@ public class territoire {
 
 	public void position(territoire t, Color r) {
 		switch (t.numero) {
-		// Amérique du Nord
+		// AmÃ©rique du Nord
 		case 1:
 			StdDraw.setPenColor(r);
 			StdDraw.filledCircle(7.2, 88.7, 2.5);
 			StdDraw.setPenColor(StdDraw.WHITE);
-			StdDraw.filledCircle(7.2, 88.7, 1.5);
+			StdDraw.filledCircle(7.2, 88.7, 2);
 			StdDraw.setPenColor(StdDraw.BLACK);
 			StdDraw.text(7.2, 88.7, "" + t.a + "");
 			break;
@@ -102,7 +102,7 @@ public class territoire {
 			StdDraw.text(11.4, 72.1, "" + t.a + "");
 			break;
 
-		// Amérique du Sud
+		// AmÃ©rique du Sud
 		case 10:
 			StdDraw.setPenColor(r);
 			StdDraw.filledCircle(24.3, 19.7, 2.5);
@@ -244,7 +244,7 @@ public class territoire {
 			StdDraw.text(45.7, 73.9, "" + t.a + "");
 			break;
 
-		// Océanie
+		// OcÃ©anie
 		case 27:
 			StdDraw.setPenColor(r);
 			StdDraw.filledCircle(92.1, 23.9, 2.5);
