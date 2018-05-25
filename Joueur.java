@@ -1272,4 +1272,99 @@ public class Joueur {
 		}
 		return false;
 	}
+	
+	public int verif_region(Joueur j) {
+		Region r1 = new Region(1);
+		Region r2 = new Region(2);
+		Region r3 = new Region(3);
+		Region r4 = new Region(4);
+		Region r5 = new Region(5);
+		Region r6 = new Region(6);
+		ArrayList<Integer> h1 = new ArrayList<Integer>();
+		ArrayList<Integer> h2 = new ArrayList<Integer>();
+		ArrayList<Integer> h3 = new ArrayList<Integer>();
+		ArrayList<Integer> h4 = new ArrayList<Integer>();
+		ArrayList<Integer> h5 = new ArrayList<Integer>();
+		ArrayList<Integer> h6 = new ArrayList<Integer>();
+		int bonus=0;
+		int	a1=0;
+		int a2=0;
+		int a3=0;
+		int a4=0;
+		int a5=0;
+		int a6=0;
+		for (int i=1;i<=9;i++) {
+			if(j.recherche_ter(i,j)==null) {
+				h1.add(0);
+			}
+			else {
+				h1.add(j.recherche_ter(i,j).getNumero());  
+				a1=a1+1;
+			}
+		}
+		if(a1==9) {
+			bonus=bonus+5;
+		}
+		for (int i=10;i<=13;i++) {
+			if(j.recherche_ter(i,j)==null) {
+				h2.add(0);
+			}
+			else {
+				h2.add(j.recherche_ter(i,j).getNumero()); 
+				a2=a2+1;
+			} 
+		}
+		if(a2==4) {
+			bonus=bonus+2;
+		}
+		for (int i=14;i<=19;i++) {
+			if(j.recherche_ter(i,j)==null) {
+				h3.add(0);
+			}
+			else {
+				h3.add(j.recherche_ter(i,j).getNumero()); 
+				a3=a3+1;
+			} 
+		}
+		if(a3==6) {
+			bonus=bonus+3;
+		}
+		for (int i=20;i<=26;i++) {
+			if(j.recherche_ter(i,j)==null) {
+				h4.add(0);
+			}
+			else {
+				h4.add(j.recherche_ter(i,j).getNumero()); 
+				a4=a4+1;
+			} 
+		}
+		if(a4==7) {
+			bonus=bonus+5;
+		}
+		for (int i=27;i<=30;i++) {
+			if(j.recherche_ter(i,j)==null) {
+				h5.add(0);
+			}
+			else {
+				h5.add(j.recherche_ter(i,j).getNumero()); 
+				a5=a5+1;
+			} 
+		}
+		if(a5==4) {
+			bonus=bonus+2;
+		}
+		for (int i=31;i<=42;i++) {
+			if(j.recherche_ter(i,j)==null) {
+				h6.add(0);
+			}
+			else {
+				h6.add(j.recherche_ter(i,j).getNumero()); 
+				a6=a6+1;
+			} 
+		}
+		if(a6==12) {
+			bonus=bonus+7;
+		}
+		return bonus;
+	}
 }
