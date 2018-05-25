@@ -6,6 +6,10 @@ import java.util.List;
 import java.util.Random;
 
 import javax.swing.*;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JSlider;
+import javax.swing.event.ChangeListener;
 
 public class Menu {
 
@@ -123,6 +127,7 @@ public class Menu {
 
 					}
 				}
+				StdDraw.pause(500);
 				break;
 			}
 
@@ -134,8 +139,65 @@ public class Menu {
 					Partie p = new Partie(42, choix3); // création de la carte
 					p.afficher_map(); // affichage de la carte
 					// création joueurs
-					Joueur j1 = new Joueur(1, StdDraw.BLUE, "bleu");
-					Joueur j2 = new Joueur(2, StdDraw.GREEN, "vert");
+					Joueur j1 = new Joueur(0, 1, StdDraw.BLUE, "bleu", null);
+					Joueur j2 = new Joueur(0, 2, StdDraw.GREEN, "vert", null);
+					
+
+					// attribution de la mission au joueur 1
+					int choixmissionj1 = 0;
+					while (choixmissionj1 == 0) {
+						if (StdDraw.isMousePressed()) {
+							double x4 = StdDraw.mouseX();// on recupere la coordonnée de x cliqué
+							double y4 = StdDraw.mouseY();// on recupere la coordonnée de y cliqué
+							if (x4 < 116 && x4 > 104 && y4 < 104 && y4 > 96) {// si elles sont sur le bouton
+								int missionj1 = rand.nextInt(2 - 1) + 1;// on choisit une mission aléatoire
+								j1.attribution_mission(missionj1, 2, j1);// on attribut une mission au joueur 1
+								j1.setMission(missionj1);// on attribut la mission 1 au joueur 1
+								StdDraw.pause(500);
+								choixmissionj1 = 1;// on termine la boucle while					
+							} else {
+								choixmissionj1 = 0;// on redemande au joueur de choisir sa mission
+								StdDraw.text(60, 105, " Joueur 1, découvrez votre mission");// affichage
+							}
+						} else {
+							choixmissionj1 = 0;// on demande au joueur de choisir sa mission
+							StdDraw.text(60, 105, "Joueur 1, découvrez votre mission");// affichage
+						}
+					}
+
+					StdDraw.clear();// on supprime le message de mission
+					p.afficher_map(); // on ré-affiche la carte
+
+					// attribution de la mission au joueur 2
+					int choixmissionj2 = 0;
+
+					while (choixmissionj2 == 0) {
+						if (StdDraw.isMousePressed()) {
+							double x5 = StdDraw.mouseX();// on recupere les coordonnées de x et y cliqués
+							double y5 = StdDraw.mouseY();
+							if (x5 < 116 && x5 > 104 && y5 < 104 && y5 > 96) {// si elles sont sur le bouton
+								int missionj2 = rand.nextInt(8 - 1) + 1;
+								j2.setMission(missionj2);
+								j2.attribution_mission(missionj2, 2, j2);// on attribut une mission au
+								// joueur 1
+								StdDraw.pause(500);
+								choixmissionj2 = 1;
+							} else {
+								choixmissionj2 = 0;// on redemande au joueur de choisir sa mission
+								StdDraw.text(60, 105, " Joueur 2, découvrez votre mission");
+							}
+						} else {
+							choixmissionj2 = 0;// on demande au joueur de choisir sa mission
+							StdDraw.text(60, 105, "Joueur 2, découvrez votre mission");
+						}
+					}
+
+					StdDraw.clear();// on supprime le message de mission
+					p.afficher_map(); // on ré-affiche la carte
+
+					j1.verification_mission(j1.getMission(), j1);// on verifie que le joueur n'a pas gagné
+					j2.verification_mission(j2.getMission(), j2);// on vérifie que le joueur n'a pass gagné
+
 					// liste aléatoire des territoires
 					ArrayList l = new ArrayList<territoire>();
 					l = p.randomAvecExclusion(1, 43);
@@ -150,11 +212,11 @@ public class Menu {
 					j2.territoire_joueur();
 
 					j1.affiche();
-					j1.attribution_mission(rand.nextInt(8 - 1) + 1, choix3, j1);
+
 					j2.affiche();
-					j2.attribution_mission(rand.nextInt(8 - 1) + 1, choix3, j2);
 
 					placementArmeeRestantes(j1, j2, choix41);
+					
 
 					for (int j = 0; j < 50; j++) { // nombre de tour arbitraire
 						System.out.println("joueur" + 1 + " place");
@@ -187,9 +249,9 @@ public class Menu {
 					Partie p = new Partie(42, choix3); // création de la carte
 					p.afficher_map(); // affichage de la carte
 					// création joueurs
-					Joueur j1 = new Joueur(1, StdDraw.BLUE, "bleu");
-					Joueur j2 = new Joueur(2, StdDraw.GREEN, "vert");
-					Joueur j3 = new Joueur(3, StdDraw.RED, "rouge");
+					Joueur j1 = new Joueur(0, 1, StdDraw.BLUE, "bleu", null);
+					Joueur j2 = new Joueur(0, 2, StdDraw.GREEN, "vert", null);
+					Joueur j3 = new Joueur(0, 3, StdDraw.RED, "rouge", null);
 					// liste aléatoire des territoires
 					ArrayList l = new ArrayList<territoire>();
 					l = p.randomAvecExclusion(1, 43);
@@ -223,10 +285,10 @@ public class Menu {
 					Partie p = new Partie(42, choix3); // création de la carte
 					p.afficher_map(); // affichage de la carte
 					// création joueurs
-					Joueur j1 = new Joueur(1, StdDraw.BLUE, "bleu");
-					Joueur j2 = new Joueur(2, StdDraw.GREEN, "vert");
-					Joueur j3 = new Joueur(3, StdDraw.RED, "rouge");
-					Joueur j4 = new Joueur(4, StdDraw.ORANGE, "orange");
+					Joueur j1 = new Joueur(0, 1, StdDraw.BLUE, "bleu", null);
+					Joueur j2 = new Joueur(0, 2, StdDraw.GREEN, "vert", null);
+					Joueur j3 = new Joueur(0, 3, StdDraw.RED, "rouge", null);
+					Joueur j4 = new Joueur(0, 4, StdDraw.ORANGE, "orange", null);
 					// liste aléatoire des territoires
 					ArrayList l = new ArrayList<Integer>();
 					l = p.randomAvecExclusion(1, 43);
@@ -280,4 +342,5 @@ public class Menu {
 		System.out.println("joueur " + 2 + " place");
 		j2.initialisation(choix4, j2, 5); // placement des armées du joueur 2
 	}
+	
 }
