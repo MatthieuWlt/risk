@@ -156,20 +156,24 @@ public class Menu {
 
 					placementArmeeRestantes(j1, j2, choix41);
 
-					for (int j = 0; j < 10; j++) { // nombre de tour arbitraire
+					for (int j = 0; j < 50; j++) { // nombre de tour arbitraire
 						System.out.println("joueur" + 1 + " place");
-						j1.initialisation(choix41, j1, 3); // placement des armées du joueur 1
+						int r1=j1.verif_region(j1);
+						j1.initialisation(choix41, j1, 3+r1); // placement des armées du joueur 1
 						System.out.println("le joueur1 attaque");
 						j1.phase_attaque(1, j1, j2); // phase attaque du joueur 1
 						System.out.println("le joueur1 déplace");
-						j1.deplacement(1, j1); // phase attaque du joueur 1
-
+						j1.deplacement(1, j1); // phase déplacement du joueur 1
+						j1.verification_mission(j1.getMission(), j1);
+						
+						int r2=j2.verif_region(j2);
 						System.out.println("joueur" + 2 + " place");
-						j2.initialisation(choix41, j2, 3); // placement des armées du joueur 2
+						j2.initialisation(choix41, j2, 3+r2); // placement des armées du joueur 2
 						System.out.println("le joueur2 attaque");
 						j2.phase_attaque(1, j2, j1); // phase attaque du joueur 2
 						System.out.println("le joueur2 déplace");
-						j1.deplacement(1, j2); // phase attaque du joueur 2
+						j2.deplacement(1, j2); // phase déplacement du joueur 2
+						j2.verification_mission(j2.getMission(), j2);
 					}
 
 					break;
