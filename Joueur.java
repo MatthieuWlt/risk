@@ -1,4 +1,6 @@
+import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Graphics;
 import java.awt.Window;
 import java.util.ArrayList;
 import java.util.Hashtable;
@@ -6,6 +8,7 @@ import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
 import javax.swing.ImageIcon;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JSlider;
@@ -120,7 +123,7 @@ public class Joueur {
 		t.setA(r);
 	}
 
-	public void attribution_mission(int numero_mission, int choix, Joueur j) {
+	public void attribution_mission(int numero_mission, int choix, Joueur j){
 		Random rand = new Random();
 		JOptionPane jop1;// on definit notre objet pour le pop up
 		jop1 = new JOptionPane();// on le cree
@@ -137,8 +140,15 @@ public class Joueur {
 				detruire=detruire2;//on affecte la nouvelle valeur
 			}
 			/* ----------------- FIN DE LA VERIFICATION ------------------ */
-			jop1.showMessageDialog(null, "Le joueur " + j.getNumero() + " doit détruire le joueur "+ detruire+".",
-					"Découvrez votre mission", JOptionPane.INFORMATION_MESSAGE, img);// partie pup-up
+			JFrame fenetre = new JFrame();
+		    fenetre.setTitle("Mission");
+		    fenetre.setSize(400, 200);
+		    fenetre.setLocationRelativeTo(null);
+		    JLabel label = new JLabel("Le joueur " + j.getNumero() + " doit détruire le joueur "+ detruire+".");
+		    JLabel image = new JLabel(img);
+		    fenetre.getContentPane().add(label, BorderLayout.CENTER);
+		    fenetre.getContentPane().add(image, BorderLayout.LINE_START);
+		    fenetre.setVisible(true);
 			break;
 
 		case 2:
