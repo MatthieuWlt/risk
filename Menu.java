@@ -215,10 +215,12 @@ public class Menu {
 					
 					// Affichage des territoires et armées des joueurs
 					j1.territoire_joueur();
-					j1.affiche();
-					
 					j2.territoire_joueur();;
+					
+					j1.affiche();
 					j2.affiche();
+					
+					placementArmeeRestantes(j1, j2, choix41);
 
 					for (int j = 0; j < 10; j++) { // nombre de tour arbitraire
 						
@@ -343,4 +345,13 @@ public class Menu {
 		StdDraw.picture(x, y, fichier);
 		StdDraw.pause(500);
 	}
+	
+	// Fonction permettant d'afficher le nombre d'armées qu'il reste à placer en console
+		public static void placementArmeeRestantes(Joueur j1, Joueur j2, int choix4) {
+			System.out.println("Joueur " + 1 + " place");
+			j1.initialisation(choix4, j1, 5); // placement des armées du joueur 1
+			System.out.println("joueur " + 2 + " place");
+			j2.initialisation(choix4, j2, 5); // placement des armées du joueur 2
+		}
+		
 }
