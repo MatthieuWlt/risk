@@ -4,10 +4,20 @@ import edu.princeton.cs.introcs.StdDraw;
 public class territoire {
 	public int numero;
 	public int a;
+	public Joueur j;
 
-	public territoire(int numero, int a) {
+	public territoire(int numero, int a, Joueur j) {
 		this.numero = numero;
 		this.a = a;
+		this.j=j;
+	}
+
+	public Joueur getJ() {
+		return j;
+	}
+
+	public void setJ(Joueur j) {
+		this.j = j;
 	}
 
 	public int getNumero() {
@@ -33,7 +43,7 @@ public class territoire {
 			StdDraw.setPenColor(r);
 			StdDraw.filledCircle(7.2, 88.7, 2.5);
 			StdDraw.setPenColor(StdDraw.WHITE);
-			StdDraw.filledCircle(7.2, 88.7, 1.5);
+			StdDraw.filledCircle(7.2, 88.7, 2);
 			StdDraw.setPenColor(StdDraw.BLACK);
 			StdDraw.text(7.2, 88.7, "" + t.a + "");
 			break;
