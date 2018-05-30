@@ -45,47 +45,57 @@ public class Menu {
 						double x = StdDraw.mouseX();
 						double y = StdDraw.mouseY();
 						StdDraw.clear(StdDraw.WHITE);
-						if (82 < y && y < 99) {
+						if (82 < y && y < 99 && 35 < x && x < 84) {
 							View.afficherImage(60.0, 55.0, "Image/parchemin2.PNG");
+							StdDraw.pause(500);
 							choix3 = 2;
 							break;
-						} else if (64 < y && y < 81) {
+						} else if (64 < y && y < 81 && 35 < x && x < 84) {
 							View.afficherImage(60.0, 55.0, "Image/parchemin3.PNG");
+							StdDraw.pause(500);
 							choix3 = 3;
 							break;
-						} else if (46 < y && y < 63) {
+						} else if (46 < y && y < 63 && 35 < x && x < 84) {
 							View.afficherImage(60.0, 55.0, "Image/parchemin4.PNG");
+							StdDraw.pause(500);
 							choix3 = 4;
 							break;
-						} else if (28 < y && y < 45) {
+						} else if (28 < y && y < 45 && 35 < x && x < 84) {
 							View.afficherImage(60.0, 55.0, "Image/parchemin5.PNG");
+							StdDraw.pause(500);
 							choix3 = 5;
 							break;
-						} else if (10 < y && y < 27) {
+						} else if (10 < y && y < 27 && 35 < x && x < 84) {
 							View.afficherImage(60.0, 55.0, "Image/parchemin6.PNG");
+							StdDraw.pause(500);
 							choix3 = 6;
 							break;
+						}
+						else {
+							View.afficherFond(60.0, 55.0, "Image/back2.png");
+							choix2 = 0;
 						}
 					} else {
 					}
 				}
 			}
+			
 
 
 /* ----------------------------- Initialisation pour 2 JOUEURS ----------------------------- */
 
-			/*while (choix3 == 2) {
-
+			while (choix3 == 2) {
 				if (StdDraw.isMousePressed()) {
-					// StdDraw.pause(500);
 					// Affichage des deux personnages à choisir
 					StdDraw.clear(StdDraw.WHITE);
 					StdDraw.setPenColor(StdDraw.BLACK);
-					StdDraw.text(60, 90, "Joueur 1, choisissez votre personnage");
-					StdDraw.picture(35.0, 55.0, "Image/Napo1.JPG");
-					StdDraw.text(35.0, 20, "Napoléon");
-					StdDraw.text(85.0, 20, "Jupiter");
-					View.afficherImage(85.0, 55.0, "Image/Macron.png");
+					StdDraw.picture(50.0,50.0,"IMAGE/parchemin_2.png");
+					StdDraw.text(60, 100, "Joueur 1, choisissez votre personnage");
+					View.afficherImage(35.0, 45.0, "Image/Napopo.png");
+					View.afficherImage(85.0, 45.0, "Image/wellington.png");
+					View.afficherImage(60.0, 60.0, "Image/versus.png");
+					StdDraw.pause(500);
+					choix3=0;
 					choix4 = 0;
 				}
 				
@@ -95,42 +105,50 @@ public class Menu {
 						double x = StdDraw.mouseX();
 						double y = StdDraw.mouseY();
 						if (15 < x && x < 55) {
-
 							choixJ1 = "Napoléon";
-							choixJ2 = "Macron";
+							choixJ2 = "Wellington";
 							StdDraw.clear(StdDraw.WHITE);
-							StdDraw.setPenColor(StdDraw.BLACK);
-							StdDraw.text(60, 90, "Joueur 2, choisissez votre personnage");
-							StdDraw.text(60.0, 20, "Jupiter");
-							View.afficherImage(60.0, 55.0, "Image/Macron.png");
+							StdDraw.picture(50.0,50.0,"IMAGE/parchemin_2.png");
+							StdDraw.text(60, 100, "Joueur 2, choisissez votre personnage");
+							View.afficherImage(60.0, 45.0, "Image/wellington.png");
+							StdDraw.pause(500);
 							choix5 = 2;
 							break;
 						} else if (55 < x && x < 105) {
 							choixJ2 = "Napoléon";
-							choixJ1 = "Macron";
+							choixJ1 = "Wellington";
 							StdDraw.clear(StdDraw.WHITE);
-							StdDraw.setPenColor(StdDraw.BLACK);
-							StdDraw.text(60, 90, "Joueur 2, choisissez votre personnage");
-							StdDraw.text(60.0, 20, "Napoléon");
-							View.afficherImage(60.0, 55.0, "Image/Napo1.JPG");
+							StdDraw.picture(50.0,50.0,"IMAGE/parchemin_2.png");
+							StdDraw.text(60, 100, "Joueur 2, choisissez votre personnage");
+							View.afficherImage(60.0, 45.0, "Image/Napopo.png");
+							StdDraw.pause(500);
 							choix5 = 2;
 							System.out.println(choix5);
 							break;
 						} else {
+							StdDraw.clear(StdDraw.WHITE);
+							StdDraw.picture(50.0,50.0,"IMAGE/parchemin_2.png");
+							StdDraw.text(60, 100, "Joueur 1, choisissez votre personnage");
+							View.afficherImage(35.0, 45.0, "Image/Napopo.png");
+							View.afficherImage(85.0, 45.0, "Image/wellington.png");
+							View.afficherImage(60.0, 60.0, "Image/versus.png");
+							StdDraw.pause(500);
+							choix4 = 0;
 						}
-						// break;
 					} else {
-
 					}
 				}
-				break;
-			}*/
+			}
+			
 
-			while (choix3 == 2) {
+			
+			
+//---------------------------------------------------------------------------------------------------
+			while (choix5 == 2) {
 				if (StdDraw.mousePressed()) {
 					int armee = 40;
 					int choix41 = 1;
-					Partie p = new Partie(42, choix3); // création de la carte
+					Partie p = new Partie(42, choix5); // création de la carte
 					View.afficher_map(); // affichage de la carte
 					// création joueurs
 					Joueur j1 = new Joueur(0, 1, StdDraw.BLUE, "bleu", null);
