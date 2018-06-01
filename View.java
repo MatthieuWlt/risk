@@ -14,10 +14,10 @@ public class View {
 		StdDraw.picture(x, y, fichier);
 	}
 	
-	// Fonction permettant d'afficher le nombre d'armées qu'il reste à placer en console
+	// Fonction permettant d'afficher le nombre d'armÃ©es qu'il reste Ã  placer en console
 	public static void placementArmeeRestantes(Joueur j1, int choix4) {
 		System.out.println("Joueur " + j1.getNumero() + " place");
-		j1.initialisation(choix4, j1, 5); // placement des armées du joueur 1
+		j1.initialisation(choix4, j1, 5); // placement des armÃ©es du joueur 1
 	}
 	
 	//Fonction permettant d'afficher le plateau de jeu
@@ -29,14 +29,42 @@ public class View {
 		StdDraw.filledRectangle(110, 100, 8, 4);// bouton mission
 		StdDraw.filledRectangle(110, 90, 8, 4);// bouton finir son tour
 		StdDraw.filledRectangle(110, 80, 8, 4);// bouton attaquer
-		StdDraw.filledRectangle(110, 70, 8, 4);// bouton se déplacer
+		StdDraw.filledRectangle(110, 70, 8, 4);// bouton se dÃ©placer
 		StdDraw.setPenColor(StdDraw.ORANGE);
 		StdDraw.filledRectangle(50, 105, 35, 5);// chat-box
-		StdDraw.setPenColor(StdDraw.BLACK);// couleur de l'écriture
+		StdDraw.setPenColor(StdDraw.BLACK);// couleur de l'Ã©criture
 		StdDraw.text(110, 100, "mission");// texte
 		StdDraw.text(110, 90, "finir");// texte
 		StdDraw.text(110, 80, "attaque");// texte
 		StdDraw.text(110, 70, "mouvement");// texte
 		StdDraw.text(25, 105, "Chat-Box : ");//texte	
+	}
+	
+	public static void affichage_personnage(int i, String perso1, String perso2, String perso3) {
+		if(i==1) {
+			StdDraw.clear(StdDraw.WHITE);
+			StdDraw.picture(50.0,50.0,"IMAGE/parchemin_2.png");
+			View.afficherImage(60.0, 45.0, perso1);
+			StdDraw.pause(500);
+		}
+		
+		else if (i==2) {
+		StdDraw.clear(StdDraw.WHITE);
+		StdDraw.setPenColor(StdDraw.BLACK);
+		StdDraw.picture(50.0,50.0,"IMAGE/parchemin_2.png");
+		View.afficherImage(35.0, 45.0, perso1);
+		View.afficherImage(85.0, 45.0, perso2);
+		StdDraw.pause(500);
+		}
+		
+		else if (i==3) {
+			StdDraw.clear(StdDraw.WHITE);
+			StdDraw.setPenColor(StdDraw.BLACK);
+			StdDraw.picture(50.0,50.0,"IMAGE/parchemin_2.png");
+			View.afficherImage(20.0, 45.0, perso1);
+			View.afficherImage(60.0, 45.0, perso2);
+			View.afficherImage(100.0, 45.0, perso3);
+			StdDraw.pause(500);
+		}
 	}
 }
