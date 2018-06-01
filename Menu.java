@@ -29,8 +29,7 @@ public class Menu {
 		int choix3 = 0; // Pour le choix du nombre de joueurs et l'affichage de la carte
 		int choix4 = 1;
 		int choix5 = 0; // Choix du personnage
-		String choixJ1 = "";
-		String choixJ2 = "";
+		int choix10 = 0;
 		Random rand = new Random();
 
 		
@@ -87,14 +86,9 @@ public class Menu {
 			while (choix3 == 2) {
 				if (StdDraw.isMousePressed()) {
 					// Affichage des deux personnages à choisir
-					StdDraw.clear(StdDraw.WHITE);
-					StdDraw.setPenColor(StdDraw.BLACK);
-					StdDraw.picture(50.0,50.0,"IMAGE/parchemin_2.png");
+					View.affichage_personnage(2, "Image/Napopo.png", "Image/wellington.png", null);
+					View.afficherImage(60,55,"Image/versus.png");
 					StdDraw.text(60, 100, "Joueur 1, choisissez votre personnage");
-					View.afficherImage(35.0, 45.0, "Image/Napopo.png");
-					View.afficherImage(85.0, 45.0, "Image/wellington.png");
-					View.afficherImage(60.0, 60.0, "Image/versus.png");
-					StdDraw.pause(500);
 					choix3=0;
 					choix4 = 0;
 				}
@@ -105,34 +99,19 @@ public class Menu {
 						double x = StdDraw.mouseX();
 						double y = StdDraw.mouseY();
 						if (15 < x && x < 55) {
-							choixJ1 = "Napoléon";
-							choixJ2 = "Wellington";
-							StdDraw.clear(StdDraw.WHITE);
-							StdDraw.picture(50.0,50.0,"IMAGE/parchemin_2.png");
+							View.affichage_personnage(1, "Image/wellington.png", null, null);
 							StdDraw.text(60, 100, "Joueur 2, choisissez votre personnage");
-							View.afficherImage(60.0, 45.0, "Image/wellington.png");
-							StdDraw.pause(500);
 							choix5 = 2;
 							break;
 						} else if (55 < x && x < 105) {
-							choixJ2 = "Napoléon";
-							choixJ1 = "Wellington";
-							StdDraw.clear(StdDraw.WHITE);
-							StdDraw.picture(50.0,50.0,"IMAGE/parchemin_2.png");
+							View.affichage_personnage(1, "Image/Napopo.png", null, null);
 							StdDraw.text(60, 100, "Joueur 2, choisissez votre personnage");
-							View.afficherImage(60.0, 45.0, "Image/Napopo.png");
-							StdDraw.pause(500);
 							choix5 = 2;
-							System.out.println(choix5);
 							break;
 						} else {
-							StdDraw.clear(StdDraw.WHITE);
-							StdDraw.picture(50.0,50.0,"IMAGE/parchemin_2.png");
+							View.affichage_personnage(2, "Image/Napopo.png", "Image/wellington.png", null);
 							StdDraw.text(60, 100, "Joueur 1, choisissez votre personnage");
-							View.afficherImage(35.0, 45.0, "Image/Napopo.png");
-							View.afficherImage(85.0, 45.0, "Image/wellington.png");
-							View.afficherImage(60.0, 60.0, "Image/versus.png");
-							StdDraw.pause(500);
+							View.afficherImage(60,55,"Image/versus.png");
 							choix4 = 0;
 						}
 					} else {
@@ -140,10 +119,6 @@ public class Menu {
 				}
 			}
 			
-
-			
-			
-//---------------------------------------------------------------------------------------------------
 			while (choix5 == 2) {
 				if (StdDraw.mousePressed()) {
 					int armee = 40;
@@ -212,6 +187,122 @@ public class Menu {
 /* ----------------------------- Initialisation pour 3 JOUEURS ----------------------------- */
 
 			while (choix3 == 3) {
+				if (StdDraw.isMousePressed()) {
+					// Affichage des deux personnages à choisir
+					View.affichage_personnage(3, "Image/Napopo.png", "Image/cesar.png", "Image/wellington.png");
+					View.afficherImage(39,55,"Image/versus.png");
+					View.afficherImage(82,55,"Image/versus.png");
+					StdDraw.text(60, 100, "Joueur 1, choisissez votre personnage");
+					choix3=0;
+					choix4 = 0;
+				}
+				
+				while (choix4 != 1) {
+					if (StdDraw.mousePressed()) {
+						// Affichage du personnage restant en fonction du choix précédent
+						double x = StdDraw.mouseX();
+						double y = StdDraw.mouseY();
+						if (5 < x && x < 35) {
+							View.affichage_personnage(2, "Image/cesar.png", "Image/wellington.png", null);
+							View.afficherImage(60,55,"Image/versus.png");
+							StdDraw.text(60, 100, "Joueur 2, choisissez votre personnage");
+							while (choix10 != 1) {
+								if (StdDraw.mousePressed()) {
+								double x1 = StdDraw.mouseX();
+								double y1 = StdDraw.mouseY();
+								if (15 < x1 && x1 < 55) {
+									View.affichage_personnage(1, "Image/wellington.png", null, null);
+									StdDraw.text(60, 100, "Joueur 3, choisissez votre personnage");
+									choix5 = 2;
+									break;
+								} else if (55 < x1 && x1 < 105) {
+									View.affichage_personnage(1, "Image/cesar.png", null, null);
+									StdDraw.text(60, 100, "Joueur 3, choisissez votre personnage");
+									choix5 = 2;
+									break;
+								} else {
+									View.affichage_personnage(2, "Image/cesar.png", "Image/wellington.png", null);
+									View.afficherImage(60,55,"Image/versus.png");
+									StdDraw.text(60, 100, "Joueur 2, choisissez votre personnage");
+									choix4 = 0;
+								}
+								}
+							}
+							break;
+						} 
+						
+						else if (45 < x && x < 75) {
+							View.affichage_personnage(2, "Image/Napopo.png", "Image/wellington.png", null);
+							View.afficherImage(60,55,"Image/versus.png");
+							StdDraw.text(60, 100, "Joueur 2, choisissez votre personnage");
+							while (choix10 != 1) {
+								if (StdDraw.mousePressed()) {
+								double x1 = StdDraw.mouseX();
+								double y1 = StdDraw.mouseY();
+								if (15 < x1 && x1 < 55) {
+									View.affichage_personnage(1, "Image/wellington.png", null, null);
+									StdDraw.text(60, 100, "Joueur 3, choisissez votre personnage");
+									choix5 = 2;
+									break;
+								} else if (55 < x1 && x1 < 105) {
+									View.affichage_personnage(1, "Image/Napopo.png", null, null);
+									StdDraw.text(60, 100, "Joueur 3, choisissez votre personnage");
+									choix5 = 2;
+									break;
+								} else {
+									View.affichage_personnage(2, "Image/Napopo.png", "Image/wellington.png", null);
+									View.afficherImage(60,55,"Image/versus.png");
+									StdDraw.text(60, 100, "Joueur 2, choisissez votre personnage");
+									choix4 = 0;
+								}
+								}
+							}
+							break;
+						} 
+						
+						
+						else if (85 < x && x < 115) {
+							View.affichage_personnage(2, "Image/Napopo.png", "Image/cesar.png", null);
+							View.afficherImage(60,55,"Image/versus.png");
+							StdDraw.text(60, 100, "Joueur 2, choisissez votre personnage");
+							while (choix10 != 1) {
+								if (StdDraw.mousePressed()) {
+								double x1 = StdDraw.mouseX();
+								double y1 = StdDraw.mouseY();
+								if (15 < x1 && x1 < 55) {
+									View.affichage_personnage(1, "Image/cesar.png", null, null);
+									StdDraw.text(60, 100, "Joueur 3, choisissez votre personnage");
+									choix5 = 2;
+									break;
+								} else if (55 < x1 && x1 < 105) {
+									View.affichage_personnage(1, "Image/Napopo.png", null, null);
+									StdDraw.text(60, 100, "Joueur 3, choisissez votre personnage");
+									choix5 = 2;
+									break;
+								} else {
+									View.affichage_personnage(2, "Image/Napopo.png", "Image/cesar.png", null);
+									StdDraw.text(60, 100, "Joueur 2, choisissez votre personnage");
+									choix4 = 0;
+								}
+								}
+							}
+							break;
+						}
+						else {
+							// Affichage des deux personnages à choisir
+							View.affichage_personnage(3, "Image/Napopo.png", "Image/cesar.png", "Image/wellington.png");
+							View.afficherImage(39,55,"Image/versus.png");
+							View.afficherImage(82,55,"Image/versus.png");
+							StdDraw.text(60, 100, "Joueur 1, choisissez votre personnage");
+							choix4 = 0;
+						}
+					} else {
+					}
+				}
+			}
+			
+			
+			while (choix3 == 3) {
 				if (StdDraw.mousePressed()) {
 					int armee = 35;
 					int choix41=1;
@@ -241,10 +332,12 @@ public class Menu {
 					// liste aléatoire des territoires
 					ArrayList l = new ArrayList<territoire>();
 					l = p.randomAvecExclusion(1, 43);
+					
 					// découpage de la liste selon le nombre de joueurs
 					List<territoire> l1 = l.subList(0, 14);
 					List<territoire> l2 = l.subList(14, 28);
 					List<territoire> l3 = l.subList(28, 42);
+					
 					// attribuer les territoires aux joueurs
 					p.ajouter_teritoire(j1, l1);
 					p.ajouter_teritoire(j2, l2);
