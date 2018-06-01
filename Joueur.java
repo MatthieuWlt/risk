@@ -1,5 +1,6 @@
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Container;
 import java.awt.Graphics;
 import java.awt.Window;
 import java.util.ArrayList;
@@ -266,6 +267,21 @@ public class Joueur {
 			}
 			break;
 		case 3: //Le joueur doit contrôler 3 régions et au moins 18 territoires.
+			int a =verif_region2(j);
+			if (a>=3&&j.list_ter.size()>=18) {
+				StdDraw.clear(StdDraw.WHITE);
+				StdDraw.text(60, 105, "Le joueur "+j.getNumero()+" a gagné !");
+				StdDraw.pause(500);
+				int g=0;
+				while(g==0) {
+					if (StdDraw.mousePressed()) {
+						System.exit(0);
+					}
+				}
+			}
+			else {
+				
+			}
 			
 			break;
 			
@@ -345,6 +361,34 @@ public class Joueur {
 			break;
 			
 		case 8: //Le joueur doit contrôler la plus grosse région plus une autre région
+			int compteur2 =verif_region2(j);
+			if(compteur2>=2) {
+				ArrayList<Integer> r = new ArrayList<Integer>();
+				int c=0;
+				for (int i=31;i<=42;i++) {
+					if(j.recherche_ter(i,j)==null) {
+						r.add(0);
+					}
+					else {
+						r.add(j.recherche_ter(i,j).getNumero()); 
+						c=c+1;
+					} 
+				}
+				if(c==12) {
+					StdDraw.clear(StdDraw.WHITE);
+					StdDraw.text(60, 105, "Le joueur "+j.getNumero()+" a gagné !");//si le joueur a 21 territoires il a gagné
+					StdDraw.pause(500);
+					int g=0;
+					while(g==0) {
+						if (StdDraw.mousePressed()) {
+							System.exit(0);
+						}
+					}
+				}
+			}
+			else {
+				
+			}
 			break;
 		}
 	}
@@ -589,7 +633,7 @@ public class Joueur {
 			att = TriaBulles(att);
 			return att;
 		} else if (t.getA() == 3) {
-			int[] att = { de1, de2, de3 };
+			int[] att = { de1, de2};
 			att = TriaBulles(att);
 			return att;
 		} else if (t.getA() > 3) {
@@ -618,7 +662,7 @@ public class Joueur {
 	}
 
 
-	public void phase_attaque(int a, Joueur j1, Joueur j2, Joueur j3, Joueur j4, Joueur j5, Joueur j6) {
+	public void phase_attaque(int a, Joueur j1, Joueur j2, Joueur j3, Joueur j4, Joueur j5, Joueur j6) throws InterruptedException {
 		while (a != 0) {
 			if(j1.list_ter==null) {
 				break;
@@ -640,7 +684,9 @@ public class Joueur {
 					StdDraw.text(25, 105, "Chat-Box : ");//texte
 					StdDraw.text(60, 105, "choisir un pays" );
 					StdDraw.pause(500);
+					
 					while (a != 0) {
+						int b=1;
 						if (StdDraw.mousePressed()) { // clique sur un territoire
 							territoire t1 = choix_pays(1, j1); // selection du pays qui attaque
 							if (t1 == null || t1.getA()==1) {
@@ -658,7 +704,7 @@ public class Joueur {
 							StdDraw.text(25, 105, "Chat-Box : ");//texte
 							StdDraw.text(60, 105, "choisir un pays à attaquer" );
 							StdDraw.pause(500);
-							while (a != 0) {
+							while (b != 0) {
 								// System.out.println("choisir un pays à attaquer");
 								if (StdDraw.mousePressed()) {// clique sur le territoire à attaquer
 									territoire t2 = choix_pays(1, j2); // selection du pays à attaquer
@@ -669,36 +715,45 @@ public class Joueur {
 									if (t2 == null && t3==null && t4==null && t5==null && t6==null) {//clique sur aucun pays
 										t1.position(t1, j1.getCouleur());
 										phase_attaque( a, j1, j2, j3, j4,j5,j6);
-										break;
+										b=0;
+										//break;
 									}
 									else if (t3==null&& t4==null && t5==null && t6==null) {//clique sur un territoire du joueur 2
+										
 										phase_attaque2(t1,t2,j1,j2);
-										break;
+										b=0;
+										//break;
 									}
 									else if (t2==null&& t4==null && t5==null && t6==null) { //clique sur un territoire du joueur 3
+										
 										phase_attaque2(t1,t3,j1,j3);
-										break;
+										b=0;
+										//break;
 									}
 									else if (t2==null&& t3==null && t5==null && t6==null) { //clique sur un territoire du joueur 4
+										
 										phase_attaque2(t1,t4,j1,j4);
-										break;
+										b=0;
+										//break;
 									}
 									else if (t2==null&& t3==null && t4==null && t6==null) { //clique sur un territoire du joueur 5
+										
 										phase_attaque2(t1,t5,j1,j5);
-										break;
+										b=0;
+										//break;
 									}
 									else if (t2==null&& t3==null && t4==null && t5==null) { //clique sur un territoire du joueur 6
+										
 										phase_attaque2(t1,t6,j1,j6);
-										break;
+										b=0;
+										//break;
 									}
 									
-
 									StdDraw.pause(500);
 									break;
 								}
 							}
 							StdDraw.pause(500);
-							break;
 						}
 					}
 				} else if (105 < x && x < 115 && 87 < y && y < 93) { // lorsqu'on clique sur "finir"
@@ -714,7 +769,7 @@ public class Joueur {
 		}
 	}
 
-	public void phase_attaque2(territoire t1, territoire t2, Joueur j1, Joueur j2) {
+	public void phase_attaque2(territoire t1, territoire t2, Joueur j1, Joueur j2) throws InterruptedException {
 		if (verif(t1, t2) == true) {
 			int[] att = att(j1, t1); // résultat du dé joueur attaquant
 			int[] def = def(j2, t2); // résultat du dé joueur defenseur
@@ -735,6 +790,7 @@ public class Joueur {
 					StdDraw.text(60, 105, "le Joueur" + j1.getNumero() + " gagne mais perd 1 unité" );
 					System.out.println(
 							"le Joueur" + j1.getNumero() + " gagne mais perd 1 unité");
+					
 					sup_armee(t2, 1); // suppression d'une unité sur le territoire du joueur
 										// défenseur
 					sup_armee(t1, 1); // suppression d'une unité sur le territoire du joueur
@@ -749,10 +805,18 @@ public class Joueur {
 					StdDraw.text(60, 105, "le Joueur" + j1.getNumero() + " gagne" );
 					System.out.println("le Joueur" + j1.getNumero() + " gagne");
 					if (t2.getA() == 2) {
+						
+						int c = t1.getA() - 1; // unité max que le joueur peut déplacer
+
+						Sliders slide = new Sliders(att.length, c); // création de la fenêtre pop up
+						slide.setVisible(true); // rend visible cette fenêtre
+						TimeUnit.SECONDS.sleep(5); // laisse un temps de réponse au joueur
+						int h = slide.getResultat(); // récupère le choix du joueur
+						
 						sup_armee(t2, 2);
-						add_armee(t2, (t1.getA() - 1)); // déplacement armée joueur
+						add_armee(t2, h); // déplacement armée joueur
 														// attaquant
-						sup_armee(t1, (t1.getA() - 1));
+						sup_armee(t1, h);
 						j1.list_ter.add(t2); // ajout du territoire au joueur attaquant
 						j2.list_ter.remove(t2); // suppression du territoire au joueur
 												// defenseur
@@ -780,13 +844,32 @@ public class Joueur {
 				StdDraw.setPenColor(StdDraw.BLACK);
 				StdDraw.text(25, 105, "Chat-Box : ");//texte
 				StdDraw.text(60, 105, "le Joueur" + j1.getNumero() + " gagne" );
-					sup_armee(t2, 1);
-					add_armee(t2, (t1.getA() - 1)); // déplacement armée joueur attaquant
-					sup_armee(t1, (t1.getA() - 1));
-					j1.list_ter.add(t2); // ajout du territoire au joueur attaquant
-					j2.list_ter.remove(t2); // suppression du territoire au joueur defenseur
-					t2.position(t2, j1.getCouleur()); // affichage territoire conquis
-					t1.position(t1, j1.getCouleur()); // affichage territoire attaquant
+				
+					if(t1.getA()<=4) {
+						sup_armee(t2, 1);
+						add_armee(t2, (t1.getA()-1)); // déplacement armée joueur attaquant
+						sup_armee(t1, (t1.getA()-1));
+						j1.list_ter.add(t2); // ajout du territoire au joueur attaquant
+						j2.list_ter.remove(t2); // suppression du territoire au joueur defenseur
+						t2.position(t2, j1.getCouleur()); // affichage territoire conquis
+						t1.position(t1, j1.getCouleur()); // affichage territoire attaquant
+					}
+					else {
+						int c = t1.getA() - 1; // unité max que le joueur peut déplacer
+		
+						Sliders slide = new Sliders(att.length, c); // création de la fenêtre pop up
+						slide.setVisible(true); // rend visible cette fenêtre
+						TimeUnit.SECONDS.sleep(5); // laisse un temps de réponse au joueur
+						int h = slide.getResultat(); // récupère le choix du joueur
+						
+							sup_armee(t2, 1);
+							add_armee(t2, h); // déplacement armée joueur attaquant
+							sup_armee(t1, h);
+							j1.list_ter.add(t2); // ajout du territoire au joueur attaquant
+							j2.list_ter.remove(t2); // suppression du territoire au joueur defenseur
+							t2.position(t2, j1.getCouleur()); // affichage territoire conquis
+							t1.position(t1, j1.getCouleur()); // affichage territoire attaquant
+					}
 				} else if (att[0] <= def[0]) {
 					StdDraw.setPenColor(StdDraw.ORANGE);
 					StdDraw.filledRectangle(50, 105, 35, 5);// chat-box
@@ -873,10 +956,12 @@ public class Joueur {
 										slide.setVisible(true); // rend visible cette fenêtre
 										TimeUnit.SECONDS.sleep(5); // laisse un temps de réponse au joueur
 										int h = slide.getResultat(); // récupère le choix du joueur
+										
 										add_armee(t2, h); // ajout armee sur territoire de destination
 										sup_armee(t1, h); // suppression armee sur territoire source
 										t2.position(t2, j.getCouleur()); // affichage territoire destination
 										t1.position(t1, j.getCouleur()); // affichage territoire source
+										d=0;
 										break;
 									} else {
 										t1.position(t1, j.getCouleur()); // renvoie la couleur couleur du joueur
@@ -1088,7 +1173,9 @@ public class Joueur {
 				return true;
 			} else if (t2.getNumero() == 19) {
 				return true;
-			} else {
+			} else if (t2.getNumero() == 37) {
+				return true;
+			}else {
 				return false;
 			}
 		}
@@ -1536,5 +1623,94 @@ public class Joueur {
 			bonus=bonus+7;
 		}
 		return bonus;
+	}
+	
+	public int verif_region2(Joueur j) {
+		ArrayList<Integer> h1 = new ArrayList<Integer>();
+		ArrayList<Integer> h2 = new ArrayList<Integer>();
+		ArrayList<Integer> h3 = new ArrayList<Integer>();
+		ArrayList<Integer> h4 = new ArrayList<Integer>();
+		ArrayList<Integer> h5 = new ArrayList<Integer>();
+		ArrayList<Integer> h6 = new ArrayList<Integer>();
+		int compteur=0;
+		int	a1=0;
+		int a2=0;
+		int a3=0;
+		int a4=0;
+		int a5=0;
+		int a6=0;
+		for (int i=1;i<=9;i++) {
+			if(j.recherche_ter(i,j)==null) {
+				h1.add(0);
+			}
+			else {
+				h1.add(j.recherche_ter(i,j).getNumero());  
+				a1=a1+1;
+			}
+		}
+		if(a1==9) {
+			compteur=compteur+1;
+		}
+		for (int i=10;i<=13;i++) {
+			if(j.recherche_ter(i,j)==null) {
+				h2.add(0);
+			}
+			else {
+				h2.add(j.recherche_ter(i,j).getNumero()); 
+				a2=a2+1;
+			} 
+		}
+		if(a2==4) {
+			compteur=compteur+1;
+		}
+		for (int i=14;i<=19;i++) {
+			if(j.recherche_ter(i,j)==null) {
+				h3.add(0);
+			}
+			else {
+				h3.add(j.recherche_ter(i,j).getNumero()); 
+				a3=a3+1;
+			} 
+		}
+		if(a3==6) {
+			compteur=compteur+1;
+		}
+		for (int i=20;i<=26;i++) {
+			if(j.recherche_ter(i,j)==null) {
+				h4.add(0);
+			}
+			else {
+				h4.add(j.recherche_ter(i,j).getNumero()); 
+				a4=a4+1;
+			} 
+		}
+		if(a4==7) {
+			compteur=compteur+1;
+		}
+		for (int i=27;i<=30;i++) {
+			if(j.recherche_ter(i,j)==null) {
+				h5.add(0);
+			}
+			else {
+				h5.add(j.recherche_ter(i,j).getNumero()); 
+				a5=a5+1;
+			} 
+		}
+		if(a5==4) {
+			compteur=compteur+1;
+		}
+		for (int i=31;i<=42;i++) {
+			if(j.recherche_ter(i,j)==null) {
+				h6.add(0);
+			}
+			else {
+				h6.add(j.recherche_ter(i,j).getNumero()); 
+				a6=a6+1;
+			} 
+		}
+		if(a6==12) {
+			compteur=compteur+1;
+		}
+		return compteur;
 	}
 }
