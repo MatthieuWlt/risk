@@ -13,13 +13,7 @@ public class View {
 	public static void afficherImage(double x, double y, String fichier) {
 		StdDraw.picture(x, y, fichier);
 	}
-	
-	// Fonction permettant d'afficher le nombre d'armées qu'il reste à placer en console
-	public static void placementArmeeRestantes(Joueur j1, int choix4) {
-		System.out.println("Joueur " + j1.getNumero() + " place");
-		j1.initialisation(choix4, j1, 5); // placement des armées du joueur 1
-	}
-	
+
 	//Fonction permettant d'afficher le plateau de jeu
 	public static void afficher_map() {
 		StdDraw.clear(StdDraw.WHITE);
@@ -40,6 +34,7 @@ public class View {
 		StdDraw.text(25, 105, "Chat-Box : ");//texte	
 	}
 	
+	// Fonction qui affiche les images des personnages au moment du choix
 	public static void affichage_personnage(int i, String perso1, String perso2, String perso3) {
 		if(i==1) {
 			StdDraw.clear(StdDraw.WHITE);
