@@ -97,10 +97,6 @@ public class Joueur {
 		return list;
 	}
 
-	public void affiche() {
-		System.out.println("Joueur" + numero + " : " + affiche_list() + "\n" + "Couleur : " + nomcoul);
-	}
-
 	public void territoire_joueur() { //affiche les territoire du joueur
 		int a;
 		int b = 0;
