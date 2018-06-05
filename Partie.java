@@ -56,4 +56,8 @@ public class Partie {
 		}
 		return j.list_ter;
 	}
+	
+	public static void placementArmeeRestantes(Joueur j1, int choix4) {
+		j1.initialisation(choix4, j1, 5); // placement des armées du joueur 1
+	}
 }
