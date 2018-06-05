@@ -165,9 +165,6 @@ public class Menu {
 					// Affichage des territoires et armées des joueurs
 					j1.territoire_joueur();
 					j2.territoire_joueur();
-
-					j1.affiche();
-					j2.affiche();
 					
 					Partie.placementArmeeRestantes(j1, choix41);
 					Partie.placementArmeeRestantes(j2, choix41);
@@ -421,10 +418,10 @@ public class Menu {
 						Partie p = new Partie(42, choix3); // création de la carte
 						View.afficher_map(); // affichage de la carte
 						// création joueurs
-						Joueur j1 = new Joueur(0, 1, StdDraw.BLUE, "bleu", null);
-						Joueur j2 = new Joueur(0, 2, StdDraw.GREEN, "vert", null);
-						Joueur j3 = new Joueur(0, 3, StdDraw.RED, "rouge", null);
-						Joueur j4 = new Joueur(0, 4, StdDraw.ORANGE, "orange", null);
+						Joueur j1 = new Joueur(0, 1, StdDraw.BLUE, "bleu", null, null);
+						Joueur j2 = new Joueur(0, 2, StdDraw.GREEN, "vert", null, null);
+						Joueur j3 = new Joueur(0, 3, StdDraw.RED, "rouge", null, null);
+						Joueur j4 = new Joueur(0, 4, StdDraw.ORANGE, "orange", null, null);
 						
 						// attribution de la mission au joueur 1
 						mission.Chat_Box_Mission(j1);
