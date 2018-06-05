@@ -126,43 +126,51 @@ public class Menu {
 				}
 			}
 			
+			// Lancement de la partie
 			while (choix5 == 2) {
 				if (StdDraw.mousePressed()) {
 					int armee = 40;
 					int choix41 = 1;
-					Partie p = new Partie(42, choix5); // création de la carte
-					View.afficher_map(); // affichage de la carte
-					// création joueurs
-					Joueur j1 = new Joueur(0, 1, StdDraw.BLUE, "bleu", null,persoj1);
-					Joueur j2 = new Joueur(0, 2, StdDraw.GREEN, "vert", null,persoj2);
+					
+					// Création et affichage de la carte
+					Partie p = new Partie(42, choix5);
+					View.afficher_map();
+					
+					// Création des joueurs
+					Joueur j1 = new Joueur(0, 1, StdDraw.BLUE, "bleu", null, persoj1);
+					Joueur j2 = new Joueur(0, 2, StdDraw.GREEN, "vert", null, persoj2);
 
-					// attribution de la mission au joueur 1
+					// Attribution de la mission au joueur 1
 					mission.Chat_Box_Mission(j1);
-					StdDraw.clear();// on supprime le message de mission
+					StdDraw.clear();
 					View.afficher_map(); // on ré-affiche la carte
 
-					// attribution de la mission au joueur 2
+					// Attribution de la mission au joueur 2
 					mission.Chat_Box_Mission(j2);
-					StdDraw.clear();// on supprime le message de mission
+					StdDraw.clear();
 					View.afficher_map(); // on ré-affiche la carte
 
-					// liste aléatoire des territoires
+					// Création de la liste des territoires
 					ArrayList l = new ArrayList<territoire>();
 					l = p.randomAvecExclusion(1, 43);
-					// découpage de la liste selon le nombre de joueurs
+					
+					// Découpage de la liste selon le nombre de joueurs
 					List<territoire> l1 = l.subList(0, 21);
 					List<territoire> l2 = l.subList(21, 42);
-					// attribuer les territoires aux joueurs
+					
+					// Attribution des territoires aux joueurs
 					p.ajouter_teritoire(j1, l1);
 					p.ajouter_teritoire(j2, l2);
-					// affichage des territoires et armées des joueurs
+					
+					// Affichage des territoires et armées des joueurs
 					j1.territoire_joueur();
 					j2.territoire_joueur();
 
 					j1.affiche();
-
 					j2.affiche();
-
+					
+					Partie.placementArmeeRestantes(j1, choix41);
+					Partie.placementArmeeRestantes(j2, choix41);
 					
 					for (int j = 0; j < 50; j++) { // boucle infinie
 						System.out.println("joueur" + 1 + " place");
@@ -188,7 +196,7 @@ public class Menu {
 				}
 			}
 
-/* ----------------------------- Initialisation pour 3 JOUEURS ----------------------------- */
+/* ------------------------------------- Initialisation pour 3 JOUEURS ------------------------------------- */
 
 			while (choix3 == 3) {
 				if (StdDraw.isMousePressed()) {
