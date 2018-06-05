@@ -321,7 +321,7 @@ public class Menu {
 			}
 			
 			
-			while (choix3 == 3) {
+			while (choix5 == 3) {
 				if (StdDraw.mousePressed()) {
 					int armee = 35;
 					int choix41=1;
@@ -329,9 +329,9 @@ public class Menu {
 					Partie p = new Partie(42, choix3); // création de la carte
 					View.afficher_map(); // affichage de la carte
 					// création joueurs
-					Joueur j1 = new Joueur(0, 1, StdDraw.BLUE, "bleu", null,null);
-					Joueur j2 = new Joueur(0, 2, StdDraw.GREEN, "vert", null,null);
-					Joueur j3 = new Joueur(0, 3, StdDraw.RED, "rouge", null,null);
+					Joueur j1 = new Joueur(0, 1, StdDraw.BLUE, "bleu", null);
+					Joueur j2 = new Joueur(0, 2, StdDraw.GREEN, "vert", null);
+					Joueur j3 = new Joueur(0, 3, StdDraw.RED, "rouge", null);
 					
 					// attribution de la mission au joueur 1
 					mission.Chat_Box_Mission(j1);
@@ -365,13 +365,12 @@ public class Menu {
 					j1.territoire_joueur();
 					j2.territoire_joueur();
 					j3.territoire_joueur();
-	
-					j1.affiche();
-					j2.affiche();
-					j3.affiche();
-
 					
-					while(choix41==1) { // bouocle infinie
+					Partie.placementArmeeRestantes(j1,choix41);
+					Partie.placementArmeeRestantes(j2,choix41);
+					Partie.placementArmeeRestantes(j3,choix41);
+
+					while(choix41==1) { // boucle infinie
 						System.out.println("joueur" + 1 + " place");
 						int r1=j1.verif_region(j1);
 						j1.initialisation(choix41,j1, 3+r1); // placement des armées du joueur 1
