@@ -1,6 +1,7 @@
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Container;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Window;
 import java.util.ArrayList;
@@ -23,13 +24,23 @@ public class Joueur {
 	Color couleur;
 	String nomcoul;
 	public ArrayList<territoire> list_ter;
+	public String photo;
 
-	public Joueur(int mission, int numero, Color couleur, String nomcoul, ArrayList<territoire> list_ter) {
+	public Joueur(int mission, int numero, Color couleur, String nomcoul, ArrayList<territoire> list_ter, String photo) {
 		this.mission = mission;
 		this.numero = numero;
 		this.couleur = couleur;
 		this.nomcoul = nomcoul;
 		this.list_ter = new ArrayList<territoire>();
+		this.photo=photo;
+	}
+
+	public String getPhoto() {
+		return photo;
+	}
+
+	public void setPhoto(String photo) {
+		this.photo = photo;
 	}
 
 	public int getMission() {
@@ -76,8 +87,7 @@ public class Joueur {
 
 	}
 
-	// Fonction qui retourne la liste des territoires d'un joueur
-	public ArrayList<Integer> affiche_list() {
+	public ArrayList<Integer> affiche_list() { //fonction qui retourne la liste des territoires du joueur
 		ArrayList<Integer> list = new ArrayList<Integer>();
 		for (int i = 0; i < list_ter.size(); i++) {
 			territoire t = list_ter.get(i);
@@ -236,8 +246,8 @@ public class Joueur {
 		switch(numero_mission) {
 		case 1:
 			if(j.getList_ter()==null) {
-				View.afficherFond(60, 55, "Image/victoire.jpg");
-				StdDraw.text(60, 70, "Le joueur "+j.getNumero()+ " a gagné !");//on vérifie que le joueur adverse n'ai plus de territoire
+				StdDraw.clear(StdDraw.WHITE);
+				StdDraw.text(60, 105, "Le joueur "+j.getNumero()+ " a gagné !");//on vérifie que le joueur adverse n'ai plus de territoire
 				StdDraw.pause(500);
 				int g=0;
 				while(g==0) {
@@ -253,8 +263,8 @@ public class Joueur {
 			break;
 		case 2:
 			if((j.getList_ter()).size()==22) {
-				View.afficherFond(60, 55, "Image/victoire.jpg");
-				StdDraw.text(60, 70, "Le joueur "+j.getNumero()+" a gagné !");//on vérifie si le joueur a tous les territoires
+				StdDraw.clear(StdDraw.WHITE);
+				StdDraw.text(60, 105, "Le joueur "+j.getNumero()+" a gagné !");//on vérifie si le joueur a tous les territoires
 				StdDraw.pause(500);
 				int g=0;
 				while(g==0) {
@@ -270,8 +280,8 @@ public class Joueur {
 		case 3: //Le joueur doit contrôler 3 régions et au moins 18 territoires.
 			int a =verif_region2(j);
 			if (a>=3&&j.list_ter.size()>=18) {
-				View.afficherFond(60, 55, "Image/victoire.jpg");
-				StdDraw.text(60, 70, "Le joueur "+j.getNumero()+" a gagné !");
+				StdDraw.clear(StdDraw.WHITE);
+				StdDraw.text(60, 105, "Le joueur "+j.getNumero()+" a gagné !");
 				StdDraw.pause(500);
 				int g=0;
 				while(g==0) {
@@ -295,8 +305,8 @@ public class Joueur {
 					}
 				}
 				if (compteur>=18) {
-					View.afficherFond(60, 55, "Image/victoire.jpg");
-					StdDraw.text(60, 70, "Le joueur "+j.getNumero()+" a gagné !");
+					StdDraw.clear(StdDraw.WHITE);
+					StdDraw.text(60, 105, "Le joueur "+j.getNumero()+" a gagné !");
 					StdDraw.pause(500);
 					int g=0;
 					while(g==0) {
@@ -312,8 +322,8 @@ public class Joueur {
 			
 		case 5:
 			if(getList_ter().size()>=30) {
-				View.afficherFond(60, 55, "Image/victoire.jpg");
-				StdDraw.text(60, 70, "Le joueur "+j.getNumero()+" a gagné !");//si le joueur a 30 territoires il a gagné
+				StdDraw.clear(StdDraw.WHITE);
+				StdDraw.text(60, 105, "Le joueur "+j.getNumero()+" a gagné !");//si le joueur a 30 territoires il a gagné
 				StdDraw.pause(500);
 				int g=0;
 				while(g==0) {
@@ -329,8 +339,8 @@ public class Joueur {
 			
 		case 6:
 			if(getList_ter().size()>=24) {
-				View.afficherFond(60, 55, "Image/victoire.jpg");
-				StdDraw.text(60, 70, "Le joueur "+j.getNumero()+" a gagné !");//si le joueur a 24 territoires il a gagné
+				StdDraw.clear(StdDraw.WHITE);
+				StdDraw.text(60, 105, "Le joueur "+j.getNumero()+" a gagné !");//si le joueur a 24 territoires il a gagné
 				StdDraw.pause(500);
 				int g=0;
 				while(g==0) {
@@ -346,8 +356,8 @@ public class Joueur {
 			
 		case 7:
 			if(getList_ter().size()>=21) {
-				View.afficherFond(60, 55, "Image/victoire.jpg");
-				StdDraw.text(60, 70, "Le joueur "+j.getNumero()+" a gagné !");//si le joueur a 21 territoires il a gagné
+				StdDraw.clear(StdDraw.WHITE);
+				StdDraw.text(60, 105, "Le joueur "+j.getNumero()+" a gagné !");//si le joueur a 21 territoires il a gagné
 				StdDraw.pause(500);
 				int g=0;
 				while(g==0) {
@@ -376,8 +386,8 @@ public class Joueur {
 					} 
 				}
 				if(c==12) {
-					View.afficherFond(60, 55, "Image/victoire.jpg");
-					StdDraw.text(60, 70, "Le joueur "+j.getNumero()+" a gagné !");//si le joueur a 21 territoires il a gagné
+					StdDraw.clear(StdDraw.WHITE);
+					StdDraw.text(60, 105, "Le joueur "+j.getNumero()+" a gagné !");//si le joueur a 21 territoires il a gagné
 					StdDraw.pause(500);
 					int g=0;
 					while(g==0) {
@@ -759,7 +769,7 @@ public class Joueur {
 					}
 				} else if (105 < x && x < 115 && 87 < y && y < 93) { // lorsqu'on clique sur "finir"
 					StdDraw.pause(500);
-					break; // arrÃªt de la phase attaque
+					break; // arrêt de la phase attaque
 				} else {
 					StdDraw.pause(500);
 				}
@@ -781,7 +791,13 @@ public class Joueur {
 			
 			System.out.println("la taille de att est : " + att.length);
 			System.out.println("la taille de def est : " + def.length);
-			StdDraw.text(110, 40, "COMBAT :");
+			StdDraw.picture(110, 30, "Image/parchemin_combat.png");
+			StdDraw.picture(105, 40,"Image/cache.png" );
+			StdDraw.picture(105,42,j1.getPhoto());//105,40
+			StdDraw.picture(110, 40, "Image/cache.png");
+			StdDraw.picture(110, 40, "Image/versus2.png");
+			StdDraw.picture(115, 42, j2.getPhoto());//115,40
+
 
 			if(att.length==3) {
 				for (int w1 = 1; w1 <= 3; w1++) {
@@ -820,7 +836,7 @@ public class Joueur {
 
 					}
 				}
-				StdDraw.picture(115, 30, "Image/de_vide.jpeg");
+				StdDraw.picture(115, 30, "Image/cache.png");
 			}
 			else {
 				for (int w2 = 1; w2 <= 1; w2++) {
@@ -841,8 +857,8 @@ public class Joueur {
 
 					}
 				}
-				StdDraw.picture(115, 30,"Image/de_vide.jpeg");
-				StdDraw.picture(110, 30, "Image/de_vide.jpeg");
+				StdDraw.picture(115, 30,"Image/cache.png");
+				StdDraw.picture(110, 30, "Image/cache.png");
 			}
 			
 			if(def.length==2){
@@ -885,7 +901,7 @@ public class Joueur {
 					}
 					
 				}
-				StdDraw.picture(110, 20,"Image/de_vide.jpeg");
+				StdDraw.picture(110, 20,"Image/cache.png");
 			}
 			
 			
@@ -920,10 +936,10 @@ public class Joueur {
 						
 						int c = t1.getA() - 1; // unité max que le joueur peut déplacer
 
-						Sliders slide = new Sliders(att.length, c); // création de la fenÃªtre pop up
-						slide.setVisible(true); // rend visible cette fenÃªtre
+						Sliders slide = new Sliders(att.length, c); // création de la fenêtre pop up
+						slide.setVisible(true); // rend visible cette fenêtre
 						TimeUnit.SECONDS.sleep(5); // laisse un temps de réponse au joueur
-						int h = slide.getResultat(); // récupÃ¨re le choix du joueur
+						int h = slide.getResultat(); // récupère le choix du joueur
 						
 						sup_armee(t2, 2);
 						add_armee(t2, h); // déplacement armée joueur
@@ -969,10 +985,10 @@ public class Joueur {
 					else {
 						int c = t1.getA() - 1; // unité max que le joueur peut déplacer
 		
-						Sliders slide = new Sliders(att.length, c); // création de la fenÃªtre pop up
-						slide.setVisible(true); // rend visible cette fenÃªtre
+						Sliders slide = new Sliders(att.length, c); // création de la fenêtre pop up
+						slide.setVisible(true); // rend visible cette fenêtre
 						TimeUnit.SECONDS.sleep(5); // laisse un temps de réponse au joueur
-						int h = slide.getResultat(); // récupÃ¨re le choix du joueur
+						int h = slide.getResultat(); // récupère le choix du joueur
 						
 							sup_armee(t2, 1);
 							add_armee(t2, h); // déplacement armée joueur attaquant
@@ -1064,10 +1080,10 @@ public class Joueur {
 									if (verif(t1, t2) == true) {
 										int c = t1.getA() - 1; // unité max que le joueur peut déplacer
 
-										Sliders slide = new Sliders(1, c); // création de la fenÃªtre pop up
-										slide.setVisible(true); // rend visible cette fenÃªtre
+										Sliders slide = new Sliders(1, c); // création de la fenêtre pop up
+										slide.setVisible(true); // rend visible cette fenêtre
 										TimeUnit.SECONDS.sleep(5); // laisse un temps de réponse au joueur
-										int h = slide.getResultat(); // récupÃ¨re le choix du joueur
+										int h = slide.getResultat(); // récupère le choix du joueur
 										
 										add_armee(t2, h); // ajout armee sur territoire de destination
 										sup_armee(t1, h); // suppression armee sur territoire source
@@ -1089,7 +1105,7 @@ public class Joueur {
 					}
 				} else if (105 < x && x < 115 && 87 < y && y < 93) { // lorsqu'on clique sur "finir"
 					StdDraw.pause(500);
-					break; // arrÃªt de la phase déplacement
+					break; // arrêt de la phase déplacement
 				} else {
 					StdDraw.pause(500);
 				}
