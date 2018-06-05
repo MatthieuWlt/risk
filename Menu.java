@@ -11,7 +11,7 @@ public class Menu {
 
 	public static void main(String[] args) throws InterruptedException {
 		
-		/* Initialisation de la taille de la fenÃªtre et affichage du fond d'into */
+		/* Initialisation de la taille de la fenêtre et affichage du fond d'into */
 		StdDraw.setCanvasSize(1229, 576);
 		StdDraw.setXscale(0.0, 120);
 		StdDraw.setYscale(0.0, 110);
@@ -30,6 +30,9 @@ public class Menu {
 		int choix4 = 1;
 		int choix5 = 0; // Choix du personnage
 		int choix10 = 0;
+		String persoj1="";
+		String persoj2="";
+		String persoj3="";
 		Random rand = new Random();
 
 		
@@ -85,7 +88,7 @@ public class Menu {
 
 			while (choix3 == 2) {
 				if (StdDraw.isMousePressed()) {
-					// Affichage des deux personnages Ã  choisir
+					// Affichage des deux personnages à choisir
 					View.affichage_personnage(2, "Image/Napopo.png", "Image/wellington.png", null);
 					View.afficherImage(60,55,"Image/versus.png");
 					StdDraw.text(60, 100, "Joueur 1, choisissez votre personnage");
@@ -101,12 +104,16 @@ public class Menu {
 						if (15 < x && x < 55) {
 							View.affichage_personnage(1, "Image/wellington.png", null, null);
 							StdDraw.text(60, 100, "Joueur 2, choisissez votre personnage");
+							persoj1="Image/Napopo_petit.png";
+							persoj2="Image/wellington_petit.png";
 							choix5 = 2;
 							break;
 						} else if (55 < x && x < 105) {
 							View.affichage_personnage(1, "Image/Napopo.png", null, null);
 							StdDraw.text(60, 100, "Joueur 2, choisissez votre personnage");
 							choix5 = 2;
+							persoj1="Image/wellington_petit.png";
+							persoj2="Image/Napopo_petit.png";
 							break;
 						} else {
 							View.affichage_personnage(2, "Image/Napopo.png", "Image/wellington.png", null);
@@ -126,17 +133,16 @@ public class Menu {
 					Partie p = new Partie(42, choix5); // création de la carte
 					View.afficher_map(); // affichage de la carte
 					// création joueurs
-					Joueur j1 = new Joueur(0, 1, StdDraw.BLUE, "bleu", null);
-					Joueur j2 = new Joueur(0, 2, StdDraw.GREEN, "vert", null);
-					
+					Joueur j1 = new Joueur(0, 1, StdDraw.BLUE, "bleu", null,persoj1);
+					Joueur j2 = new Joueur(0, 2, StdDraw.GREEN, "vert", null,persoj2);
 
 					// attribution de la mission au joueur 1
-					mission.affichage_mission(j1);
+					mission.Chat_Box_Mission(j1);
 					StdDraw.clear();// on supprime le message de mission
 					View.afficher_map(); // on ré-affiche la carte
 
 					// attribution de la mission au joueur 2
-					mission.affichage_mission(j2);
+					mission.Chat_Box_Mission(j2);
 					StdDraw.clear();// on supprime le message de mission
 					View.afficher_map(); // on ré-affiche la carte
 
@@ -157,9 +163,7 @@ public class Menu {
 
 					j2.affiche();
 
-					View.placementArmeeRestantes(j1, choix41);
-					View.placementArmeeRestantes(j2, choix41);
-
+					
 					for (int j = 0; j < 50; j++) { // boucle infinie
 						System.out.println("joueur" + 1 + " place");
 						int r1=j1.verif_region(j1);
@@ -188,7 +192,7 @@ public class Menu {
 
 			while (choix3 == 3) {
 				if (StdDraw.isMousePressed()) {
-					// Affichage des deux personnages Ã  choisir
+					// Affichage des deux personnages à choisir
 					View.affichage_personnage(3, "Image/Napopo.png", "Image/cesar.png", "Image/wellington.png");
 					View.afficherImage(39,55,"Image/versus.png");
 					View.afficherImage(82,55,"Image/versus.png");
@@ -203,6 +207,7 @@ public class Menu {
 						double x = StdDraw.mouseX();
 						double y = StdDraw.mouseY();
 						if (5 < x && x < 35) {
+							persoj1="Image/Napopo_petit.png";
 							View.affichage_personnage(2, "Image/cesar.png", "Image/wellington.png", null);
 							View.afficherImage(60,55,"Image/versus.png");
 							StdDraw.text(60, 100, "Joueur 2, choisissez votre personnage");
@@ -213,12 +218,16 @@ public class Menu {
 								if (15 < x1 && x1 < 55) {
 									View.affichage_personnage(1, "Image/wellington.png", null, null);
 									StdDraw.text(60, 100, "Joueur 3, choisissez votre personnage");
-									choix5 = 3;
+									choix5 = 2;
+									persoj3="Image/wellington_petit.png";
+									persoj2="Image/cesar_petit.png";
 									break;
 								} else if (55 < x1 && x1 < 105) {
 									View.affichage_personnage(1, "Image/cesar.png", null, null);
 									StdDraw.text(60, 100, "Joueur 3, choisissez votre personnage");
-									choix5 = 3;
+									choix5 = 2;
+									persoj2="Image/wellington_petit.png";
+									persoj3="Image/cesar_petit.png";
 									break;
 								} else {
 									View.affichage_personnage(2, "Image/cesar.png", "Image/wellington.png", null);
@@ -232,6 +241,7 @@ public class Menu {
 						} 
 						
 						else if (45 < x && x < 75) {
+							persoj1="Image/cesar_petit.png";
 							View.affichage_personnage(2, "Image/Napopo.png", "Image/wellington.png", null);
 							View.afficherImage(60,55,"Image/versus.png");
 							StdDraw.text(60, 100, "Joueur 2, choisissez votre personnage");
@@ -242,12 +252,16 @@ public class Menu {
 								if (15 < x1 && x1 < 55) {
 									View.affichage_personnage(1, "Image/wellington.png", null, null);
 									StdDraw.text(60, 100, "Joueur 3, choisissez votre personnage");
-									choix5 = 3;
+									choix5 = 2;
+									persoj3="Image/wellington_petit.png";
+									persoj2="Image/Napopo_petit.png";
 									break;
 								} else if (55 < x1 && x1 < 105) {
 									View.affichage_personnage(1, "Image/Napopo.png", null, null);
 									StdDraw.text(60, 100, "Joueur 3, choisissez votre personnage");
-									choix5 = 3;
+									choix5 = 2;
+									persoj2="Image/wellington_petit.png";
+									persoj3="Image/Napopo_petit.png";
 									break;
 								} else {
 									View.affichage_personnage(2, "Image/Napopo.png", "Image/wellington.png", null);
@@ -262,6 +276,7 @@ public class Menu {
 						
 						
 						else if (85 < x && x < 115) {
+							persoj1="Image/wellington_petit.png";
 							View.affichage_personnage(2, "Image/Napopo.png", "Image/cesar.png", null);
 							View.afficherImage(60,55,"Image/versus.png");
 							StdDraw.text(60, 100, "Joueur 2, choisissez votre personnage");
@@ -272,12 +287,16 @@ public class Menu {
 								if (15 < x1 && x1 < 55) {
 									View.affichage_personnage(1, "Image/cesar.png", null, null);
 									StdDraw.text(60, 100, "Joueur 3, choisissez votre personnage");
-									choix5 = 3;
+									choix5 = 2;
+									persoj2="Image/Napopo_petit.png";
+									persoj3="Image/cesar_petit.png";
 									break;
 								} else if (55 < x1 && x1 < 105) {
 									View.affichage_personnage(1, "Image/Napopo.png", null, null);
 									StdDraw.text(60, 100, "Joueur 3, choisissez votre personnage");
-									choix5 = 3;
+									choix5 = 2;
+									persoj3="Image/Napopo_petit.png";
+									persoj2="Image/cesar_petit.png";
 									break;
 								} else {
 									View.affichage_personnage(2, "Image/Napopo.png", "Image/cesar.png", null);
@@ -289,7 +308,7 @@ public class Menu {
 							break;
 						}
 						else {
-							// Affichage des deux personnages Ã  choisir
+							// Affichage des deux personnages à choisir
 							View.affichage_personnage(3, "Image/Napopo.png", "Image/cesar.png", "Image/wellington.png");
 							View.afficherImage(39,55,"Image/versus.png");
 							View.afficherImage(82,55,"Image/versus.png");
@@ -302,7 +321,7 @@ public class Menu {
 			}
 			
 			
-			while (choix5 == 3) {
+			while (choix3 == 3) {
 				if (StdDraw.mousePressed()) {
 					int armee = 35;
 					int choix41=1;
@@ -310,22 +329,22 @@ public class Menu {
 					Partie p = new Partie(42, choix3); // création de la carte
 					View.afficher_map(); // affichage de la carte
 					// création joueurs
-					Joueur j1 = new Joueur(0, 1, StdDraw.BLUE, "bleu", null);
-					Joueur j2 = new Joueur(0, 2, StdDraw.GREEN, "vert", null);
-					Joueur j3 = new Joueur(0, 3, StdDraw.RED, "rouge", null);
+					Joueur j1 = new Joueur(0, 1, StdDraw.BLUE, "bleu", null,null);
+					Joueur j2 = new Joueur(0, 2, StdDraw.GREEN, "vert", null,null);
+					Joueur j3 = new Joueur(0, 3, StdDraw.RED, "rouge", null,null);
 					
 					// attribution de la mission au joueur 1
-					mission.affichage_mission(j1);
+					mission.Chat_Box_Mission(j1);
 					StdDraw.clear();// on supprime le message de mission
 					View.afficher_map(); // on ré-affiche la carte
 
 					// attribution de la mission au joueur 2
-					mission.affichage_mission(j2);
+					mission.Chat_Box_Mission(j2);
 					StdDraw.clear();// on supprime le message de mission
 					View.afficher_map(); // on ré-affiche la carte
 					
 					// attribution de la mission au joueur 3
-					mission.affichage_mission(j3);
+					mission.Chat_Box_Mission(j3);
 					StdDraw.clear();// on supprime le message de mission
 					View.afficher_map(); // on ré-affiche la carte
 					
@@ -350,11 +369,8 @@ public class Menu {
 					j1.affiche();
 					j2.affiche();
 					j3.affiche();
-					
-					View.placementArmeeRestantes(j1,choix41);
-					View.placementArmeeRestantes(j2,choix41);
-					View.placementArmeeRestantes(j3,choix41);
 
+					
 					while(choix41==1) { // bouocle infinie
 						System.out.println("joueur" + 1 + " place");
 						int r1=j1.verif_region(j1);
@@ -398,28 +414,28 @@ public class Menu {
 						Partie p = new Partie(42, choix3); // création de la carte
 						View.afficher_map(); // affichage de la carte
 						// création joueurs
-						Joueur j1 = new Joueur(0, 1, StdDraw.BLUE, "bleu", null);
-						Joueur j2 = new Joueur(0, 2, StdDraw.GREEN, "vert", null);
-						Joueur j3 = new Joueur(0, 3, StdDraw.RED, "rouge", null);
-						Joueur j4 = new Joueur(0, 4, StdDraw.ORANGE, "orange", null);
+						Joueur j1 = new Joueur(0, 1, StdDraw.BLUE, "bleu", null,null);
+						Joueur j2 = new Joueur(0, 2, StdDraw.GREEN, "vert", null,null);
+						Joueur j3 = new Joueur(0, 3, StdDraw.RED, "rouge", null,null);
+						Joueur j4 = new Joueur(0, 4, StdDraw.ORANGE, "orange", null,null);
 						
 						// attribution de la mission au joueur 1
-						mission.affichage_mission(j1);
+						mission.Chat_Box_Mission(j1);
 						StdDraw.clear();// on supprime le message de mission
 						View.afficher_map(); // on ré-affiche la carte
 						
 						// attribution de la mission au joueur 2
-						mission.affichage_mission(j2);
+						mission.Chat_Box_Mission(j2);
 						StdDraw.clear();// on supprime le message de mission
 						View.afficher_map(); // on ré-affiche la carte
 						
 						// attribution de la mission au joueur 3
-						mission.affichage_mission(j3);
+						mission.Chat_Box_Mission(j3);
 						StdDraw.clear();// on supprime le message de mission
 						View.afficher_map(); // on ré-affiche la carte
 						
 						// attribution de la mission au joueur 4
-						mission.affichage_mission(j4);
+						mission.Chat_Box_Mission(j4);
 						StdDraw.clear();// on supprime le message de mission
 						View.afficher_map(); // on ré-affiche la carte
 						
@@ -447,11 +463,7 @@ public class Menu {
 						j3.affiche();
 						j4.affiche();
 						
-						View.placementArmeeRestantes(j1,choix41);
-						View.placementArmeeRestantes(j2,choix41);
-						View.placementArmeeRestantes(j3,choix41);
-						View.placementArmeeRestantes(j4,choix41);
-						
+
 						while(choix41==1) { //boucle infinie
 							System.out.println("joueur" + 1 + " place");
 							int r1=j1.verif_region(j1);
