@@ -337,9 +337,9 @@ public class Menu {
 					Partie p = new Partie(42, choix3); // création de la carte
 					View.afficher_map(); // affichage de la carte
 					// création joueurs
-					Joueur j1 = new Joueur(0, 1, StdDraw.BLUE, "bleu", null);
-					Joueur j2 = new Joueur(0, 2, StdDraw.GREEN, "vert", null);
-					Joueur j3 = new Joueur(0, 3, StdDraw.RED, "rouge", null);
+					Joueur j1 = new Joueur(0, 1, StdDraw.BLUE, "bleu", null, persoj1);
+					Joueur j2 = new Joueur(0, 2, StdDraw.GREEN, "vert", null, persoj2);
+					Joueur j3 = new Joueur(0, 3, StdDraw.RED, "rouge", null, persoj3);
 					
 					// attribution de la mission au joueur 1
 					mission.Chat_Box_Mission(j1);
