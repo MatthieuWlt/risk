@@ -12,7 +12,7 @@ public class mission {
 		this.numero_mission = numero_mission;
 	}
 	
-	public static void affichage_mission(Joueur j) {
+	public static void Chat_Box_Mission(Joueur j) {
 		int choixmissionj = 0;
 		Random rand = new Random();
 		while (choixmissionj == 0) {
