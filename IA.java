@@ -7,9 +7,11 @@ import edu.princeton.cs.introcs.StdDraw;
 
 public class IA {
 	public Joueur j;
+	public Partie p;
 
-	public IA(Joueur j) {
+	public IA(Joueur j, Partie p) {
 		this.j=j;
+		this.p=p;
 	}
 	
 	public void IA_placementArmeeRestantes(Joueur j2, int c) {//c représente le  nombre d'armées restantes
@@ -22,10 +24,25 @@ public class IA {
 	}
 	
 	public void IA_initialisation(Joueur j2, int c) {
-		
+		territoire t1 = choix_joueur(j2);
+		int a = c/2;
+		j2.add_armee(t1, a);
+		territoire t2 = choix_joueur(j2);
+		j2.add_armee(t2, c-a);
+		System.out.println(t2.getA());
 	}
 	
 	public void IA_verif_region(int c) {
+		int w=0;
+		if (c==19||c==17) {
+			w = 6;
+		}
+		else if (c==21||c==20) {
+			w=7;
+		}
+		else if(c==13) {
+			w=4;
+		}
 		Region r1 = new Region(1);
 		Region r2 = new Region(2);
 		Region r3 = new Region(3);
@@ -38,9 +55,9 @@ public class IA {
 			territoire t1= j.recherche_ter(1, j);
 			territoire t2=j.recherche_ter(5, j);
 			territoire t3=j.recherche_ter(3, j);
-			j.add_armee(t1,6);
-			j.add_armee(t2,6);
-			j.add_armee(t3,7);
+			j.add_armee(t1,w);
+			j.add_armee(t2,w);
+			j.add_armee(t3,c-2*w);
 			t1.position(t1, j.getCouleur());
 			t2.position(t2, j.getCouleur());
 			t3.position(t3, j.getCouleur());
@@ -49,8 +66,8 @@ public class IA {
 		else if(r2.region(j)==4) {
 			territoire t1= j.recherche_ter(11, j);
 			territoire t2=j.recherche_ter(13, j);
-			j.add_armee(t1,9);
-			j.add_armee(t2,10);
+			j.add_armee(t1,w+3);
+			j.add_armee(t2,c-(w+3));
 			t1.position(t1, j.getCouleur());
 			t2.position(t2, j.getCouleur());
 			StdDraw.pause(500);
@@ -59,9 +76,9 @@ public class IA {
 			territoire t1= j.recherche_ter(15, j);
 			territoire t2=j.recherche_ter(16, j);
 			territoire t3=j.recherche_ter(18, j);
-			j.add_armee(t1,6);
-			j.add_armee(t2,6);
-			j.add_armee(t3,7);
+			j.add_armee(t1,w);
+			j.add_armee(t2,w);
+			j.add_armee(t3,c-w*2);
 			t1.position(t1, j.getCouleur());
 			t2.position(t2, j.getCouleur());
 			t3.position(t3, j.getCouleur());
@@ -72,10 +89,10 @@ public class IA {
 			territoire t2=j.recherche_ter(24, j);
 			territoire t3=j.recherche_ter(25, j);
 			territoire t4=j.recherche_ter(26, j);
-			j.add_armee(t1,4);
-			j.add_armee(t2,5);
-			j.add_armee(t3,5);
-			j.add_armee(t4,5);
+			j.add_armee(t1,c-3*(w-1));
+			j.add_armee(t2,w-1);
+			j.add_armee(t3,w-1);
+			j.add_armee(t4,w-1);
 			t1.position(t1, j.getCouleur());
 			t2.position(t2, j.getCouleur());
 			t3.position(t3, j.getCouleur());
@@ -84,13 +101,13 @@ public class IA {
 		}
 		else if(r5.region(j)==4) {
 			if(j.recherche_ter(39,j)!=null) {
-				j.add_armee(j.recherche_ter(39,j),19);
+				j.add_armee(j.recherche_ter(39,j),c);
 				j.recherche_ter(39,j).position(j.recherche_ter(39,j), j.getCouleur());
 				StdDraw.pause(500);
 			}
 			else {
 				territoire t1= j.recherche_ter(28, j);
-				j.add_armee(t1,19);
+				j.add_armee(t1,c);
 				t1.position(t1, j.getCouleur());
 				StdDraw.pause(500);
 			}
@@ -102,10 +119,10 @@ public class IA {
 			territoire t4=j.recherche_ter(31, j);
 			territoire t5=j.recherche_ter(37, j);
 			if(j.recherche_ter(25,j)!=null) {
-				j.add_armee(j.recherche_ter(25,j),5);
-				j.add_armee(t1,5);
-				j.add_armee(t2,5);
-				j.add_armee(t5,4);
+				j.add_armee(j.recherche_ter(25,j),w-1);
+				j.add_armee(t1,w-1);
+				j.add_armee(t2,w-1);
+				j.add_armee(t5,c-3*(w-1));
 				t1.position(t1, j.getCouleur());
 				t2.position(t2, j.getCouleur());
 				t5.position(t5, j.getCouleur());
@@ -113,11 +130,11 @@ public class IA {
 				StdDraw.pause(500);
 			}
 			else {
-				j.add_armee(t1,4);
-				j.add_armee(t2,4);
-				j.add_armee(t3,3);
-				j.add_armee(t4,4);
-				j.add_armee(t5,4);
+				j.add_armee(t1,w-2);
+				j.add_armee(t2,w-2);
+				j.add_armee(t3,c-(w-2)*4);
+				j.add_armee(t4,w-2);
+				j.add_armee(t5,w-2);
 				t1.position(t1, j.getCouleur());
 				t2.position(t2, j.getCouleur());
 				t3.position(t3, j.getCouleur());
@@ -156,10 +173,10 @@ public class IA {
 				territoire t9=j.recherche_ter(9, j);
 				if (r1.region(j)==8) {
 					if(t1==null) {
-						j.add_armee(t6,4);
-						j.add_armee(t2,3);
-						j.add_armee(t3,6);
-						j.add_armee(t5,6);
+						j.add_armee(t6,w-1);
+						j.add_armee(t2,c-3*(w-1));
+						j.add_armee(t3,w-1);
+						j.add_armee(t5,w-1);
 						t6.position(t6, j.getCouleur());
 						t2.position(t2, j.getCouleur());
 						t3.position(t3, j.getCouleur());
@@ -167,10 +184,10 @@ public class IA {
 						StdDraw.pause(500);	
 					}
 					else if(t3==null) {
-						j.add_armee(t4,4);
-						j.add_armee(t9,3);
-						j.add_armee(t5,6);
-						j.add_armee(t1,6);
+						j.add_armee(t4,w-1);
+						j.add_armee(t9,c-3*(w-1));
+						j.add_armee(t5,w-1);
+						j.add_armee(t1,w-1);
 						t4.position(t4, j.getCouleur());
 						t9.position(t9, j.getCouleur());
 						t5.position(t5, j.getCouleur());
@@ -178,11 +195,11 @@ public class IA {
 						StdDraw.pause(500);	
 					}
 					else if(t5==null) {
-						j.add_armee(t6,3);
-						j.add_armee(t8,3);
-						j.add_armee(t7,3);
-						j.add_armee(t3,5);
-						j.add_armee(t1,5);
+						j.add_armee(t6,w-2);
+						j.add_armee(t8,c-(w-2)*4);
+						j.add_armee(t7,w-2);
+						j.add_armee(t3,w-2);
+						j.add_armee(t1,w-2);
 						t6.position(t6, j.getCouleur());
 						t8.position(t8, j.getCouleur());
 						t7.position(t7, j.getCouleur());
@@ -191,9 +208,9 @@ public class IA {
 						StdDraw.pause(500);	
 					}
 					else {
-						j.add_armee(t1, 6);
-						j.add_armee(t3, 6);
-						j.add_armee(t5, 7);
+						j.add_armee(t1, w);
+						j.add_armee(t3, w);
+						j.add_armee(t5, c-w*2);
 						t1.position(t1, j.getCouleur());
 						t3.position(t3, j.getCouleur());
 						t5.position(t5, j.getCouleur());
@@ -202,11 +219,11 @@ public class IA {
 				}
 				else if(r1.region(j)==7) {
 					if(t1==null&&t5==null) {
-						j.add_armee(t2,3);
-						j.add_armee(t6,4);
-						j.add_armee(t7,3);
-						j.add_armee(t8,4);
-						j.add_armee(t3,5);
+						j.add_armee(t2,c-(w-2)*4);
+						j.add_armee(t6,w-2);
+						j.add_armee(t7,w-2);
+						j.add_armee(t8,w-2);
+						j.add_armee(t3,w-2);
 						t2.position(t2, j.getCouleur());
 						t6.position(t6, j.getCouleur());
 						t7.position(t7, j.getCouleur());
@@ -215,11 +232,11 @@ public class IA {
 						StdDraw.pause(500);	
 					}
 					else if(t1==null&&t3==null) {
-						j.add_armee(t2,3);
-						j.add_armee(t6,4);
-						j.add_armee(t9,3);
-						j.add_armee(t4,4);
-						j.add_armee(t5,5);
+						j.add_armee(t2,c-(w-2)*4);
+						j.add_armee(t6,w-2);
+						j.add_armee(t9,w-2);
+						j.add_armee(t4,w-2);
+						j.add_armee(t5,w-2);
 						t2.position(t2, j.getCouleur());
 						t6.position(t6, j.getCouleur());
 						t9.position(t9, j.getCouleur());
@@ -228,11 +245,11 @@ public class IA {
 						StdDraw.pause(500);	
 					}
 					else if(t3==null&&t5==null) {
-						j.add_armee(t8,3);
-						j.add_armee(t6,4);
-						j.add_armee(t9,3);
-						j.add_armee(t4,4);
-						j.add_armee(t1,5);
+						j.add_armee(t8,c-(w-2)*4);
+						j.add_armee(t6,w-2);
+						j.add_armee(t9,w-2);
+						j.add_armee(t4,w-2);
+						j.add_armee(t1,w-2);
 						t8.position(t8, j.getCouleur());
 						t6.position(t6, j.getCouleur());
 						t9.position(t9, j.getCouleur());
@@ -242,10 +259,10 @@ public class IA {
 					}
 					else if(t1==null) {
 						if(t6==null) {
-							j.add_armee(t2,4);
-							j.add_armee(t7,4);
-							j.add_armee(t5,5);
-							j.add_armee(t3,6);
+							j.add_armee(t2,w-1);
+							j.add_armee(t7,c-3*(w-1));
+							j.add_armee(t5,w-1);
+							j.add_armee(t3,w-1);
 							t2.position(t2, j.getCouleur());
 							t7.position(t7, j.getCouleur());
 							t5.position(t5, j.getCouleur());
@@ -253,11 +270,11 @@ public class IA {
 							StdDraw.pause(500);	
 						}
 						else if(t2==null) {
-							j.add_armee(t6,3);
-							j.add_armee(t7,3);
-							j.add_armee(t9,3);
-							j.add_armee(t3,5);
-							j.add_armee(t5,5);
+							j.add_armee(t6,c-(w-2)*4);
+							j.add_armee(t7,w-2);
+							j.add_armee(t9,w-2);
+							j.add_armee(t3,w-2);
+							j.add_armee(t5,w-2);
 							t6.position(t6, j.getCouleur());
 							t7.position(t7, j.getCouleur());
 							t9.position(t9, j.getCouleur());
@@ -266,10 +283,10 @@ public class IA {
 							StdDraw.pause(500);	
 						}
 						else {
-							j.add_armee(t6,4);
-							j.add_armee(t2,3);
-							j.add_armee(t3,6);
-							j.add_armee(t5,6);
+							j.add_armee(t6,w-1);
+							j.add_armee(t2,c-3*(w-1));
+							j.add_armee(t3,w-1);
+							j.add_armee(t5,w-1);
 							t6.position(t6, j.getCouleur());
 							t2.position(t2, j.getCouleur());
 							t3.position(t3, j.getCouleur());
@@ -279,11 +296,11 @@ public class IA {
 					}
 					else if(t3==null) {
 						if(t4==null) {
-							j.add_armee(t9,3);
-							j.add_armee(t7,3);
-							j.add_armee(t8,3);
-							j.add_armee(t1,5);
-							j.add_armee(t5,5);
+							j.add_armee(t9,c-(w-2)*4);
+							j.add_armee(t7,w-2);
+							j.add_armee(t8,w-2);
+							j.add_armee(t1,w-2);
+							j.add_armee(t5,w-2);
 							t9.position(t9, j.getCouleur());
 							t7.position(t7, j.getCouleur());
 							t8.position(t8, j.getCouleur());
@@ -292,11 +309,11 @@ public class IA {
 							StdDraw.pause(500);	
 						}
 						else if(t9==null) {
-							j.add_armee(t2,3);
-							j.add_armee(t7,3);
-							j.add_armee(t4,3);
-							j.add_armee(t1,5);
-							j.add_armee(t5,5);
+							j.add_armee(t2,c-(w-2)*4);
+							j.add_armee(t7,w-2);
+							j.add_armee(t4,w-2);
+							j.add_armee(t1,w-2);
+							j.add_armee(t5,w-2);
 							t2.position(t2, j.getCouleur());
 							t7.position(t7, j.getCouleur());
 							t4.position(t4, j.getCouleur());
@@ -305,10 +322,10 @@ public class IA {
 							StdDraw.pause(500);	
 						}
 						else {
-							j.add_armee(t4,4);
-							j.add_armee(t9,3);
-							j.add_armee(t5,6);
-							j.add_armee(t1,6);
+							j.add_armee(t4,w-1);
+							j.add_armee(t9,c-3*(w-1));
+							j.add_armee(t5,w-1);
+							j.add_armee(t1,w-1);
 							t4.position(t4, j.getCouleur());
 							t9.position(t9, j.getCouleur());
 							t5.position(t5, j.getCouleur());
@@ -318,29 +335,29 @@ public class IA {
 					}
 					else if(t5==null) {
 						if(t6==null) {
-							j.add_armee(t1,8);
-							j.add_armee(t8,5);
-							j.add_armee(t3,6);
+							j.add_armee(t1,w);
+							j.add_armee(t8,w);
+							j.add_armee(t3,c-w*2);
 							t1.position(t1, j.getCouleur());
 							t8.position(t8, j.getCouleur());
 							t3.position(t3, j.getCouleur());
 							StdDraw.pause(500);	
 						}else if(t7==null) {
-							j.add_armee(t6,4);
-							j.add_armee(t8,3);
-							j.add_armee(t3,6);
-							j.add_armee(t1,6);
+							j.add_armee(t6,w-1);
+							j.add_armee(t8,c-3*(w-1));
+							j.add_armee(t3,w-1);
+							j.add_armee(t1,w-1);
 							t6.position(t6, j.getCouleur());
 							t8.position(t8, j.getCouleur());
 							t3.position(t3, j.getCouleur());
 							t1.position(t1, j.getCouleur());
 							StdDraw.pause(500);	
 						}else if(t8==null) {
-							j.add_armee(t7,4);
-							j.add_armee(t6,3);
-							j.add_armee(t4,4);
-							j.add_armee(t1,4);
-							j.add_armee(t3,4);
+							j.add_armee(t7,w-2);
+							j.add_armee(t6,c-(w-2)*4);
+							j.add_armee(t4,w-2);
+							j.add_armee(t1,w-2);
+							j.add_armee(t3,w-2);
 							t7.position(t7, j.getCouleur());
 							t6.position(t6, j.getCouleur());
 							t4.position(t4, j.getCouleur());
@@ -348,11 +365,11 @@ public class IA {
 							t3.position(t3, j.getCouleur());
 							StdDraw.pause(500);	
 						}else {
-							j.add_armee(t6,3);
-							j.add_armee(t8,3);
-							j.add_armee(t7,3);
-							j.add_armee(t3,5);
-							j.add_armee(t1,5);
+							j.add_armee(t6,c-(w-2)*4);
+							j.add_armee(t8,w-2);
+							j.add_armee(t7,w-2);
+							j.add_armee(t3,w-2);
+							j.add_armee(t1,w-2);
 							t6.position(t6, j.getCouleur());
 							t8.position(t8, j.getCouleur());
 							t7.position(t7, j.getCouleur());
@@ -362,9 +379,9 @@ public class IA {
 						}
 						
 					}else {
-						j.add_armee(t1, 6);
-						j.add_armee(t3, 6);
-						j.add_armee(t5, 7);
+						j.add_armee(t1, w);
+						j.add_armee(t3, w);
+						j.add_armee(t5, c-w*2);
 						t1.position(t1, j.getCouleur());
 						t3.position(t3, j.getCouleur());
 						t5.position(t5, j.getCouleur());
@@ -377,7 +394,7 @@ public class IA {
 						t = j.recherche_ter(rand.nextInt(10 - 1) + 1, j);
 						
 					}
-					j.add_armee(t, 19);
+					j.add_armee(t, c);
 					t.position(t, j.getCouleur());
 					StdDraw.pause(500);	
 					
@@ -393,60 +410,60 @@ public class IA {
 				territoire t13= j.recherche_ter(13, j);
 				if (r2.region(j)==3) {
 					if(t13==null) {
-						j.add_armee(t12, 9);
-						j.add_armee(t11, 10);
+						j.add_armee(t12, w+3);
+						j.add_armee(t11, c-(w+3));
 						t12.position(t12, j.getCouleur());
 						t11.position(t11, j.getCouleur());
 						StdDraw.pause(500);	
 					}else if(t11==null) {
-						j.add_armee(t13, 7);
-						j.add_armee(t12, 6);
-						j.add_armee(t10, 6);
+						j.add_armee(t13, c-2*w);
+						j.add_armee(t12, w);
+						j.add_armee(t10, w);
 						t13.position(t13, j.getCouleur());
 						t12.position(t12, j.getCouleur());
 						t10.position(t10, j.getCouleur());
 						StdDraw.pause(500);	
 					}else {
-						j.add_armee(t13, 9);
-						j.add_armee(t11, 10);
+						j.add_armee(t13, w+3);
+						j.add_armee(t11, c-(w+3));
 						t13.position(t13, j.getCouleur());
 						t11.position(t11, j.getCouleur());
 						StdDraw.pause(500);	
 					}
 				}else if(r2.region(j)==2) {
 					if(t13==null&&t11==null) {
-						j.add_armee(t10, 9);
-						j.add_armee(t12, 10);
+						j.add_armee(t10, w+3);
+						j.add_armee(t12, c-(w+3));
 						t10.position(t10, j.getCouleur());
 						t12.position(t12, j.getCouleur());
 						StdDraw.pause(500);
 					}else if(t13==null&&t12==null) {
-						j.add_armee(t11, 9);
-						j.add_armee(t10, 10);
+						j.add_armee(t11, w+3);
+						j.add_armee(t10, c-(w+3));
 						t10.position(t10, j.getCouleur());
 						t11.position(t11, j.getCouleur());
 						StdDraw.pause(500);
 					}else if(t13==null&&t10==null) {
-						j.add_armee(t12, 9);
-						j.add_armee(t11, 10);
+						j.add_armee(t12, w+3);
+						j.add_armee(t11, c-(w+3));
 						t12.position(t12, j.getCouleur());
 						t11.position(t11, j.getCouleur());
 						StdDraw.pause(500);
 					}else if(t12==null&&t11==null) {
-						j.add_armee(t13, 10);
-						j.add_armee(t10, 9);
+						j.add_armee(t13, c-(w+3));
+						j.add_armee(t10, w+3);
 						t13.position(t13, j.getCouleur());
 						t10.position(t10, j.getCouleur());
 						StdDraw.pause(500);
 					}else if(t12==null&&t10==null) {
-						j.add_armee(t13, 9);
-						j.add_armee(t11, 10);
+						j.add_armee(t13, w+3);
+						j.add_armee(t11, c-(w+3));
 						t13.position(t13, j.getCouleur());
 						t11.position(t11, j.getCouleur());
 						StdDraw.pause(500);
 					}else if(t11==null&&t10==null) {
-						j.add_armee(t12, 9);
-						j.add_armee(t13, 10);
+						j.add_armee(t12, w+3);
+						j.add_armee(t13, c-(w+3));
 						t12.position(t12, j.getCouleur());
 						t13.position(t13, j.getCouleur());
 						StdDraw.pause(500);
@@ -457,7 +474,7 @@ public class IA {
 					while (t==null) {
 						t = j.recherche_ter(rand.nextInt(14 - 10) + 10, j);
 					}
-					j.add_armee(t, 19);
+					j.add_armee(t, c);
 					t.position(t, j.getCouleur());
 					StdDraw.pause(500);
 				}
@@ -472,25 +489,25 @@ public class IA {
 				territoire t19=j.recherche_ter(19, j);
 				if (r3.region(j)==5) {
 					if(t18==null) {
-						j.add_armee(t15, 6);
-						j.add_armee(t16, 7);
-						j.add_armee(t14, 6);
+						j.add_armee(t15, w);
+						j.add_armee(t16, c-2*w);
+						j.add_armee(t14, w);
 						t15.position(t15, j.getCouleur());
 						t16.position(t16, j.getCouleur());
 						t14.position(t14, j.getCouleur());
 						StdDraw.pause(500);
 					}else if(t16==null) {
-						j.add_armee(t15, 10);
-						j.add_armee(t18, 9);
+						j.add_armee(t15, c-(w+3));
+						j.add_armee(t18, w+3);
 						t15.position(t15, j.getCouleur());
 						t18.position(t18, j.getCouleur());
 						StdDraw.pause(500);
 					}else if(t15==null) {
-						j.add_armee(t14, 3);
-						j.add_armee(t17, 3);
-						j.add_armee(t19, 3);
-						j.add_armee(t16, 5);
-						j.add_armee(t18, 5);
+						j.add_armee(t14, c-(w-2)*4);
+						j.add_armee(t17, w-2);
+						j.add_armee(t19, w-2);
+						j.add_armee(t16, w-2);
+						j.add_armee(t18, w-2);
 						t14.position(t14, j.getCouleur());
 						t17.position(t17, j.getCouleur());
 						t19.position(t19, j.getCouleur());
@@ -498,9 +515,9 @@ public class IA {
 						t18.position(t18, j.getCouleur());
 						StdDraw.pause(500);
 					}else {
-						j.add_armee(t15, 6);
-						j.add_armee(t16, 7);
-						j.add_armee(t18, 6);
+						j.add_armee(t15, w);
+						j.add_armee(t16, c-2*w);
+						j.add_armee(t18, w);
 						t15.position(t15, j.getCouleur());
 						t16.position(t16, j.getCouleur());
 						t18.position(t18, j.getCouleur());
@@ -509,23 +526,23 @@ public class IA {
 				}
 				else if(r3.region(j)==4) {
 					if(t18==null&&t16==null) {
-						j.add_armee(t15, 10);
-						j.add_armee(t14, 9);
+						j.add_armee(t15, c-(w+3));
+						j.add_armee(t14, w+3);
 						t15.position(t15, j.getCouleur());
 						t14.position(t14, j.getCouleur());
 						StdDraw.pause(500);
 					}else if(t18==null&&t15==null) {
-						j.add_armee(t16, 9);
-						j.add_armee(t14, 5);
-						j.add_armee(t17, 5);
+						j.add_armee(t16, c-2*w);
+						j.add_armee(t14, w);
+						j.add_armee(t17, w);
 						t16.position(t16, j.getCouleur());
 						t14.position(t14, j.getCouleur());
 						t17.position(t17, j.getCouleur());
 						StdDraw.pause(500);
 					}else if(t15==null&&t16==null) {
-						j.add_armee(t18, 9);
-						j.add_armee(t14, 5);
-						j.add_armee(t17, 5);
+						j.add_armee(t18, c-2*w);
+						j.add_armee(t14, w);
+						j.add_armee(t17, w);
 						t18.position(t18, j.getCouleur());
 						t14.position(t14, j.getCouleur());
 						t17.position(t17, j.getCouleur());
@@ -533,54 +550,54 @@ public class IA {
 					}
 					else if(t18==null) {
 						if(t14==null) {
-							j.add_armee(t16, 8);
-							j.add_armee(t15, 5);
-							j.add_armee(t19,6);
+							j.add_armee(t16, c-2*w);
+							j.add_armee(t15, w);
+							j.add_armee(t19,w);
 							t16.position(t16, j.getCouleur());
 							t15.position(t15, j.getCouleur());
 							t19.position(t19, j.getCouleur());
 							StdDraw.pause(500);
 						}else {
-							j.add_armee(t14, 7);
-							j.add_armee(t15, 6);
-							j.add_armee(t16, 6);
+							j.add_armee(t14, c-2*w);
+							j.add_armee(t15, w);
+							j.add_armee(t16, w);
 							t14.position(t14, j.getCouleur());
 							t15.position(t15, j.getCouleur());
 							t16.position(t16, j.getCouleur());
 							StdDraw.pause(500);
 						}
 					}else if(t16==null) {
-						j.add_armee(t18, 10);
-						j.add_armee(t15, 9);
+						j.add_armee(t18, c-(w+3));
+						j.add_armee(t15, w+3);
 						t18.position(t18, j.getCouleur());
 						t15.position(t15, j.getCouleur());
 						StdDraw.pause(500);
 					}else if(t15==null) {
 						if(t14==null) {
-							j.add_armee(t18, 6);
-							j.add_armee(t16, 6);
-							j.add_armee(t17, 4);
-							j.add_armee(t19, 3);
+							j.add_armee(t18, w-1);
+							j.add_armee(t16, w-1);
+							j.add_armee(t17, w-1);
+							j.add_armee(t19, c-3*(w-1));
 							t18.position(t18, j.getCouleur());
 							t16.position(t16, j.getCouleur());
 							t17.position(t17, j.getCouleur());
 							t19.position(t19, j.getCouleur());
 							StdDraw.pause(500);
 						}else if(t19==null) {
-							j.add_armee(t18, 6);
-							j.add_armee(t16, 6);
-							j.add_armee(t17, 4);
-							j.add_armee(t14, 3);
+							j.add_armee(t18, w-1);
+							j.add_armee(t16, w-1);
+							j.add_armee(t17, w-1);
+							j.add_armee(t14, c-3*(w-1));
 							t18.position(t18, j.getCouleur());
 							t16.position(t16, j.getCouleur());
 							t17.position(t17, j.getCouleur());
 							t14.position(t14, j.getCouleur());
 							StdDraw.pause(500);
 						}else if(t17==null) {
-							j.add_armee(t18, 6);
-							j.add_armee(t16, 6);
-							j.add_armee(t14, 3);
-							j.add_armee(t19, 4);
+							j.add_armee(t18, w-1);
+							j.add_armee(t16, w-1);
+							j.add_armee(t14, c-3*(w-1));
+							j.add_armee(t19, w-1);
 							t18.position(t18, j.getCouleur());
 							t16.position(t16, j.getCouleur());
 							t14.position(t14, j.getCouleur());
@@ -588,9 +605,9 @@ public class IA {
 							StdDraw.pause(500);
 						}
 					}else {
-						j.add_armee(t15, 6);
-						j.add_armee(t16, 7);
-						j.add_armee(t18, 6);
+						j.add_armee(t15, w);
+						j.add_armee(t16, c-2*w);
+						j.add_armee(t18, w);
 						t15.position(t15, j.getCouleur());
 						t16.position(t16, j.getCouleur());
 						t18.position(t18, j.getCouleur());
@@ -603,7 +620,7 @@ public class IA {
 					while (t==null) {
 						t = j.recherche_ter(rand.nextInt(20 - 14) + 14, j);
 					}
-					j.add_armee(t, 19);
+					j.add_armee(t, c);
 					t.position(t, j.getCouleur());
 					StdDraw.pause(500);
 				}
@@ -616,51 +633,51 @@ public class IA {
 				territoire t30= j.recherche_ter(30, j);
 				if (r5.region(j)==3) {
 					if(t28==null||t27==null) {
-						j.add_armee(t29, 9);
-						j.add_armee(t30, 10);
+						j.add_armee(t29, w+3);
+						j.add_armee(t30, c-(w+3));
 						t29.position(t29, j.getCouleur());
 						t30.position(t30, j.getCouleur());
 						StdDraw.pause(500);
 					}else {
-						j.add_armee(t28, 19);
+						j.add_armee(t28, c);
 						t30.position(t28, j.getCouleur());
 						StdDraw.pause(500);
 					}
 				}
 				else if(r5.region(j)==2) {
 					if(t28==null&&t27==null) {
-						j.add_armee(t29, 9);
-						j.add_armee(t30, 10);
+						j.add_armee(t29, w+3);
+						j.add_armee(t30, c-(w+3));
 						t29.position(t29, j.getCouleur());
 						t30.position(t30, j.getCouleur());
 						StdDraw.pause(500);
 					}else if(t28==null&&t29==null) {
-						j.add_armee(t27, 9);
-						j.add_armee(t30, 10);
+						j.add_armee(t27, w+3);
+						j.add_armee(t30, c-(w+3));
 						t27.position(t27, j.getCouleur());
 						t30.position(t30, j.getCouleur());
 						StdDraw.pause(500);
 					}else if(t28==null&&t30==null) {
-						j.add_armee(t27, 9);
-						j.add_armee(t29, 10);
+						j.add_armee(t27, w+3);
+						j.add_armee(t29, c-(w+3));
 						t27.position(t27, j.getCouleur());
 						t29.position(t29, j.getCouleur());
 						StdDraw.pause(500);
 					}else if(t29==null&&t30==null) {
-						j.add_armee(t27, 9);
-						j.add_armee(t28, 10);
+						j.add_armee(t27, w+3);
+						j.add_armee(t28, c-(w+3));
 						t27.position(t27, j.getCouleur());
 						t28.position(t28, j.getCouleur());
 						StdDraw.pause(500);
 					}else if(t29==null&&t27==null) {
-						j.add_armee(t28, 9);
-						j.add_armee(t30, 10);
+						j.add_armee(t28, w+3);
+						j.add_armee(t30, c-(w+3));
 						t28.position(t28, j.getCouleur());
 						t30.position(t30, j.getCouleur());
 						StdDraw.pause(500);
 					}else if(t30==null&&t27==null) {
-						j.add_armee(t28, 9);
-						j.add_armee(t29, 10);
+						j.add_armee(t28, w+3);
+						j.add_armee(t29, c-(w+3));
 						t29.position(t29, j.getCouleur());
 						t28.position(t28, j.getCouleur());
 						StdDraw.pause(500);
@@ -672,23 +689,126 @@ public class IA {
 					while (t==null) {
 						t = j.recherche_ter(rand.nextInt(31 - 27) + 27, j);
 					}
-					j.add_armee(t, 19);
+					j.add_armee(t, c);
 					t.position(t, j.getCouleur());
 					StdDraw.pause(500);
 				}
 			}
-			//Europe ou Asie
+			//Europe 
+			else if(f==a4) {
+				territoire t20= j.recherche_ter(20, j);
+				territoire t21=j.recherche_ter(21, j);
+				territoire t22=j.recherche_ter(22, j);
+				territoire t23= j.recherche_ter(23, j);
+				territoire t24= j.recherche_ter(24, j);
+				territoire t25=j.recherche_ter(25, j);
+				territoire t26=j.recherche_ter(26, j);
+				if (r4.region(j)==6) {
+					if (t20==null) {
+						j.add_armee(t21, w);
+						j.add_armee(t23, w);
+						j.add_armee(t26, c-(2*w));
+						t21.position(t21, j.getCouleur());
+						t23.position(t23, j.getCouleur());
+						t26.position(t26, j.getCouleur());
+						StdDraw.pause(500);
+					}
+					else if(t21==null) {
+						j.add_armee(t20, w-1);
+						j.add_armee(t23, w-1);
+						j.add_armee(t26, w-1);
+						j.add_armee(t25, c-(3*w));
+						t20.position(t20, j.getCouleur());
+						t23.position(t23, j.getCouleur());
+						t26.position(t26, j.getCouleur());
+						t25.position(t25, j.getCouleur());
+						StdDraw.pause(500);
+					}
+					else if(t22==null) {
+						j.add_armee(t21, w-1);
+						j.add_armee(t24, w-1);
+						j.add_armee(t25, w-1);
+						j.add_armee(t26, c-(3*w));
+						t21.position(t21, j.getCouleur());
+						t24.position(t24, j.getCouleur());
+						t25.position(t25, j.getCouleur());
+						t26.position(t26, j.getCouleur());
+						StdDraw.pause(500);
+					}
+					else if(t23==null) {
+						j.add_armee(t21, w-1);
+						j.add_armee(t25, w-1);
+						j.add_armee(t26, w-1);
+						j.add_armee(t24, c-(3*w));
+						t21.position(t21, j.getCouleur());
+						t25.position(t25, j.getCouleur());
+						t26.position(t26, j.getCouleur());
+						t24.position(t24, j.getCouleur());
+						StdDraw.pause(500);
+					}
+					else if(t24==null) {
+						j.add_armee(t26, w);
+						j.add_armee(t25, w);
+						j.add_armee(t21, c-(2*w));
+						t26.position(t26, j.getCouleur());
+						t25.position(t25, j.getCouleur());
+						t21.position(t21, j.getCouleur());
+						StdDraw.pause(500);
+					}
+					else if(t25==null) {
+						j.add_armee(t21, w);
+						j.add_armee(t26, w);
+						j.add_armee(t24, c-(2*w));
+						t21.position(t21, j.getCouleur());
+						t26.position(t26, j.getCouleur());
+						t24.position(t24, j.getCouleur());
+						StdDraw.pause(500);
+					}
+					else if(t26==null) {
+						j.add_armee(t21, w-1);
+						j.add_armee(t25, w-1);
+						j.add_armee(t24, w-1);
+						j.add_armee(t20, c-(3*w));
+						t21.position(t21, j.getCouleur());
+						t25.position(t25, j.getCouleur());
+						t24.position(t24, j.getCouleur());
+						t20.position(t20, j.getCouleur());
+						StdDraw.pause(500);
+					}
+					
+				}
+				else {
+					Random rand = new Random();
+					territoire t1 = null;
+					territoire t2 = null;
+					territoire t3 = null;
+					while (t1==null||t2==null||t3==null) {
+						t1 = j.recherche_ter(rand.nextInt(27 - 20) + 20, j);
+						t2 = j.recherche_ter(rand.nextInt(27 - 20) + 20, j);
+						t3 = j.recherche_ter(rand.nextInt(27 - 20) + 20, j);
+					}
+					j.add_armee(t1, w);
+					j.add_armee(t2, w);
+					j.add_armee(t3, c-(2*w));
+					t1.position(t1, j.getCouleur());
+					t2.position(t2, j.getCouleur());
+					t3.position(t3, j.getCouleur());
+					StdDraw.pause(500);
+				}
+			}
+			
+			//Asie
 			else {
 				Random rand = new Random();
 				territoire t1 = null;
 				territoire t2 = null;
 				while (t1==null||t2==null) {
-					t1 = j.recherche_ter(rand.nextInt(26 - 20) + 20, j);
-					t2 = j.recherche_ter(rand.nextInt(42 - 31) + 31, j);
+					t1 = j.recherche_ter(rand.nextInt(43 - 31) + 31, j);
+					t2 = j.recherche_ter(rand.nextInt(43 - 31) + 31, j);
 					
 				}
-				j.add_armee(t1, 9);
-				j.add_armee(t2, 10);
+				j.add_armee(t1, w+3);
+				j.add_armee(t2, c-(w+3));
 				t1.position(t1, j.getCouleur());
 				t2.position(t2, j.getCouleur());
 				StdDraw.pause(500);
@@ -696,17 +816,17 @@ public class IA {
 		}
 	}
 	
-	public void IA_phase_attaque(int a, Joueur j, Joueur j2, Joueur j3, Joueur j4, Joueur j5, Joueur j6) throws InterruptedException {
+	public void IA_phase_attaque(int a, Joueur j1, Joueur j2, Joueur j3, Joueur j4, Joueur j5, Joueur j6) throws InterruptedException {
 		while (a != 0) {
-			if(j.list_ter==null) {
+			if(j1.list_ter==null) {
 				break;
 			}
 			StdDraw.setPenColor(StdDraw.ORANGE);
 			StdDraw.filledRectangle(50, 105, 35, 5);// chat-box
 			StdDraw.setPenColor(StdDraw.BLACK);
 			StdDraw.text(25, 105, "Chat-Box : ");//texte
-			StdDraw.text(60, 105, "J"+j.getNumero()+" attaque" );
-			StdDraw.pause(100);
+			StdDraw.text(60, 105, "J"+j1.getNumero()+" attaque" );
+			//StdDraw.pause(100);
 			
 					System.out.println("choisir un pays");
 					StdDraw.setPenColor(StdDraw.ORANGE);
@@ -717,7 +837,11 @@ public class IA {
 					
 					int b=0;
 					while(b!=10) {
-					territoire t1 =choix_joueur();
+						if(verif_armee(j1)==false) {
+							break;
+						}
+						else {
+							territoire t1 =choix_joueur(j);
 					
 							
 							t1.position(t1, StdDraw.YELLOW); // affichage du pays qui attaque
@@ -729,23 +853,23 @@ public class IA {
 							StdDraw.text(60, 105, "choisir un pays à attaquer" );
 							
 							Random rand= new Random();
-							int e = rand.nextInt(4 - 2) + 2; 
-							System.out.println(e);
+							int h = p.getNbre_joueur();
+							int e = rand.nextInt((h+1) - 2) + 2; 
+							System.out.println("le joueur choisit est j"+e);
 							if(e==2) {
 								territoire t2 = IA_verif(t1,j2);
-								
 								if(t2==null) {
-									t1.position(t1, j.getCouleur());
+									t1.position(t1, j1.getCouleur());
 									b++;
 								}
 								else {
-									while(t1.getA()>1) {
+									//while(t1.getA()>1) {
+										System.out.println(t2.getA());
 										IA_phase_attaque2(t1,t2,j,j2);
+										t1.position(t1, j1.getCouleur());
+										System.out.println(t2.getA());
 										StdDraw.pause(1500);
-										//t1.position(t1, j.getCouleur());
-										
-										
-									}
+									//}
 								}
 
 							}
@@ -757,44 +881,65 @@ public class IA {
 									b++;
 								}
 								else {
-									while(t1.getA()>1) {
+									//while(t1.getA()>1) {
 										IA_phase_attaque2(t1,t3,j,j3);
-										StdDraw.pause(1500);
-									//	t1.position(t1, j.getCouleur());
+										t1.position(t1, j.getCouleur());
+										System.out.println(j2.getCouleur());
+								//	StdDraw.pause(1500);
 										
-								}
+								//}
 								}
 								
 								
 							}
-							/*else if(e==4) {
+							else if(e==4) {
 								territoire t4 = IA_verif(t1,j4);
-								if (j.verif(t1, t4) == true) {
-									IA_phase_attaque2(t1,t4,j,j4);
-								}else {
+								if(t4==null) {
 									t1.position(t1, j.getCouleur());
-									IA_phase_attaque(a, j, j2, j3, j4, j5, j6);
+									b++;
+								}
+								else {
+								//	while(t1.getA()>1) {
+										IA_phase_attaque2(t1,t4,j,j4);
+									//	StdDraw.pause(1500);
+									//	t1.position(t1, j.getCouleur());
+										
+								//}
 								}
 							}
 							else if(e==5) {
 								territoire t5 = IA_verif(t1,j5);
-								if (j.verif(t1, t5) == true) {
-									IA_phase_attaque2(t1,t5,j,j5);
-								}else {
+								if(t5==null) {
 									t1.position(t1, j.getCouleur());
-									IA_phase_attaque(a, j, j2, j3, j4, j5, j6);
+									b++;
+								}
+								else {
+								//	while(t1.getA()>1) {
+										IA_phase_attaque2(t1,t5,j,j5);
+										//StdDraw.pause(1500);
+									//	t1.position(t1, j.getCouleur());
+										
+							//	}
 								}
 							}
 							else if(e==6) {
 								territoire t6 = IA_verif(t1,j6);
-								if (j.verif(t1, t6) == true) {
-									IA_phase_attaque2(t1,t6,j,j6);
-								}else {
+								if(t6==null) {
 									t1.position(t1, j.getCouleur());
-									IA_phase_attaque(a, j, j2, j3, j4, j5, j6);
+									b++;
 								}
-							}	*/
-									StdDraw.pause(500);
+								else {
+							//		while(t1.getA()>1) {
+										IA_phase_attaque2(t1,t6,j,j6);
+									//	StdDraw.pause(1500);
+									//	t1.position(t1, j.getCouleur());
+										
+							//	}
+								}
+							}
+									//StdDraw.pause(500);
+						}
+							
 		}
 									break;
 								}
@@ -812,10 +957,10 @@ public class IA {
 			System.out.println("la taille de def est : " + def.length);
 			StdDraw.picture(110, 30, "Image/parchemin_combat.png");
 			StdDraw.picture(105, 40,"Image/cache.png" );
-			StdDraw.text(105,40,"J"+j1.getNumero());
+			StdDraw.picture(105,42,j1.getPhoto());//105,40
 			StdDraw.picture(110, 40, "Image/cache.png");
 			StdDraw.picture(110, 40, "Image/versus2.png");
-			StdDraw.text(115, 40, "J"+j2.getNumero());
+			StdDraw.picture(115, 42, j2.getPhoto());//115,40
 
 			if(att.length==3) {
 				for (int w1 = 1; w1 <= 3; w1++) {
@@ -935,9 +1080,9 @@ public class IA {
 					System.out.println(
 							"le Joueur" + j1.getNumero() + " gagne mais perd 1 unité");
 					
-					j2.sup_armee(t2, 1); // suppression d'une unité sur le territoire du joueur
+					j.sup_armee(t2, 1); // suppression d'une unité sur le territoire du joueur
 										// défenseur
-					j1.sup_armee(t1, 1); // suppression d'une unité sur le territoire du joueur
+					j.sup_armee(t1, 1); // suppression d'une unité sur le territoire du joueur
 										// attaquant
 					t2.position(t2, j2.getCouleur());
 					t1.position(t1, j1.getCouleur());
@@ -952,17 +1097,17 @@ public class IA {
 						
 						int c = t1.getA() - 1; // unité max que le joueur peut déplacer
 						
-						j2.sup_armee(t2, 2);
-						j1.add_armee(t2, c-1); // déplacement armée joueur
+						j.sup_armee(t2, 2);
+						j.add_armee(t2, c-1); // déplacement armée joueur
 														// attaquant
-						j1.sup_armee(t1, c-1);
-						j1.list_ter.add(t2); // ajout du territoire au joueur attaquant
-						j2.list_ter.remove(t2); // suppression du territoire au joueur
+						j.sup_armee(t1, c-1);
+						j1.getList_ter().add(t2); // ajout du territoire au joueur attaquant
+						j2.getList_ter().remove(t2); // suppression du territoire au joueur
 												// defenseur
 						t2.position(t2, j1.getCouleur()); // affichage territoire conquis
 						t1.position(t1, j1.getCouleur()); // affichage territoire attaquant
 					} else if (t2.getA() > 2) {
-						j2.sup_armee(t2, 2);
+						j.sup_armee(t2, 2);
 						t2.position(t2, j2.getCouleur());
 						t1.position(t1, j1.getCouleur());
 					}
@@ -972,8 +1117,9 @@ public class IA {
 					StdDraw.setPenColor(StdDraw.BLACK);
 					StdDraw.text(25, 105, "Chat-Box : ");//texte
 					StdDraw.text(60, 105, "le Joueur" + j1.getNumero() + " perd" );
-					j1.sup_armee(t1, 2);
+					j.sup_armee(t1, 2);
 					t1.position(t1, j1.getCouleur());
+					t2.position(t2, j2.getCouleur());
 				}
 			} else if ((att.length == 3 && def.length == 1)
 					|| (att.length == 2 && def.length == 1)
@@ -985,11 +1131,11 @@ public class IA {
 				StdDraw.text(60, 105, "le Joueur" + j1.getNumero() + " gagne" );
 				
 					if(t1.getA()<=4) {
-						j2.sup_armee(t2, 1);
-						j1.add_armee(t2, (t1.getA()-1)); // déplacement armée joueur attaquant
-						j1.sup_armee(t1, (t1.getA()-1));
-						j1.list_ter.add(t2); // ajout du territoire au joueur attaquant
-						j2.list_ter.remove(t2); // suppression du territoire au joueur defenseur
+						j.sup_armee(t2, 1);
+						j.add_armee(t2, (t1.getA()-1)); // déplacement armée joueur attaquant
+						j.sup_armee(t1, (t1.getA()-1));
+						j1.getList_ter().add(t2); // ajout du territoire au joueur attaquant
+						j2.getList_ter().remove(t2); // suppression du territoire au joueur defenseur
 						t2.position(t2, j1.getCouleur()); // affichage territoire conquis
 						t1.position(t1, j1.getCouleur()); // affichage territoire attaquant
 					}
@@ -1001,11 +1147,11 @@ public class IA {
 						//TimeUnit.SECONDS.sleep(5); // laisse un temps de réponse au joueur
 						//int h = slide.getResultat(); // récupère le choix du joueur
 						
-							j2.sup_armee(t2, 1);
-							j1.add_armee(t2, c-2); // déplacement armée joueur attaquant
-							j1.sup_armee(t1, c-2);
-							j1.list_ter.add(t2); // ajout du territoire au joueur attaquant
-							j2.list_ter.remove(t2); // suppression du territoire au joueur defenseur
+							j.sup_armee(t2, 1);
+							j.add_armee(t2, c-2); // déplacement armée joueur attaquant
+							j.sup_armee(t1, c-2);
+							j1.getList_ter().add(t2); // ajout du territoire au joueur attaquant
+							j2.getList_ter().remove(t2); // suppression du territoire au joueur defenseur
 							t2.position(t2, j1.getCouleur()); // affichage territoire conquis
 							t1.position(t1, j1.getCouleur()); // affichage territoire attaquant
 					}
@@ -1015,8 +1161,9 @@ public class IA {
 					StdDraw.setPenColor(StdDraw.BLACK);
 					StdDraw.text(25, 105, "Chat-Box : ");//texte
 					StdDraw.text(60, 105, "le Joueur" + j1.getNumero() + " perd" );
-					j1.sup_armee(t1, 1);
+					j.sup_armee(t1, 1);
 					t1.position(t1, j1.getCouleur());
+					t2.position(t2, j2.getCouleur());
 				}
 			} else if ((att.length == 1 && def.length == 2)) {
 				if (att[0] > def[0]) {
@@ -1025,16 +1172,19 @@ public class IA {
 					StdDraw.setPenColor(StdDraw.BLACK);
 					StdDraw.text(25, 105, "Chat-Box : ");//texte
 					StdDraw.text(60, 105, "le Joueur" + j1.getNumero() + " gagne" );
-					j1.sup_armee(t2, 1);
+					j.sup_armee(t2, 1);
 					t2.position(t2, j2.getCouleur());
+					t1.position(t1, j1.getCouleur());
+					StdDraw.pause(500);
 				} else if (att[0] <= def[0]) {
 					StdDraw.setPenColor(StdDraw.ORANGE);
 					StdDraw.filledRectangle(50, 105, 35, 5);// chat-box
 					StdDraw.setPenColor(StdDraw.BLACK);
 					StdDraw.text(25, 105, "Chat-Box : ");//texte
 					StdDraw.text(60, 105, "le Joueur" + j1.getNumero() + " perd" );
-					j1.sup_armee(t1, 1);
+					j.sup_armee(t1, 1);
 					t1.position(t1, j1.getCouleur());
+					t2.position(t2, j2.getCouleur());
 				}
 			}
 		else {
@@ -1042,7 +1192,7 @@ public class IA {
 												// lorsqu'il se trompe
 		}
 	}
-	public territoire choix_joueur() {
+	public territoire choix_joueur(Joueur j) {
 		territoire t1=null;
 		int t=0;
 		while(t==0) {
@@ -1056,8 +1206,8 @@ public class IA {
 	
 	public territoire territoire_hasard(Joueur j) {
 		Random rand= new Random();
-		int i = rand.nextInt(j.list_ter.size() - 0) + 0;
-		territoire t=j.list_ter.get(i);
+		int i = rand.nextInt(j.getList_ter().size() - 0) + 0;
+		territoire t=j.getList_ter().get(i);
 		return t;
 	}
 	
@@ -1405,11 +1555,10 @@ public class IA {
 		return null;
 	}
 
-	public territoire fonction(ArrayList list_voisins, Joueur j) {
-		Random rand=new Random();
+	public territoire fonction(ArrayList<Integer> list_voisins, Joueur j1) {
 		int a=0;
 		for (int i=0;i<list_voisins.size();i++) {
-			territoire t2= j.recherche_ter((int) list_voisins.get(i), j);
+			territoire t2= j1.recherche_ter((int) list_voisins.get(i), j1);
 			
 			if(t2==null) {
 				a++;
@@ -1483,5 +1632,22 @@ public class IA {
 		int a = list.indexOf(m);
 		territoire t2 = j.list_ter.get(a);
 		return t2;
+	}
+	
+	public boolean verif_armee(Joueur j) {
+		int b=0;
+		for (int i=0;i<j.list_ter.size();i++){
+			territoire t = j.list_ter.get(i);
+			int a = t.getA();
+			if (a==1) {
+				b++;
+			}
+		}
+		if(b==j.list_ter.size()) {
+			return false;
+		}
+		else {
+			return true;
+		}
 	}
 }
