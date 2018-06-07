@@ -23,10 +23,10 @@ public class View {
 		StdDraw.filledRectangle(110, 100, 8, 4);// bouton mission
 		StdDraw.filledRectangle(110, 90, 8, 4);// bouton finir son tour
 		StdDraw.filledRectangle(110, 80, 8, 4);// bouton attaquer
-		StdDraw.filledRectangle(110, 70, 8, 4);// bouton se dÃ©placer
+		StdDraw.filledRectangle(110, 70, 8, 4);// bouton se déplacer
 		StdDraw.setPenColor(StdDraw.ORANGE);
 		StdDraw.filledRectangle(50, 105, 35, 5);// chat-box
-		StdDraw.setPenColor(StdDraw.BLACK);// couleur de l'Ã©criture
+		StdDraw.setPenColor(StdDraw.BLACK);// couleur de l'écriture
 		StdDraw.text(110, 100, "Mission");// texte
 		StdDraw.text(110, 90, "Finir");// texte
 		StdDraw.text(110, 80, "Attaque");// texte

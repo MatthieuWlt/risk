@@ -1,6 +1,7 @@
 
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.concurrent.TimeUnit;
@@ -13,9 +14,10 @@ import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
 public class Sliders extends JFrame { //panneau de déplacement d'unité
-	  private JLabel label = new JLabel("Valeur actuelle : 1");  //initialisation valeur 
+	  
 	  private int resultat;
 	  public Sliders(int a, int b){
+		JLabel label = new JLabel("Valeur actuelle : "+a);  //initialisation valeur 
 		JButton button = new JButton("valider");
 	    this.setSize(250, 150);
 	    this.setTitle("Slider");
@@ -41,15 +43,16 @@ public class Sliders extends JFrame { //panneau de déplacement d'unité
 	              slide_mousePressed(e);
 	            }
 	          });
-	        
 	      }
 	    });      
+	    
 	    this.getContentPane().add(slide, BorderLayout.NORTH);
 	    this.getContentPane().add(label, BorderLayout.CENTER);     
 	    this.getContentPane().add(button, BorderLayout.SOUTH);
 
 	    
 	  }   
+	  
 	  void slide_mousePressed (MouseEvent e) {
 		    // Enregistre quel bouton de la souris est enfoncé.
 		    int button = e.getButton();

@@ -107,17 +107,6 @@ public class Joueur {
 		}
 	}
 
-	/*public void armee_joueur(int x) {
-		Random rand = new Random();
-		int w = 1;
-		while (w != x + 1 - list_ter.size()) {
-			territoire g = (territoire) list_ter.get(rand.nextInt(list_ter.size() - 0) + 0);
-			add_armee(g, 1);
-			g.position(g, couleur);
-			w++;
-		}
-	}*/
-
 	public void add_armee(territoire t, int p) { //ajoute des soldats sur un territoire
 		int r = t.getA();
 		r = r + p;
@@ -139,8 +128,30 @@ public class Joueur {
 		switch (numero_mission) {
 
 		case 1:
+			JFrame fenetre2 = new JFrame();
+		    fenetre2.setTitle("Mission");
+		    fenetre2.setSize(400, 200);
+		    fenetre2.setLocationRelativeTo(null);
+		    JLabel label2 = new JLabel("Le joueur " + j.getNumero() + " doit conquérir tous les territoires.");
+		    JLabel image2 = new JLabel(img);
+		    fenetre2.getContentPane().add(label2, BorderLayout.CENTER);
+		    fenetre2.getContentPane().add(image2, BorderLayout.LINE_START);
+		    fenetre2.setVisible(true);
+			break;
+		case 2:
+			JFrame fenetre5 = new JFrame();
+		    fenetre5.setTitle("Mission");
+		    fenetre5.setSize(400, 200);
+		    fenetre5.setLocationRelativeTo(null);
+		    JLabel label5 = new JLabel("Le joueur " + j.getNumero() + " doit contrôler contrôler 30 territoires.");
+		    JLabel image5 = new JLabel(img);
+		    fenetre5.getContentPane().add(label5, BorderLayout.CENTER);
+		    fenetre5.getContentPane().add(image5, BorderLayout.LINE_START);
+		    fenetre5.setVisible(true);
+			break;
+		case 3:
 			/*--------------- VERIFICATION DU JOUEUR A DETRUIRE -----------*/
-			int detruire = rand.nextInt((choix+1) -1)+1;//on choisit le joueur Ã  dÃ©truire
+			int detruire = rand.nextInt((choix+1) -1)+1;//on choisit le joueur à détruire
 			
 			while(detruire == j.getNumero()){//tant que le joueur choisi est le meme que celui qui joue,
 				int detruire2 = rand.nextInt((choix+1) -1)+1;//on rechoisit un nouveau joueur
@@ -151,85 +162,64 @@ public class Joueur {
 		    fenetre1.setTitle("Mission");
 		    fenetre1.setSize(400, 200);
 		    fenetre1.setLocationRelativeTo(null);
-		    JLabel label1 = new JLabel("Le joueur " + j.getNumero() + " doit dÃ©truire le joueur "+ detruire+".");
+		    JLabel label1 = new JLabel("Le joueur " + j.getNumero() + " doit détruire le joueur "+ detruire+".");
 		    JLabel image1 = new JLabel(img);
 		    fenetre1.getContentPane().add(label1, BorderLayout.CENTER);
 		    fenetre1.getContentPane().add(image1, BorderLayout.LINE_START);
 		    fenetre1.setVisible(true);
-			break;
-
-		case 2:
-			JFrame fenetre2 = new JFrame();
-		    fenetre2.setTitle("Mission");
-		    fenetre2.setSize(400, 200);
-		    fenetre2.setLocationRelativeTo(null);
-		    JLabel label2 = new JLabel("Le joueur " + j.getNumero() + " doit conquÃ©rir tous les territoires.");
-		    JLabel image2 = new JLabel(img);
-		    fenetre2.getContentPane().add(label2, BorderLayout.CENTER);
-		    fenetre2.getContentPane().add(image2, BorderLayout.LINE_START);
-		    fenetre2.setVisible(true);
-			break;
-		case 3:
-			JFrame fenetre3 = new JFrame();
-		    fenetre3.setTitle("Mission");
-		    fenetre3.setSize(400, 200);
-		    fenetre3.setLocationRelativeTo(null);
-		    JLabel label3 = new JLabel("Le joueur " + j.getNumero() + " doit contrÃ´ler 3 rÃ©gions et au moins 18 territoires.");
-		    JLabel image3 = new JLabel(img);
-		    fenetre3.getContentPane().add(label3, BorderLayout.CENTER);
-		    fenetre3.getContentPane().add(image3, BorderLayout.LINE_START);
-		    fenetre3.setVisible(true);
 			break;
 		case 4:
 			JFrame fenetre4 = new JFrame();
 		    fenetre4.setTitle("Mission");
 		    fenetre4.setSize(400, 200);
 		    fenetre4.setLocationRelativeTo(null);
-		    JLabel label4 = new JLabel("Le joueur " + j.getNumero() + " doit contrÃ´ler 18 territoires avec au moins 2 armÃ©es.");
+		    JLabel label4 = new JLabel("<html>Le joueur " + j.getNumero() + " doit contrôler 18 territoires avec au moins 2 armées.</html>");
 		    JLabel image4 = new JLabel(img);
 		    fenetre4.getContentPane().add(label4, BorderLayout.CENTER);
 		    fenetre4.getContentPane().add(image4, BorderLayout.LINE_START);
 		    fenetre4.setVisible(true);
 			break;
+		
 		case 5:
-			JFrame fenetre5 = new JFrame();
-		    fenetre5.setTitle("Mission");
-		    fenetre5.setSize(400, 200);
-		    fenetre5.setLocationRelativeTo(null);
-		    JLabel label5 = new JLabel("Le joueur " + j.getNumero() + " doit contrÃ´ler contrÃ´ler 30 territoires.");
-		    JLabel image5 = new JLabel(img);
-		    fenetre5.getContentPane().add(label5, BorderLayout.CENTER);
-		    fenetre5.getContentPane().add(image5, BorderLayout.LINE_START);
-		    fenetre5.setVisible(true);
-			break;
-		case 6:
 			JFrame fenetre6 = new JFrame();
 		    fenetre6.setTitle("Mission");
 		    fenetre6.setSize(400, 200);
 		    fenetre6.setLocationRelativeTo(null);
-		    JLabel label6 = new JLabel("Le joueur " + j.getNumero() + " doit contrÃ´ler 24 territoires.");
+		    JLabel label6 = new JLabel("Le joueur " + j.getNumero() + " doit contrôler 24 territoires.");
 		    JLabel image6 = new JLabel(img);
 		    fenetre6.getContentPane().add(label6, BorderLayout.CENTER);
 		    fenetre6.getContentPane().add(image6, BorderLayout.LINE_START);
 		    fenetre6.setVisible(true);
 			break;
-		case 7:
+		case 6:
 			JFrame fenetre7 = new JFrame();
 		    fenetre7.setTitle("Mission");
 		    fenetre7.setSize(400, 200);
 		    fenetre7.setLocationRelativeTo(null);
-		    JLabel label7 = new JLabel("Le joueur " + j.getNumero() + " doit contrÃ´ler 21 territoires.");
+		    JLabel label7 = new JLabel("Le joueur " + j.getNumero() + " doit contrôler 21 territoires.");
 		    JLabel image7 = new JLabel(img);
 		    fenetre7.getContentPane().add(label7, BorderLayout.CENTER);
 		    fenetre7.getContentPane().add(image7, BorderLayout.LINE_START);
 		    fenetre7.setVisible(true);
 			break;
+		case 7:
+			JFrame fenetre3 = new JFrame();
+		    fenetre3.setTitle("Mission");
+		    fenetre3.setSize(400, 200);
+		    fenetre3.setLocationRelativeTo(null);
+		    JLabel label3 = new JLabel("<html>Le joueur " + j.getNumero() + " doit contrôler 3 régions et au moins 18 territoires.</html>");
+		    JLabel image3 = new JLabel(img);
+		    fenetre3.getContentPane().add(label3, BorderLayout.CENTER);
+		    fenetre3.getContentPane().add(image3, BorderLayout.LINE_START);
+		    fenetre3.setVisible(true);
+			break;
+		
 		case 8:
 			JFrame fenetre8 = new JFrame();
 		    fenetre8.setTitle("Mission");
 		    fenetre8.setSize(400, 200);
 		    fenetre8.setLocationRelativeTo(null);
-		    JLabel label8 = new JLabel("Le joueur " + j.getNumero() + " doit contrÃ´ler la plus grosse rÃ©gion plus une autre rÃ©gion.");
+		    JLabel label8 = new JLabel("<html>Le joueur " + j.getNumero() + " doit contrôler la plus grosse région plus une autre région.</html>");
 		    JLabel image8 = new JLabel(img);
 		    fenetre8.getContentPane().add(label8, BorderLayout.CENTER);
 		    fenetre8.getContentPane().add(image8, BorderLayout.LINE_START);
@@ -242,8 +232,8 @@ public class Joueur {
 		switch(numero_mission) {
 		case 1:
 			if(j.getList_ter()==null) {
-				StdDraw.clear(StdDraw.WHITE);
-				StdDraw.text(60, 105, "Le joueur "+j.getNumero()+ " a gagnÃ© !");//on vÃ©rifie que le joueur adverse n'ai plus de territoire
+				View.afficherFond(60, 55, "Image/victoire.jpg");
+				StdDraw.text(60, 70, "Le joueur "+j.getNumero()+ " a gagné !");//on vérifie que le joueur adverse n'ai plus de territoire
 				StdDraw.pause(500);
 				int g=0;
 				while(g==0) {
@@ -259,8 +249,8 @@ public class Joueur {
 			break;
 		case 2:
 			if((j.getList_ter()).size()==22) {
-				StdDraw.clear(StdDraw.WHITE);
-				StdDraw.text(60, 105, "Le joueur "+j.getNumero()+" a gagnÃ© !");//on vÃ©rifie si le joueur a tous les territoires
+				View.afficherFond(60, 55, "Image/victoire.jpg");
+				StdDraw.text(60, 70, "Le joueur "+j.getNumero()+" a gagné !");//on vérifie si le joueur a tous les territoires
 				StdDraw.pause(500);
 				int g=0;
 				while(g==0) {
@@ -273,11 +263,11 @@ public class Joueur {
 				//s'il n'a pas tous les territoires le jeux continue
 			}
 			break;
-		case 3: //Le joueur doit contrÃ´ler 3 rÃ©gions et au moins 18 territoires.
+		case 3: //Le joueur doit contrôler 3 régions et au moins 18 territoires.
 			int a =verif_region2(j);
 			if (a>=3&&j.list_ter.size()>=18) {
-				StdDraw.clear(StdDraw.WHITE);
-				StdDraw.text(60, 105, "Le joueur "+j.getNumero()+" a gagnÃ© !");
+				View.afficherFond(60, 55, "Image/victoire.jpg");
+				StdDraw.text(60, 70, "Le joueur "+j.getNumero()+" a gagné !");
 				StdDraw.pause(500);
 				int g=0;
 				while(g==0) {
@@ -292,7 +282,7 @@ public class Joueur {
 			
 			break;
 			
-		case 4://doit contrÃ´ler 18 territoires avec au moins 2 armÃ©es
+		case 4://doit contrôler 18 territoires avec au moins 2 armées
 				int compteur=0;
 				for(int i=0;i<getList_ter().size();i++) {
 					territoire t =(territoire) list_ter.get(i);
@@ -301,8 +291,8 @@ public class Joueur {
 					}
 				}
 				if (compteur>=18) {
-					StdDraw.clear(StdDraw.WHITE);
-					StdDraw.text(60, 105, "Le joueur "+j.getNumero()+" a gagnÃ© !");
+					View.afficherFond(60, 55, "Image/victoire.jpg");
+					StdDraw.text(60, 70, "Le joueur "+j.getNumero()+" a gagné !");
 					StdDraw.pause(500);
 					int g=0;
 					while(g==0) {
@@ -318,8 +308,8 @@ public class Joueur {
 			
 		case 5:
 			if(getList_ter().size()>=30) {
-				StdDraw.clear(StdDraw.WHITE);
-				StdDraw.text(60, 105, "Le joueur "+j.getNumero()+" a gagnÃ© !");//si le joueur a 30 territoires il a gagnÃ©
+				View.afficherFond(60, 55, "Image/victoire.jpg");
+				StdDraw.text(60, 70, "Le joueur "+j.getNumero()+" a gagné !");//si le joueur a 30 territoires il a gagné
 				StdDraw.pause(500);
 				int g=0;
 				while(g==0) {
@@ -329,14 +319,14 @@ public class Joueur {
 				}
 			}
 			else {
-				//le joueur n'a pas gagnÃ© car il n'a pas 30 territoires
+				//le joueur n'a pas gagné car il n'a pas 30 territoires
 			}
 			break;
 			
 		case 6:
 			if(getList_ter().size()>=24) {
-				StdDraw.clear(StdDraw.WHITE);
-				StdDraw.text(60, 105, "Le joueur "+j.getNumero()+" a gagnÃ© !");//si le joueur a 24 territoires il a gagnÃ©
+				View.afficherFond(60, 55, "Image/victoire.jpg");
+				StdDraw.text(60, 70, "Le joueur "+j.getNumero()+" a gagné !");//si le joueur a 24 territoires il a gagné
 				StdDraw.pause(500);
 				int g=0;
 				while(g==0) {
@@ -346,14 +336,14 @@ public class Joueur {
 				}
 			}
 			else {
-				//le joueur n'a pas gagnÃ© car il n'a pas 24 territoires
+				//le joueur n'a pas gagné car il n'a pas 24 territoires
 			}
 			break;
 			
 		case 7:
 			if(getList_ter().size()>=21) {
-				StdDraw.clear(StdDraw.WHITE);
-				StdDraw.text(60, 105, "Le joueur "+j.getNumero()+" a gagnÃ© !");//si le joueur a 21 territoires il a gagnÃ©
+				View.afficherFond(60, 55, "Image/victoire.jpg");
+				StdDraw.text(60, 70, "Le joueur "+j.getNumero()+" a gagné !");//si le joueur a 21 territoires il a gagné
 				StdDraw.pause(500);
 				int g=0;
 				while(g==0) {
@@ -363,11 +353,11 @@ public class Joueur {
 				}
 			}
 			else {
-				//le joueur n'a pas gagnÃ© car il n'a pas 21 territoires
+				//le joueur n'a pas gagné car il n'a pas 21 territoires
 			}
 			break;
 			
-		case 8: //Le joueur doit contrÃ´ler la plus grosse rÃ©gion plus une autre rÃ©gion
+		case 8: //Le joueur doit contrôler la plus grosse région plus une autre région
 			int compteur2 =verif_region2(j);
 			if(compteur2>=2) {
 				ArrayList<Integer> r = new ArrayList<Integer>();
@@ -382,8 +372,8 @@ public class Joueur {
 					} 
 				}
 				if(c==12) {
-					StdDraw.clear(StdDraw.WHITE);
-					StdDraw.text(60, 105, "Le joueur "+j.getNumero()+" a gagnÃ© !");//si le joueur a 21 territoires il a gagnÃ©
+					View.afficherFond(60, 55, "Image/victoire.jpg");
+					StdDraw.text(60, 70, "Le joueur "+j.getNumero()+" a gagné !");//si le joueur a 21 territoires il a gagné
 					StdDraw.pause(500);
 					int g=0;
 					while(g==0) {
@@ -417,7 +407,7 @@ public class Joueur {
 	public territoire choix_pays(int choix4, Joueur j) {
 		double x = StdDraw.mouseX();
 		double y = StdDraw.mouseY();
-		// AmÃ©rique
+		// Amérique
 		if (86.1 < y && y < 91.3 && 4.7 < x && x < 9.7) {
 			territoire t = recherche_ter(1,j);
 			return t;
@@ -446,7 +436,7 @@ public class Joueur {
 			territoire t = recherche_ter(9, j);
 			return t;
 		}
-		// AmÃ©rique du sud
+		// Amérique du sud
 		else if (22.3 < x && x < 26.3 && 17.7 < y && y < 21.7) {
 			territoire t = recherche_ter(10, j);
 			return t;
@@ -503,7 +493,7 @@ public class Joueur {
 			territoire t = recherche_ter(26, j);
 			return t;
 		}
-		// OcÃ©anie
+		// Océanie
 		else if (90.1 < x && x < 94.1 && 21.9 < y && y < 25.9) {
 			territoire t = recherche_ter(27, j);
 			return t;
@@ -576,7 +566,7 @@ public class Joueur {
 			StdDraw.filledRectangle(50, 105, 35, 5);// chat-box
 			StdDraw.setPenColor(StdDraw.BLACK);
 			StdDraw.text(25, 105, "Chat-Box : ");//texte
-			StdDraw.text(60, 105, "J"+j.getNumero()+", il vous reste " + (c - (i-1)) + " armÃ©es Ã  placer" );
+			StdDraw.text(60, 105, "J"+j.getNumero()+", il vous reste " + (c - (i-1)) + " armées à placer" );
 			if (StdDraw.mousePressed()) {
 
 				territoire t = choix_pays(1, j);
@@ -584,7 +574,7 @@ public class Joueur {
 					initialisation(choix4, j, c - i + 1);
 					break;
 				}
-				System.out.println("Il vous reste " + (c - i) + " armÃ©es Ã  placer");
+				System.out.println("Il vous reste " + (c - i) + " armées à placer");
 				
 				add_armee(t, 1);
 				i++;
@@ -601,34 +591,34 @@ public class Joueur {
 
 	public int de(Joueur j) {
 		Random rand = new Random();
-		int r = rand.nextInt(6 - 1) + 1;
+		int r = rand.nextInt(7 - 1) + 1;
 		return r;
 	}
 
 	public static void PrintTab(int tab[]) {
 		for (int i = 0; i < tab.length; i++) {
-			System.out.print(tab[i] + " "); // on affiche chaque Ã©lÃ©ment du tableau
+			System.out.print(tab[i] + " "); // on affiche chaque élément du tableau
 		}
-		System.out.println("");// sauter une ligne pour les diffÃ©rentes lignes du tableau
+		System.out.println("");// sauter une ligne pour les différentes lignes du tableau
 	}
 
 	public static int[] Permuter(int tab[], int i, int j) {
 
-		int tmp = tab[i]; // donne Ã  la variable temporaire la valeur Ã  Ã©changer
+		int tmp = tab[i]; // donne à la variable temporaire la valeur à échanger
 		tab[i] = tab[j];// affecte une nouvelle valeur
-		tab[j] = tmp; // Ã©change la valeur
-		return tab; // retourne le tableau avec des valeurs Ã©changÃ©es
+		tab[j] = tmp; // échange la valeur
+		return tab; // retourne le tableau avec des valeurs échangées
 	}
 
 	public static int[] TriaBulles(int tab[]) {
-		for (int i = 1; i < tab.length; i++) { // on compare deux valeurs donc on crÃ©e deux variables
+		for (int i = 1; i < tab.length; i++) { // on compare deux valeurs donc on crée deux variables
 			for (int j = 0; j < tab.length - i; j++) {
 				if (tab[j] < tab[j + 1]) { // on compare deux valeurs du tableau
-					tab = Permuter(tab, j, j + 1); // permute si l'Ã©lÃ©ment de droite est plus petit que celui de gauche
+					tab = Permuter(tab, j, j + 1); // permute si l'élément de droite est plus petit que celui de gauche
 				}
-			} // fin lorsque tous les Ã©lÃ©ments sont bien placÃ©s
+			} // fin lorsque tous les éléments sont bien placés
 		}
-		return (tab); // affiche le tableau triÃ©
+		return (tab); // affiche le tableau trié
 	}
 
 	public int[] att(Joueur j, territoire t) {
@@ -680,7 +670,7 @@ public class Joueur {
 			StdDraw.text(25, 105, "Chat-Box : ");//texte
 			StdDraw.text(60, 105, "J"+j1.getNumero()+" attaque" );
 			StdDraw.pause(100);
-			if (StdDraw.mousePressed()) { // clique sur un des boutons Ã  droite
+			if (StdDraw.mousePressed()) { // clique sur un des boutons à droite
 				double x = StdDraw.mouseX();
 				double y = StdDraw.mouseY();
 				if (105 < x && x < 115 && 77 < y && y < 83) { // lorsqu'on clique sur "attaque"
@@ -704,17 +694,17 @@ public class Joueur {
 								
 							//}
 							t1.position(t1, StdDraw.YELLOW); // affichage du pays qui attaque
-							System.out.println("choisir un pays Ã  attaquer");
+							System.out.println("choisir un pays à attaquer");
 							StdDraw.setPenColor(StdDraw.ORANGE);
 							StdDraw.filledRectangle(50, 105, 35, 5);// chat-box
 							StdDraw.setPenColor(StdDraw.BLACK);
 							StdDraw.text(25, 105, "Chat-Box : ");//texte
-							StdDraw.text(60, 105, "choisir un pays Ã  attaquer" );
+							StdDraw.text(60, 105, "choisir un pays à attaquer" );
 							StdDraw.pause(500);
 							while (b != 0) {
-								// System.out.println("choisir un pays Ã  attaquer");
-								if (StdDraw.mousePressed()) {// clique sur le territoire Ã  attaquer
-									territoire t2 = choix_pays(1, j2); // selection du pays Ã  attaquer
+								// System.out.println("choisir un pays à attaquer");
+								if (StdDraw.mousePressed()) {// clique sur le territoire à attaquer
+									territoire t2 = choix_pays(1, j2); // selection du pays à attaquer
 									territoire t3 = choix_pays(1,j3);
 									territoire t4 = choix_pays(1,j4);
 									territoire t5 = choix_pays(1,j5);
@@ -765,21 +755,21 @@ public class Joueur {
 					}
 				} else if (105 < x && x < 115 && 87 < y && y < 93) { // lorsqu'on clique sur "finir"
 					StdDraw.pause(500);
-					break; // arrÃªt de la phase attaque
+					break; // arrêt de la phase attaque
 				} else {
 					StdDraw.pause(500);
 				}
-
+				
 			} else {
-
+				
 			}
 		}
 	}
 
 	public void phase_attaque2(territoire t1, territoire t2, Joueur j1, Joueur j2) throws InterruptedException {
 		if (verif(t1, t2) == true) {
-			int[] att = att(j1, t1); // rÃ©sultat du dÃ© joueur attaquant
-			int[] def = def(j2, t2); // rÃ©sultat du dÃ© joueur defenseur
+			int[] att = att(j1, t1); // résultat du dé joueur attaquant
+			int[] def = def(j2, t2); // résultat du dé joueur defenseur
 			System.out.println("attaque :");
 			PrintTab(att);
 			System.out.println("def :");
@@ -905,19 +895,19 @@ public class Joueur {
 					|| (att.length == 2 && def.length == 2)) { // situation possible de
 																// combat
 				if (att[0] > def[0] && att[1] <= def[1]
-						|| att[0] <= def[0] && att[1] > def[1]) { // rÃ©sultat possible aux
-																	// dÃ©s
+						|| att[0] <= def[0] && att[1] > def[1]) { // résultat possible aux
+																	// dés
 					StdDraw.setPenColor(StdDraw.ORANGE);
 					StdDraw.filledRectangle(50, 105, 35, 5);// chat-box
 					StdDraw.setPenColor(StdDraw.BLACK);
 					StdDraw.text(25, 105, "Chat-Box : ");//texte
-					StdDraw.text(60, 105, "le Joueur" + j1.getNumero() + " gagne mais perd 1 unitÃ©" );
+					StdDraw.text(60, 105, "le Joueur" + j1.getNumero() + " gagne mais perd 1 unité" );
 					System.out.println(
-							"le Joueur" + j1.getNumero() + " gagne mais perd 1 unitÃ©");
+							"le Joueur" + j1.getNumero() + " gagne mais perd 1 unité");
 					
-					sup_armee(t2, 1); // suppression d'une unitÃ© sur le territoire du joueur
-										// dÃ©fenseur
-					sup_armee(t1, 1); // suppression d'une unitÃ© sur le territoire du joueur
+					sup_armee(t2, 1); // suppression d'une unité sur le territoire du joueur
+										// défenseur
+					sup_armee(t1, 1); // suppression d'une unité sur le territoire du joueur
 										// attaquant
 					t2.position(t2, j2.getCouleur());
 					t1.position(t1, j1.getCouleur());
@@ -930,15 +920,15 @@ public class Joueur {
 					System.out.println("le Joueur" + j1.getNumero() + " gagne");
 					if (t2.getA() == 2) {
 						
-						int c = t1.getA() - 1; // unitÃ© max que le joueur peut dÃ©placer
+						int c = t1.getA() - 1; // unité max que le joueur peut déplacer
 
-						Sliders slide = new Sliders(att.length, c); // crÃ©ation de la fenÃªtre pop up
-						slide.setVisible(true); // rend visible cette fenÃªtre
-						TimeUnit.SECONDS.sleep(5); // laisse un temps de rÃ©ponse au joueur
-						int h = slide.getResultat(); // rÃ©cupÃ¨re le choix du joueur
+						Sliders slide = new Sliders(att.length, c); // création de la fenêtre pop up
+						slide.setVisible(true); // rend visible cette fenêtre
+						TimeUnit.SECONDS.sleep(5); // laisse un temps de réponse au joueur
+						int h = slide.getResultat(); // récupère le choix du joueur
 						
 						sup_armee(t2, 2);
-						add_armee(t2, h); // dÃ©placement armÃ©e joueur
+						add_armee(t2, h); // déplacement armée joueur
 														// attaquant
 						sup_armee(t1, h);
 						j1.list_ter.add(t2); // ajout du territoire au joueur attaquant
@@ -971,7 +961,7 @@ public class Joueur {
 				
 					if(t1.getA()<=4) {
 						sup_armee(t2, 1);
-						add_armee(t2, (t1.getA()-1)); // dÃ©placement armÃ©e joueur attaquant
+						add_armee(t2, (t1.getA()-1)); // déplacement armée joueur attaquant
 						sup_armee(t1, (t1.getA()-1));
 						j1.list_ter.add(t2); // ajout du territoire au joueur attaquant
 						j2.list_ter.remove(t2); // suppression du territoire au joueur defenseur
@@ -979,15 +969,15 @@ public class Joueur {
 						t1.position(t1, j1.getCouleur()); // affichage territoire attaquant
 					}
 					else {
-						int c = t1.getA() - 1; // unitÃ© max que le joueur peut dÃ©placer
+						int c = t1.getA() - 1; // unité max que le joueur peut déplacer
 		
-						Sliders slide = new Sliders(att.length, c); // crÃ©ation de la fenÃªtre pop up
-						slide.setVisible(true); // rend visible cette fenÃªtre
-						TimeUnit.SECONDS.sleep(5); // laisse un temps de rÃ©ponse au joueur
-						int h = slide.getResultat(); // rÃ©cupÃ¨re le choix du joueur
+						Sliders slide = new Sliders(att.length, c); // création de la fenêtre pop up
+						slide.setVisible(true); // rend visible cette fenêtre
+						TimeUnit.SECONDS.sleep(5); // laisse un temps de réponse au joueur
+						int h = slide.getResultat(); // récupère le choix du joueur
 						
 							sup_armee(t2, 1);
-							add_armee(t2, h); // dÃ©placement armÃ©e joueur attaquant
+							add_armee(t2, h); // déplacement armée joueur attaquant
 							sup_armee(t1, h);
 							j1.list_ter.add(t2); // ajout du territoire au joueur attaquant
 							j2.list_ter.remove(t2); // suppression du territoire au joueur defenseur
@@ -1037,9 +1027,9 @@ public class Joueur {
 			StdDraw.filledRectangle(50, 105, 35, 5);// chat-box
 			StdDraw.setPenColor(StdDraw.BLACK);
 			StdDraw.text(25, 105, "Chat-Box : ");//texte
-			StdDraw.text(60, 105, "J"+j.getNumero()+" dÃ©place" );
+			StdDraw.text(60, 105, "J"+j.getNumero()+" déplace" );
 			StdDraw.pause(100);
-			if (StdDraw.mousePressed()) { // clique sur un des boutons Ã  droite
+			if (StdDraw.mousePressed()) { // clique sur un des boutons à droite
 				double x = StdDraw.mouseX();
 				double y = StdDraw.mouseY();
 				if (105 < x && x < 115 && 67 < y && y < 73) { // lorsqu'on clique sur "mouvement"
@@ -1052,7 +1042,7 @@ public class Joueur {
 					StdDraw.pause(500);
 					while (d != 0) {
 						if (StdDraw.mousePressed()) { // clique sur un territoire
-							territoire t1 = choix_pays(1, j); // selection armÃ©e Ã  dÃ©placer
+							territoire t1 = choix_pays(1, j); // selection armée à déplacer
 							if(t1==null) {
 								deplacement(d,j);
 								break;
@@ -1074,12 +1064,12 @@ public class Joueur {
 										break;
 									}
 									if (verif(t1, t2) == true) {
-										int c = t1.getA() - 1; // unitÃ© max que le joueur peut dÃ©placer
+										int c = t1.getA() - 1; // unité max que le joueur peut déplacer
 
-										Sliders slide = new Sliders(1, c); // crÃ©ation de la fenÃªtre pop up
-										slide.setVisible(true); // rend visible cette fenÃªtre
-										TimeUnit.SECONDS.sleep(5); // laisse un temps de rÃ©ponse au joueur
-										int h = slide.getResultat(); // rÃ©cupÃ¨re le choix du joueur
+										Sliders slide = new Sliders(1, c); // création de la fenêtre pop up
+										slide.setVisible(true); // rend visible cette fenêtre
+										TimeUnit.SECONDS.sleep(5); // laisse un temps de réponse au joueur
+										int h = slide.getResultat(); // récupère le choix du joueur
 										
 										add_armee(t2, h); // ajout armee sur territoire de destination
 										sup_armee(t1, h); // suppression armee sur territoire source
@@ -1101,7 +1091,7 @@ public class Joueur {
 					}
 				} else if (105 < x && x < 115 && 87 < y && y < 93) { // lorsqu'on clique sur "finir"
 					StdDraw.pause(500);
-					break; // arrÃªt de la phase dÃ©placement
+					break; // arrêt de la phase déplacement
 				} else {
 					StdDraw.pause(500);
 				}
@@ -1113,7 +1103,7 @@ public class Joueur {
 	}
 
 	public boolean verif(territoire t1, territoire t2) {
-		// AmÃ©rique du nord
+		// Amérique du nord
 		if (t1.getNumero() == 1) {
 			if (t2.getNumero() == 2) {
 				return true;
@@ -1334,7 +1324,7 @@ public class Joueur {
 				return true;
 			} else if (t2.getNumero() == 11) {
 				return true;
-			} else if (t2.getNumero() == 25) {
+			} else if (t2.getNumero() == 26) {
 				return true;
 			} else {
 				return false;
@@ -1449,7 +1439,7 @@ public class Joueur {
 				return false;
 			}
 		}
-		// OcÃ©anie
+		// Océanie
 		if (t1.getNumero() == 27) {
 			if (t2.getNumero() == 29) {
 				return true;

@@ -11,13 +11,13 @@ public class Menu {
 
 	public static void main(String[] args) throws InterruptedException {
 		
-		/* Initialisation de la taille de la fenÃƒÂªtre et affichage du fond d'into */
+		/* Initialisation de la taille de la fenÃªtre et affichage du fond d'into */
 		StdDraw.setCanvasSize(1229, 576);
 		StdDraw.setXscale(0.0, 120);
 		StdDraw.setYscale(0.0, 110);
 		View.afficherFond(60.0, 55.0, "Image/fond_intro.JPG");
 
-		// DÃ©finition d'une police et de sa taille
+		// Définition d'une police et de sa taille
 		Font currentFont = StdDraw.getFont();
 		float size = 25;
 		currentFont = currentFont.deriveFont(size);
@@ -70,25 +70,25 @@ public class Menu {
 							break;
 						} 		
 						else if (67 < y && y < 81 && 64 < x && x < 110) {
-							View.afficherImage(60.0, 55.0, "Image/parchemin5.PNG");
+							View.afficherImage(60.0, 55.0, "Image/parchemin2.PNG");
 							StdDraw.pause(500);
 							choix3 = 11;
 							break;
 						}
 						else if (48 < y && y < 61 && 64 < x && x < 110) {
-							View.afficherImage(60.0, 55.0, "Image/parchemin5.PNG");
+							View.afficherImage(60.0, 55.0, "Image/parchemin3.PNG");
 							StdDraw.pause(500);
 							choix3 = 12;
 							break;
 						}
 						else if (29 < y && y < 43 && 64 < x && x < 110) {
-							View.afficherImage(60.0, 55.0, "Image/parchemin5.PNG");
+							View.afficherImage(60.0, 55.0, "Image/parchemin3.PNG");
 							StdDraw.pause(500);
 							choix3 = 21;
 							break;
 						}
 						else if (12 < y && y < 26 && 64 < x && x < 110) {
-							View.afficherImage(60.0, 55.0, "Image/parchemin5.PNG");
+							View.afficherImage(60.0, 55.0, "Image/parchemin6.PNG");
 							StdDraw.pause(500);
 							choix3 = 6;
 							break;
@@ -108,7 +108,7 @@ public class Menu {
 
 			while (choix3 == 2) {
 				if (StdDraw.isMousePressed()) {
-					// Affichage des deux personnages Ã  choisir
+					// Affichage des deux personnages à choisir
 					View.affichage_personnage(2, "Image/Napopo.png", "Image/wellington.png", null);
 					View.afficherImage(60,55,"Image/versus.png");
 					StdDraw.text(60, 100, "Joueur 1, choisissez votre personnage");
@@ -118,7 +118,7 @@ public class Menu {
 				
 				while (choix4 != 1) {
 					if (StdDraw.mousePressed()) {
-						// Affichage du personnage restant en fonction du choix prÃ©cÃ©dent
+						// Affichage du personnage restant en fonction du choix précédent
 						double x = StdDraw.mouseX();
 						double y = StdDraw.mouseY();
 						if (15 < x && x < 55) {
@@ -152,30 +152,29 @@ public class Menu {
 								int armee = 40;
 								int choix41 = 1;
 								
-								// CrÃ©ation et affichage de la carte
+								// Création et affichage de la carte
 								Partie p = new Partie(42, choix5);
 								View.afficher_map();
 								
-								// CrÃ©ation des joueurs
+								// Création des joueurs
 								Joueur j1 = new Joueur(0, 1, StdDraw.BLUE, "bleu", null, persoj1);
 								Joueur j2 = new Joueur(0, 2, StdDraw.GREEN, "vert", null, persoj2);
-								IA ia = new IA(j1,p);
 
 								// Attribution de la mission au joueur 1
 								mission.Chat_Box_Mission(j1,p);
 								StdDraw.clear();
-								View.afficher_map(); // on rÃ©-affiche la carte
+								View.afficher_map(); // on ré-affiche la carte
 
 								// Attribution de la mission au joueur 2
 								mission.Chat_Box_Mission(j2,p);
 								StdDraw.clear();
-								View.afficher_map(); // on rÃ©-affiche la carte
+								View.afficher_map(); // on ré-affiche la carte
 
-								// CrÃ©ation de la liste des territoires
+								// Création de la liste des territoires
 								ArrayList l = new ArrayList<territoire>();
 								l = p.randomAvecExclusion(1, 43);
 								
-								// DÃ©coupage de la liste selon le nombre de joueurs
+								// Découpage de la liste selon le nombre de joueurs
 								List<territoire> l1 = l.subList(0, 21);
 								List<territoire> l2 = l.subList(21, 42);
 								
@@ -183,34 +182,30 @@ public class Menu {
 								p.ajouter_teritoire(j1, l1);
 								p.ajouter_teritoire(j2, l2);
 								
-								// Affichage des territoires et armÃ©es des joueurs
+								// Affichage des territoires et armées des joueurs
 								j1.territoire_joueur();
 								j2.territoire_joueur();
 								
-								//Partie.placementArmeeRestantes(j1, choix41);
-								ia.IA_placementArmeeRestantes(j1, 19);
-								Partie.placementArmeeRestantes(j2, choix41);
+								p.placementArmeeRestantes(j1, choix41, 19);
+								p.placementArmeeRestantes(j2, choix41,19);
 								
 								while(choix41==1) { // boucle infinie
 									System.out.println("joueur" + 1 + " place");
 									int r1=j1.verif_region(j1);
-									//j1.initialisation(choix41,j1, 3+r1); // placement des armÃ©es du joueur 1
-									ia.IA_initialisation(j1, 3+r1);
+									j1.initialisation(choix41,j1, 3+r1); // placement des armées du joueur 1
 									System.out.println("le joueur1 attaque");
-									//j1.phase_attaque(1, j1, j2, null, null, null, null); // phase attaque du joueur 1
-									ia.IA_phase_attaque(1, j1, j2, null, null, null, null);
-									System.out.println("le joueur1 dÃ©place");
-									//j1.deplacement(1, j1); // phase dÃ©placement du joueur 1
-									ia.IA_deplacement(j1);
+									j1.phase_attaque(1, j1, j2, null, null, null, null); // phase attaque du joueur 1
+									System.out.println("le joueur1 déplace");
+									j1.deplacement(1, j1); // phase déplacement du joueur 1
 									j1.verification_mission(j1.getMission(), j1);
 									
 									int r2=j2.verif_region(j2);
 									System.out.println("joueur" + 2 + " place");
-									j2.initialisation(choix41,j2, 3+r2); // placement des armÃ©es du joueur 2
+									j2.initialisation(choix41,j2, 3+r2); // placement des armées du joueur 2
 									System.out.println("le joueur2 attaque");
 									j2.phase_attaque(1, j2, j1, null, null, null, null); // phase attaque du joueur 2
-									System.out.println("le joueur2 dÃ©place");
-									j2.deplacement(1, j2); // phase dÃ©placement du joueur 2
+									System.out.println("le joueur2 déplace");
+									j2.deplacement(1, j2); // phase déplacement du joueur 2
 									j2.verification_mission(j2.getMission(), j2);
 								}
 
@@ -222,7 +217,7 @@ public class Menu {
 
 			while (choix3 == 3) {
 				if (StdDraw.isMousePressed()) {
-					// Affichage des deux personnages Ã  choisir
+					// Affichage des deux personnages à choisir
 					View.affichage_personnage(3, "Image/Napopo.png", "Image/cesar.png", "Image/wellington.png");
 					View.afficherImage(39,55,"Image/versus.png");
 					View.afficherImage(82,55,"Image/versus.png");
@@ -233,7 +228,7 @@ public class Menu {
 				
 				while (choix4 != 1) {
 					if (StdDraw.mousePressed()) {
-						// Affichage du personnage restant en fonction du choix prÃ©cÃ©dent
+						// Affichage du personnage restant en fonction du choix précédent
 						double x = StdDraw.mouseX();
 						double y = StdDraw.mouseY();
 						if (5 < x && x < 35) {
@@ -338,7 +333,7 @@ public class Menu {
 							break;
 						}
 						else {
-							// Affichage des deux personnages Ã  choisir
+							// Affichage des deux personnages à choisir
 							View.affichage_personnage(3, "Image/Napopo.png", "Image/cesar.png", "Image/wellington.png");
 							View.afficherImage(39,55,"Image/versus.png");
 							View.afficherImage(82,55,"Image/versus.png");
@@ -356,9 +351,9 @@ public class Menu {
 					int armee = 35;
 					int choix41=1;
 					
-					Partie p = new Partie(42, choix3); // crÃ©ation de la carte
+					Partie p = new Partie(42, choix3); // création de la carte
 					View.afficher_map(); // affichage de la carte
-					// crÃ©ation joueurs
+					// création joueurs
 					Joueur j1 = new Joueur(0, 1, StdDraw.BLUE, "bleu", null, persoj1);
 					Joueur j2 = new Joueur(0, 2, StdDraw.GREEN, "vert", null, persoj2);
 					Joueur j3 = new Joueur(0, 3, StdDraw.RED, "rouge", null, persoj3);
@@ -366,23 +361,23 @@ public class Menu {
 					// attribution de la mission au joueur 1
 					mission.Chat_Box_Mission(j1,p);
 					StdDraw.clear();// on supprime le message de mission
-					View.afficher_map(); // on rÃ©-affiche la carte
+					View.afficher_map(); // on ré-affiche la carte
 
 					// attribution de la mission au joueur 2
 					mission.Chat_Box_Mission(j2,p);
 					StdDraw.clear();// on supprime le message de mission
-					View.afficher_map(); // on rÃ©-affiche la carte
+					View.afficher_map(); // on ré-affiche la carte
 					
 					// attribution de la mission au joueur 3
 					mission.Chat_Box_Mission(j3,p);
 					StdDraw.clear();// on supprime le message de mission
-					View.afficher_map(); // on rÃ©-affiche la carte
+					View.afficher_map(); // on ré-affiche la carte
 					
-					// liste alÃ©atoire des territoires
+					// liste aléatoire des territoires
 					ArrayList l = new ArrayList<territoire>();
 					l = p.randomAvecExclusion(1, 43);
 					
-					// dÃ©coupage de la liste selon le nombre de joueurs
+					// découpage de la liste selon le nombre de joueurs
 					List<territoire> l1 = l.subList(0, 14);
 					List<territoire> l2 = l.subList(14, 28);
 					List<territoire> l3 = l.subList(28, 42);
@@ -396,36 +391,36 @@ public class Menu {
 					j2.territoire_joueur();
 					j3.territoire_joueur();
 					
-					Partie.placementArmeeRestantes(j1,choix41);
-					Partie.placementArmeeRestantes(j2,choix41);
-					Partie.placementArmeeRestantes(j3,choix41);
+					p.placementArmeeRestantes(j1,choix41,21);
+					p.placementArmeeRestantes(j2,choix41,21);
+					p.placementArmeeRestantes(j3,choix41,21);
 
 					while(choix41==1) { // boucle infinie
 						System.out.println("joueur" + 1 + " place");
 						int r1=j1.verif_region(j1);
-						j1.initialisation(choix41,j1, 3+r1); // placement des armÃ©es du joueur 1
+						j1.initialisation(choix41,j1, 3+r1); // placement des armées du joueur 1
 						System.out.println("le joueur1 attaque");
 						j1.phase_attaque(1, j1, j2,j3, null, null, null); // phase attaque du joueur 1
-						System.out.println("le joueur1 dÃ©place");
-						j1.deplacement(1, j1); // phase dÃ©placement du joueur 1
+						System.out.println("le joueur1 déplace");
+						j1.deplacement(1, j1); // phase déplacement du joueur 1
 						j1.verification_mission(j1.getMission(), j1);
 						
 						int r2=j2.verif_region(j2);
 						System.out.println("joueur" + 2 + " place");
-						j2.initialisation(choix41,j2, 3+r2); // placement des armÃ©es du joueur 2
+						j2.initialisation(choix41,j2, 3+r2); // placement des armées du joueur 2
 						System.out.println("le joueur2 attaque");
 						j2.phase_attaque(1, j2, j1, j3, null, null, null); // phase attaque du joueur 2
-						System.out.println("le joueur2 dÃ©place");
-						j2.deplacement(1, j2); // phase dÃ©placement du joueur 2
+						System.out.println("le joueur2 déplace");
+						j2.deplacement(1, j2); // phase déplacement du joueur 2
 						j2.verification_mission(j2.getMission(), j2);
 						
 						int r3=j3.verif_region(j3);
 						System.out.println("joueur" + 3 + " place");
-						j3.initialisation(choix41,j3, 3+r3); // placement des armÃ©es du joueur 3
+						j3.initialisation(choix41,j3, 3+r3); // placement des armées du joueur 3
 						System.out.println("le joueur3 attaque");
 						j3.phase_attaque(1, j3, j1, j2, null, null, null); // phase attaque du joueur 3
-						System.out.println("le joueur3 dÃ©place");
-						j3.deplacement(1, j3); // phase dÃ©placement du joueur 3
+						System.out.println("le joueur3 déplace");
+						j3.deplacement(1, j3); // phase déplacement du joueur 3
 						j3.verification_mission(j3.getMission(), j3);
 					}
 					break;
@@ -440,9 +435,9 @@ public class Menu {
 					int choix41=1;
 					if (StdDraw.mousePressed()) {
 						int armee = 30;
-						Partie p = new Partie(42, choix3); // crÃ©ation de la carte
+						Partie p = new Partie(42, choix3); // création de la carte
 						View.afficher_map(); // affichage de la carte
-						// crÃ©ation joueurs
+						// création joueurs
 						Joueur j1 = new Joueur(0, 1, StdDraw.BLUE, "bleu", null, "Image/J1.png");
 						Joueur j2 = new Joueur(0, 2, StdDraw.GREEN, "vert", null, "Image/J2.png");
 						Joueur j3 = new Joueur(0, 3, StdDraw.RED, "rouge", null, "Image/J3.png");
@@ -451,27 +446,27 @@ public class Menu {
 						// attribution de la mission au joueur 1
 						mission.Chat_Box_Mission(j1,p);
 						StdDraw.clear();// on supprime le message de mission
-						View.afficher_map(); // on rÃ©-affiche la carte
+						View.afficher_map(); // on ré-affiche la carte
 						
 						// attribution de la mission au joueur 2
 						mission.Chat_Box_Mission(j2,p);
 						StdDraw.clear();// on supprime le message de mission
-						View.afficher_map(); // on rÃ©-affiche la carte
+						View.afficher_map(); // on ré-affiche la carte
 						
 						// attribution de la mission au joueur 3
 						mission.Chat_Box_Mission(j3,p);
 						StdDraw.clear();// on supprime le message de mission
-						View.afficher_map(); // on rÃ©-affiche la carte
+						View.afficher_map(); // on ré-affiche la carte
 						
 						// attribution de la mission au joueur 4
 						mission.Chat_Box_Mission(j4,p);
 						StdDraw.clear();// on supprime le message de mission
-						View.afficher_map(); // on rÃ©-affiche la carte
+						View.afficher_map(); // on ré-affiche la carte
 						
-						// liste alÃ©atoire des territoires
+						// liste aléatoire des territoires
 						ArrayList l = new ArrayList<Integer>();
 						l = p.randomAvecExclusion(1, 43);
-						// dÃ©coupage de la liste selon le nombre de joueurs
+						// découpage de la liste selon le nombre de joueurs
 						List l1 = l.subList(0, 10);
 						List l2 = l.subList(10, 21);
 						List l3 = l.subList(21, 31);
@@ -487,46 +482,46 @@ public class Menu {
 						j3.territoire_joueur();
 						j4.territoire_joueur();
 
-						Partie.placementArmeeRestantes(j1,choix41);
-						Partie.placementArmeeRestantes(j2,choix41);
-						Partie.placementArmeeRestantes(j3,choix41);
-						Partie.placementArmeeRestantes(j4,choix41);
+						p.placementArmeeRestantes(j1,choix41,20);
+						p.placementArmeeRestantes(j2,choix41,19);
+						p.placementArmeeRestantes(j3,choix41,19);
+						p.placementArmeeRestantes(j4,choix41,19);
 						
 						while(choix41==1) { //boucle infinie
 							System.out.println("joueur" + 1 + " place");
 							int r1=j1.verif_region(j1);
-							j1.initialisation(choix41,j1, 3+r1); // placement des armÃ©es du joueur 1
+							j1.initialisation(choix41,j1, 3+r1); // placement des armées du joueur 1
 							System.out.println("le joueur1 attaque");
 							j1.phase_attaque(1, j1, j2,j3, null, null, null); // phase attaque du joueur 1
-							System.out.println("le joueur1 dÃ©place");
-							j1.deplacement(1, j1); // phase dÃ©placement du joueur 1
+							System.out.println("le joueur1 déplace");
+							j1.deplacement(1, j1); // phase déplacement du joueur 1
 							j1.verification_mission(j1.getMission(), j1);
 							
 							int r2=j2.verif_region(j2);
 							System.out.println("joueur" + 2 + " place");
-							j2.initialisation(choix41,j2, 3+r2); // placement des armÃ©es du joueur 2
+							j2.initialisation(choix41,j2, 3+r2); // placement des armées du joueur 2
 							System.out.println("le joueur2 attaque");
 							j2.phase_attaque(1, j2, j1, j3, null, null, null); // phase attaque du joueur 2
-							System.out.println("le joueur2 dÃ©place");
-							j2.deplacement(1, j2); // phase dÃ©placement du joueur 2
+							System.out.println("le joueur2 déplace");
+							j2.deplacement(1, j2); // phase déplacement du joueur 2
 							j2.verification_mission(j2.getMission(), j2);
 							
 							int r3=j3.verif_region(j3);
 							System.out.println("joueur" + 3 + " place");
-							j3.initialisation(choix41,j3, 3+r3); // placement des armÃ©es du joueur 3
+							j3.initialisation(choix41,j3, 3+r3); // placement des armées du joueur 3
 							System.out.println("le joueur3 attaque");
 							j3.phase_attaque(1, j3, j1, j2, null, null, null); // phase attaque du joueur 3
-							System.out.println("le joueur3 dÃ©place");
-							j3.deplacement(1, j3); // phase dÃ©placement du joueur 3
+							System.out.println("le joueur3 déplace");
+							j3.deplacement(1, j3); // phase déplacement du joueur 3
 							j3.verification_mission(j3.getMission(), j3);
 							
 							int r4=j4.verif_region(j4);
 							System.out.println("joueur" + 4 + " place");
-							j4.initialisation(choix41,j4, 3+r4); // placement des armÃ©es du joueur 4
+							j4.initialisation(choix41,j4, 3+r4); // placement des armées du joueur 4
 							System.out.println("le joueur4 attaque");
 							j4.phase_attaque(1, j4, j1, j2, j3, null, null); // phase attaque du joueur 4
-							System.out.println("le joueur4 dÃ©place");
-							j4.deplacement(1, j4); // phase dÃ©placement du joueur 4
+							System.out.println("le joueur4 déplace");
+							j4.deplacement(1, j4); // phase déplacement du joueur 4
 							j4.verification_mission(j4.getMission(), j4);
 						}
 						break;
@@ -544,7 +539,7 @@ public class Menu {
 						Partie p = new Partie(42, choix3);
 						View.afficher_map();
 						
-						// crÃ©ation joueurs
+						// création joueurs
 						Joueur j1 = new Joueur(0, 1, StdDraw.BLUE, "bleu", null, "Image/J1.png");
 						Joueur j2 = new Joueur(0, 2, StdDraw.GREEN, "vert", null, "Image/J2.png");
 						Joueur j3 = new Joueur(0, 3, StdDraw.RED, "rouge", null, "Image/J3.png");
@@ -576,10 +571,10 @@ public class Menu {
 						StdDraw.clear();
 						View.afficher_map();
 						
-						// liste alÃ©atoire des territoires
+						// liste aléatoire des territoires
 						ArrayList l = new ArrayList<Integer>();
 						l = p.randomAvecExclusion(1, 43);
-						// dÃ©coupage de la liste selon le nombre de joueurs
+						// découpage de la liste selon le nombre de joueurs
 						List l1 = l.subList(0, 8);
 						List l2 = l.subList(8, 16);
 						List l3 = l.subList(16, 24);
@@ -600,56 +595,56 @@ public class Menu {
 						j4.territoire_joueur();
 						j5.territoire_joueur();
 
-						Partie.placementArmeeRestantes(j1,choix41);
-						Partie.placementArmeeRestantes(j2,choix41);
-						Partie.placementArmeeRestantes(j3,choix41);
-						Partie.placementArmeeRestantes(j4,choix41);
-						Partie.placementArmeeRestantes(j5,choix41);
+						p.placementArmeeRestantes(j1,choix41,17);
+						p.placementArmeeRestantes(j2,choix41,17);
+						p.placementArmeeRestantes(j3,choix41,17);
+						p.placementArmeeRestantes(j4,choix41,16);
+						p.placementArmeeRestantes(j5,choix41,16);
 						
 						while(choix41==1) { //boucle infinie
 							System.out.println("joueur" + 1 + " place");
 							int r1=j1.verif_region(j1);
-							j1.initialisation(choix41,j1, 3+r1); // placement des armÃ©es du joueur 1
+							j1.initialisation(choix41,j1, 3+r1); // placement des armées du joueur 1
 							System.out.println("le joueur1 attaque");
 							j1.phase_attaque(1, j1, j2,j3, j4, j5, null); // phase attaque du joueur 1
-							System.out.println("le joueur1 dÃ©place");
-							j1.deplacement(1, j1); // phase dÃ©placement du joueur 1
+							System.out.println("le joueur1 déplace");
+							j1.deplacement(1, j1); // phase déplacement du joueur 1
 							j1.verification_mission(j1.getMission(), j1);
 							
 							int r2=j2.verif_region(j2);
 							System.out.println("joueur" + 2 + " place");
-							j2.initialisation(choix41,j2, 3+r2); // placement des armÃ©es du joueur 2
+							j2.initialisation(choix41,j2, 3+r2); // placement des armées du joueur 2
 							System.out.println("le joueur2 attaque");
 							j2.phase_attaque(1, j2, j1, j3, j4, j5, null); // phase attaque du joueur 2
-							System.out.println("le joueur2 dÃ©place");
-							j2.deplacement(1, j2); // phase dÃ©placement du joueur 2
+							System.out.println("le joueur2 déplace");
+							j2.deplacement(1, j2); // phase déplacement du joueur 2
 							j2.verification_mission(j2.getMission(), j2);
 							
 							int r3=j3.verif_region(j3);
 							System.out.println("joueur" + 3 + " place");
-							j3.initialisation(choix41,j3, 3+r3); // placement des armÃ©es du joueur 3
+							j3.initialisation(choix41,j3, 3+r3); // placement des armées du joueur 3
 							System.out.println("le joueur3 attaque");
 							j3.phase_attaque(1, j3, j1, j2, j4, j5, null); // phase attaque du joueur 3
-							System.out.println("le joueur3 dÃ©place");
-							j3.deplacement(1, j3); // phase dÃ©placement du joueur 3
+							System.out.println("le joueur3 déplace");
+							j3.deplacement(1, j3); // phase déplacement du joueur 3
 							j3.verification_mission(j3.getMission(), j3);
 							
 							int r4=j4.verif_region(j4);
 							System.out.println("joueur" + 4 + " place");
-							j4.initialisation(choix41,j4, 3+r4); // placement des armÃ©es du joueur 4
+							j4.initialisation(choix41,j4, 3+r4); // placement des armées du joueur 4
 							System.out.println("le joueur4 attaque");
 							j4.phase_attaque(1, j4, j1, j2, j3, j5, null); // phase attaque du joueur 4
-							System.out.println("le joueur4 dÃ©place");
-							j4.deplacement(1, j4); // phase dÃ©placement du joueur 4
+							System.out.println("le joueur4 déplace");
+							j4.deplacement(1, j4); // phase déplacement du joueur 4
 							j4.verification_mission(j4.getMission(), j4);
 							
 							int r5=j5.verif_region(j5);
 							System.out.println("joueur" + 5 + " place");
-							j5.initialisation(choix41,j5, 3+r5); // placement des armÃ©es du joueur 5
+							j5.initialisation(choix41,j5, 3+r5); // placement des armées du joueur 5
 							System.out.println("le joueur5 attaque");
 							j5.phase_attaque(1, j5, j1, j2, j3, j4, null); // phase attaque du joueur 5
-							System.out.println("le joueur5 dÃ©place");
-							j5.deplacement(1, j5); // phase dÃ©placement du joueur 5
+							System.out.println("le joueur5 déplace");
+							j5.deplacement(1, j5); // phase déplacement du joueur 5
 							j5.verification_mission(j5.getMission(), j5);
 						}
 						break;
@@ -668,7 +663,7 @@ public class Menu {
 						Partie p = new Partie(42, choix3);
 						View.afficher_map();
 						
-						// crÃ©ation joueurs
+						// création joueurs
 						Joueur j1 = new Joueur(0, 1, StdDraw.BLUE, "bleu", null, "Image/J1.png");
 						Joueur j2 = new Joueur(0, 2, StdDraw.GREEN, "vert", null, "Image/J2.png");
 						Joueur j3 = new Joueur(0, 3, StdDraw.RED, "rouge", null, "Image/J3.png");
@@ -706,11 +701,11 @@ public class Menu {
 						StdDraw.clear();
 						View.afficher_map();
 						
-						// liste alÃ©atoire des territoires
+						// liste aléatoire des territoires
 						ArrayList l = new ArrayList<Integer>();
 						l = p.randomAvecExclusion(1, 43);
 						
-						// dÃ©coupage de la liste selon le nombre de joueurs
+						// découpage de la liste selon le nombre de joueurs
 						List l1 = l.subList(0, 7);
 						List l2 = l.subList(7, 14);
 						List l3 = l.subList(14, 21);
@@ -734,66 +729,66 @@ public class Menu {
 						j5.territoire_joueur();
 						j6.territoire_joueur();
 
-						Partie.placementArmeeRestantes(j1,choix41);
-						Partie.placementArmeeRestantes(j2,choix41);
-						Partie.placementArmeeRestantes(j3,choix41);
-						Partie.placementArmeeRestantes(j4,choix41);
-						Partie.placementArmeeRestantes(j5,choix41);
-						Partie.placementArmeeRestantes(j6,choix41);
+						p.placementArmeeRestantes(j1,choix41,13);
+						p.placementArmeeRestantes(j2,choix41,13);
+						p.placementArmeeRestantes(j3,choix41,13);
+						p.placementArmeeRestantes(j4,choix41,13);
+						p.placementArmeeRestantes(j5,choix41,13);
+						p.placementArmeeRestantes(j6,choix41,13);
 						
 						while(choix41==1) { //boucle infinie
 							System.out.println("joueur" + 1 + " place");
 							int r1=j1.verif_region(j1);
-							j1.initialisation(choix41,j1, 3+r1); // placement des armÃ©es du joueur 1
+							j1.initialisation(choix41,j1, 3+r1); // placement des armées du joueur 1
 							System.out.println("le joueur1 attaque");
 							j1.phase_attaque(1, j1, j2,j3, j4, j5, j6); // phase attaque du joueur 1
-							System.out.println("le joueur1 dÃ©place");
-							j1.deplacement(1, j1); // phase dÃ©placement du joueur 1
+							System.out.println("le joueur1 déplace");
+							j1.deplacement(1, j1); // phase déplacement du joueur 1
 							j1.verification_mission(j1.getMission(), j1);
 							
 							int r2=j2.verif_region(j2);
 							System.out.println("joueur" + 2 + " place");
-							j2.initialisation(choix41,j2, 3+r2); // placement des armÃ©es du joueur 2
+							j2.initialisation(choix41,j2, 3+r2); // placement des armées du joueur 2
 							System.out.println("le joueur2 attaque");
 							j2.phase_attaque(1, j2, j1, j3, j4, j5, j6); // phase attaque du joueur 2
-							System.out.println("le joueur2 dÃ©place");
-							j2.deplacement(1, j2); // phase dÃ©placement du joueur 2
+							System.out.println("le joueur2 déplace");
+							j2.deplacement(1, j2); // phase déplacement du joueur 2
 							j2.verification_mission(j2.getMission(), j2);
 							
 							int r3=j3.verif_region(j3);
 							System.out.println("joueur" + 3 + " place");
-							j3.initialisation(choix41,j3, 3+r3); // placement des armÃ©es du joueur 3
+							j3.initialisation(choix41,j3, 3+r3); // placement des armées du joueur 3
 							System.out.println("le joueur3 attaque");
 							j3.phase_attaque(1, j3, j1, j2, j4, j5, j6); // phase attaque du joueur 3
-							System.out.println("le joueur3 dÃ©place");
-							j3.deplacement(1, j3); // phase dÃ©placement du joueur 3
+							System.out.println("le joueur3 déplace");
+							j3.deplacement(1, j3); // phase déplacement du joueur 3
 							j3.verification_mission(j3.getMission(), j3);
 							
 							int r4=j4.verif_region(j4);
 							System.out.println("joueur" + 4 + " place");
-							j4.initialisation(choix41,j4, 3+r4); // placement des armÃ©es du joueur 4
+							j4.initialisation(choix41,j4, 3+r4); // placement des armées du joueur 4
 							System.out.println("le joueur4 attaque");
 							j4.phase_attaque(1, j4, j1, j2, j3, j5, j6); // phase attaque du joueur 4
-							System.out.println("le joueur4 dÃ©place");
-							j4.deplacement(1, j4); // phase dÃ©placement du joueur 4
+							System.out.println("le joueur4 déplace");
+							j4.deplacement(1, j4); // phase déplacement du joueur 4
 							j4.verification_mission(j4.getMission(), j4);
 							
 							int r5=j5.verif_region(j5);
 							System.out.println("joueur" + 5 + " place");
-							j5.initialisation(choix41,j5, 3+r5); // placement des armÃ©es du joueur 5
+							j5.initialisation(choix41,j5, 3+r5); // placement des armées du joueur 5
 							System.out.println("le joueur5 attaque");
 							j5.phase_attaque(1, j5, j1, j2, j3, j4, j6); // phase attaque du joueur 5
-							System.out.println("le joueur5 dÃ©place");
-							j5.deplacement(1, j5); // phase dÃ©placement du joueur 5
+							System.out.println("le joueur5 déplace");
+							j5.deplacement(1, j5); // phase déplacement du joueur 5
 							j5.verification_mission(j5.getMission(), j5);
 							
 							int r6=j6.verif_region(j6);
 							System.out.println("joueur" + 6 + " place");
-							j6.initialisation(choix41,j6, 3+r6); // placement des armÃ©es du joueur 6
+							j6.initialisation(choix41,j6, 3+r6); // placement des armées du joueur 6
 							System.out.println("le joueur6 attaque");
 							j6.phase_attaque(1, j6, j1, j2, j3, j4, j5); // phase attaque du joueur 6
-							System.out.println("le joueur6 dÃ©place");
-							j6.deplacement(1, j6); // phase dÃ©placement du joueur 6
+							System.out.println("le joueur6 déplace");
+							j6.deplacement(1, j6); // phase déplacement du joueur 6
 							j6.verification_mission(j6.getMission(), j6);
 						}
 						break;
@@ -805,7 +800,7 @@ public class Menu {
 			
 			while (choix3 == 11) {
 				if (StdDraw.isMousePressed()) {
-					// Affichage des deux personnages Ã  choisir
+					// Affichage des deux personnages à choisir
 					View.affichage_personnage(2, "Image/Napopo.png", "Image/wellington.png", null);
 					View.afficherImage(60,55,"Image/versus.png");
 					StdDraw.text(60, 100, "Choisissez le personnage de l'IA");
@@ -815,7 +810,7 @@ public class Menu {
 				
 				while (choix4 != 1) {
 					if (StdDraw.mousePressed()) {
-						// Affichage du personnage restant en fonction du choix prÃ©cÃ©dent
+						// Affichage du personnage restant en fonction du choix précédent
 						double x = StdDraw.mouseX();
 						double y = StdDraw.mouseY();
 						if (15 < x && x < 55) {
@@ -849,11 +844,11 @@ public class Menu {
 					int armee = 40;
 					int choix41 = 1;
 					
-					// CrÃ©ation et affichage de la carte
+					// Création et affichage de la carte
 					Partie p = new Partie(42, 2);
 					View.afficher_map();
 					
-					// CrÃ©ation des joueurs
+					// Création des joueurs
 					Joueur j1 = new Joueur(0, 1, StdDraw.BLUE, "bleu", null, persoj1);
 					Joueur j2 = new Joueur(0, 2, StdDraw.GREEN, "vert", null, persoj2);
 					IA ia = new IA(j1,p);
@@ -861,18 +856,18 @@ public class Menu {
 					// Attribution de la mission au joueur 1
 					mission.Chat_Box_Mission(j1,p);
 					StdDraw.clear();
-					View.afficher_map(); // on rÃ©-affiche la carte
+					View.afficher_map(); // on ré-affiche la carte
 
 					// Attribution de la mission au joueur 2
 					mission.Chat_Box_Mission(j2,p);
 					StdDraw.clear();
-					View.afficher_map(); // on rÃ©-affiche la carte
+					View.afficher_map(); // on ré-affiche la carte
 
-					// CrÃ©ation de la liste des territoires
+					// Création de la liste des territoires
 					ArrayList l = new ArrayList<territoire>();
 					l = p.randomAvecExclusion(1, 43);
 					
-					// DÃ©coupage de la liste selon le nombre de joueurs
+					// Découpage de la liste selon le nombre de joueurs
 					List<territoire> l1 = l.subList(0, 21);
 					List<territoire> l2 = l.subList(21, 42);
 					
@@ -880,13 +875,13 @@ public class Menu {
 					p.ajouter_teritoire(j1, l1);
 					p.ajouter_teritoire(j2, l2);
 					
-					// Affichage des territoires et armÃ©es des joueurs
+					// Affichage des territoires et armées des joueurs
 					j1.territoire_joueur();
 					j2.territoire_joueur();
 					
 					//Partie.placementArmeeRestantes(j1, choix41);
 					ia.IA_placementArmeeRestantes(j1, 19);
-					Partie.placementArmeeRestantes(j2, choix41);
+					p.placementArmeeRestantes(j2, choix41,19);
 					
 					while(choix41==1) { // boucle infinie
 						int r1=j1.verif_region(j1);
@@ -896,9 +891,9 @@ public class Menu {
 						j1.verification_mission(j1.getMission(), j1);
 						
 						int r2=j2.verif_region(j2);
-						j2.initialisation(choix41,j2, 3+r2); // placement des armÃ©es du joueur 2
+						j2.initialisation(choix41,j2, 3+r2); // placement des armées du joueur 2
 						j2.phase_attaque(1, j2, j1, null, null, null, null); // phase attaque du joueur 2
-						j2.deplacement(1, j2); // phase dÃ©placement du joueur 2
+						j2.deplacement(1, j2); // phase déplacement du joueur 2
 						j2.verification_mission(j2.getMission(), j2);
 					}
 
@@ -910,7 +905,7 @@ public class Menu {
 
 			while (choix3 == 12) {
 				if (StdDraw.isMousePressed()) {
-					// Affichage des deux personnages Ã  choisir
+					// Affichage des deux personnages à choisir
 					View.affichage_personnage(3, "Image/Napopo.png", "Image/cesar.png", "Image/wellington.png");
 					View.afficherImage(39,55,"Image/versus.png");
 					View.afficherImage(82,55,"Image/versus.png");
@@ -921,7 +916,7 @@ public class Menu {
 				
 				while (choix4 != 1) {
 					if (StdDraw.mousePressed()) {
-						// Affichage du personnage restant en fonction du choix prÃ©cÃ©dent
+						// Affichage du personnage restant en fonction du choix précédent
 						double x = StdDraw.mouseX();
 						double y = StdDraw.mouseY();
 						if (5 < x && x < 35) {
@@ -1026,7 +1021,7 @@ public class Menu {
 							break;
 						}
 						else {
-							// Affichage des deux personnages Ã  choisir
+							// Affichage des deux personnages à choisir
 							View.affichage_personnage(3, "Image/Napopo.png", "Image/cesar.png", "Image/wellington.png");
 							View.afficherImage(39,55,"Image/versus.png");
 							View.afficherImage(82,55,"Image/versus.png");
@@ -1044,9 +1039,9 @@ public class Menu {
 					int armee = 35;
 					int choix41=1;
 					
-					Partie p = new Partie(42, 3); // crÃ©ation de la carte
+					Partie p = new Partie(42, 3); // création de la carte
 					View.afficher_map(); // affichage de la carte
-					// crÃ©ation joueurs
+					// création joueurs
 					Joueur j1 = new Joueur(0, 1, StdDraw.BLUE, "bleu", null, persoj1);
 					Joueur j2 = new Joueur(0, 2, StdDraw.GREEN, "vert", null, persoj2);
 					Joueur j3 = new Joueur(0, 3, StdDraw.RED, "rouge", null, persoj3);
@@ -1056,23 +1051,23 @@ public class Menu {
 					// attribution de la mission au joueur 1
 					mission.Chat_Box_Mission(j1,p);
 					StdDraw.clear();// on supprime le message de mission
-					View.afficher_map(); // on rÃ©-affiche la carte
+					View.afficher_map(); // on ré-affiche la carte
 
 					// attribution de la mission au joueur 2
 					mission.Chat_Box_Mission(j2,p);
 					StdDraw.clear();// on supprime le message de mission
-					View.afficher_map(); // on rÃ©-affiche la carte
+					View.afficher_map(); // on ré-affiche la carte
 					
 					// attribution de la mission au joueur 3
 					mission.Chat_Box_Mission(j3,p);
 					StdDraw.clear();// on supprime le message de mission
-					View.afficher_map(); // on rÃ©-affiche la carte
+					View.afficher_map(); // on ré-affiche la carte
 					
-					// liste alÃ©atoire des territoires
+					// liste aléatoire des territoires
 					ArrayList l = new ArrayList<territoire>();
 					l = p.randomAvecExclusion(1, 43);
 					
-					// dÃ©coupage de la liste selon le nombre de joueurs
+					// découpage de la liste selon le nombre de joueurs
 					List<territoire> l1 = l.subList(0, 14);
 					List<territoire> l2 = l.subList(14, 28);
 					List<territoire> l3 = l.subList(28, 42);
@@ -1088,7 +1083,7 @@ public class Menu {
 					
 					ia1.IA_placementArmeeRestantes(j1, 21);
 					ia2.IA_placementArmeeRestantes(j2, 21);
-					Partie.placementArmeeRestantes(j3,choix41);
+					p.placementArmeeRestantes(j3,choix41,21);
 
 					while(choix41==1) { // boucle infinie
 						int r1=j1.verif_region(j1);
@@ -1105,11 +1100,11 @@ public class Menu {
 						
 						int r3=j3.verif_region(j3);
 						System.out.println("joueur" + 3 + " place");
-						j3.initialisation(choix41,j3, 3+r3); // placement des armÃ©es du joueur 3
+						j3.initialisation(choix41,j3, 3+r3); // placement des armées du joueur 3
 						System.out.println("le joueur3 attaque");
 						j3.phase_attaque(1, j3, j1, j2, null, null, null); // phase attaque du joueur 3
-						System.out.println("le joueur3 dÃ©place");
-						j3.deplacement(1, j3); // phase dÃ©placement du joueur 3
+						System.out.println("le joueur3 déplace");
+						j3.deplacement(1, j3); // phase déplacement du joueur 3
 						j3.verification_mission(j3.getMission(), j3);
 					}
 					break;
@@ -1121,7 +1116,7 @@ public class Menu {
 
 			while (choix3 == 21) {
 				if (StdDraw.isMousePressed()) {
-					// Affichage des deux personnages Ã  choisir
+					// Affichage des deux personnages à choisir
 					View.affichage_personnage(3, "Image/Napopo.png", "Image/cesar.png", "Image/wellington.png");
 					View.afficherImage(39,55,"Image/versus.png");
 					View.afficherImage(82,55,"Image/versus.png");
@@ -1132,7 +1127,7 @@ public class Menu {
 				
 				while (choix4 != 1) {
 					if (StdDraw.mousePressed()) {
-						// Affichage du personnage restant en fonction du choix prÃ©cÃ©dent
+						// Affichage du personnage restant en fonction du choix précédent
 						double x = StdDraw.mouseX();
 						double y = StdDraw.mouseY();
 						if (5 < x && x < 35) {
@@ -1237,7 +1232,7 @@ public class Menu {
 							break;
 						}
 						else {
-							// Affichage des deux personnages Ã  choisir
+							// Affichage des deux personnages à choisir
 							View.affichage_personnage(3, "Image/Napopo.png", "Image/cesar.png", "Image/wellington.png");
 							View.afficherImage(39,55,"Image/versus.png");
 							View.afficherImage(82,55,"Image/versus.png");
@@ -1255,9 +1250,9 @@ public class Menu {
 					int armee = 35;
 					int choix41=1;
 					
-					Partie p = new Partie(42, 3); // crÃ©ation de la carte
+					Partie p = new Partie(42, 3); // création de la carte
 					View.afficher_map(); // affichage de la carte
-					// crÃ©ation joueurs
+					// création joueurs
 					Joueur j1 = new Joueur(0, 1, StdDraw.BLUE, "bleu", null, persoj1);
 					Joueur j2 = new Joueur(0, 2, StdDraw.GREEN, "vert", null, persoj2);
 					Joueur j3 = new Joueur(0, 3, StdDraw.RED, "rouge", null, persoj3);
@@ -1266,23 +1261,23 @@ public class Menu {
 					// attribution de la mission au joueur 1
 					mission.Chat_Box_Mission(j1,p);
 					StdDraw.clear();// on supprime le message de mission
-					View.afficher_map(); // on rÃ©-affiche la carte
+					View.afficher_map(); // on ré-affiche la carte
 
 					// attribution de la mission au joueur 2
 					mission.Chat_Box_Mission(j2,p);
 					StdDraw.clear();// on supprime le message de mission
-					View.afficher_map(); // on rÃ©-affiche la carte
+					View.afficher_map(); // on ré-affiche la carte
 					
 					// attribution de la mission au joueur 3
 					mission.Chat_Box_Mission(j3,p);
 					StdDraw.clear();// on supprime le message de mission
-					View.afficher_map(); // on rÃ©-affiche la carte
+					View.afficher_map(); // on ré-affiche la carte
 					
-					// liste alÃ©atoire des territoires
+					// liste aléatoire des territoires
 					ArrayList l = new ArrayList<territoire>();
 					l = p.randomAvecExclusion(1, 43);
 					
-					// dÃ©coupage de la liste selon le nombre de joueurs
+					// découpage de la liste selon le nombre de joueurs
 					List<territoire> l1 = l.subList(0, 14);
 					List<territoire> l2 = l.subList(14, 28);
 					List<territoire> l3 = l.subList(28, 42);
@@ -1297,8 +1292,8 @@ public class Menu {
 					j3.territoire_joueur();
 					
 					ia1.IA_placementArmeeRestantes(j1, 21);
-					Partie.placementArmeeRestantes(j2,choix41);
-					Partie.placementArmeeRestantes(j3,choix41);
+					p.placementArmeeRestantes(j2,choix41,21);
+					p.placementArmeeRestantes(j3,choix41,21);
 
 					while(choix41==1) { // boucle infinie
 						int r1=j1.verif_region(j1);
@@ -1308,15 +1303,15 @@ public class Menu {
 						j1.verification_mission(j1.getMission(), j1);
 						
 						int r2=j2.verif_region(j2);
-						j2.initialisation(choix41,j2, 3+r2); // placement des armÃ©es du joueur 3
+						j2.initialisation(choix41,j2, 3+r2); // placement des armées du joueur 3
 						j2.phase_attaque(1, j2, j1, j2, null, null, null); // phase attaque du joueur 3
-						j2.deplacement(1, j2); // phase dÃ©placement du joueur 3
+						j2.deplacement(1, j2); // phase déplacement du joueur 3
 						j2.verification_mission(j2.getMission(), j2);
 						
 						int r3=j3.verif_region(j3);
-						j3.initialisation(choix41,j3, 3+r3); // placement des armÃ©es du joueur 3
+						j3.initialisation(choix41,j3, 3+r3); // placement des armées du joueur 3
 						j3.phase_attaque(1, j3, j1, j2, null, null, null); // phase attaque du joueur 3
-						j3.deplacement(1, j3); // phase dÃ©placement du joueur 3
+						j3.deplacement(1, j3); // phase déplacement du joueur 3
 						j3.verification_mission(j3.getMission(), j3);
 					}
 					break;
